@@ -5,6 +5,10 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
-  @apply text-red-400;
+::-webkit-scrollbar {
+
+}
+
+body {
+  @apply dark:bg-neutral-950 dark:text-white scroll-smooth
 }

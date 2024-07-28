@@ -5,9 +5,6 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
-  plugins: [
-    require("tailwindcss-scrollbar"),
-  ],
   theme: {
     extend: {
       fontFamily: {
@@ -16,5 +13,7 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    require('tailwind-scrollbar'),
+  ],
 }
