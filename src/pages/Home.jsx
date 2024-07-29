@@ -8,34 +8,44 @@ const Home = () => {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   const [timeInterval, setTimeInterval] = useState("day");
+  const [mediaType, setMediaType] = useState("all");
 
-  // useEffect(() => {
-  //   fetchTrending(timeInterval)
-  //     .then((results) => {
-  //       setData(results);
-  //       setLoading(false);
-  //     })
-  //     .catch((err) => {
-  //       console.log("Error fetching data:", err);
-  //     });
-  // }, [timeInterval]);
+  useEffect(() => {
+    setLoading(true);
+    fetchTrending(timeInterval, mediaType)
+    .then((results) => {
+      setData(results);
+    })
+    .catch((err) => {
+      console.log("Error fetching data:", err);
+    })
+    .finally(() => {
+      setLoading(false);
+    })
+  }, [timeInterval, mediaType]);
 
   // use fake data
-  useEffect(() => {
-    setData(fakeTrendingData(timeInterval));
-    setTimeout(() => {
-      setLoading(false);
-    }, 1500);
-  }, [timeInterval]);
+  // useEffect(() => {
+  //   setLoading(true);
+  //   setData(fakeTrendingData(timeInterval));
+  //   setTimeout(() => {
+  //     setLoading(false);
+  //   }, 500)
+  // }, [timeInterval]);
 
   return (
     <div className="py-4 px-6">
-      <div className="flex items:center space-x-3 py-4">
+      <div className="flex items-center space-x-3 py-4">
         <h2 className="uppercase text-xl">Trending</h2>
-        <select className="bg-zinc-900 text-gray-300 p-1 rounded-md">
+        <select
+          id="mediaType"
+          className="bg-zinc-900 text-gray-300 p-1 rounded-md"
+          onChange={(e) => setMediaType(e.target.value)}
+          defaultValue={"all"}
+        >
           <option value="all">all</option>
-          <option value="movies">Movies</option>
-          <option value="shows">TV Shows</option>
+          <option value="movie">Movies</option>
+          <option value="tv">TV Shows</option>
         </select>
         <div className="flex border-4 border-white/5 rounded-full">
           <button 
@@ -53,13 +63,11 @@ const Home = () => {
         </div>
       </div>
       <div className="flex overflow-x-auto gap-5 py-3">
-        {data?.map((item, index) =>
-          loading ? (
-            <Skeleton key={index} />
-          ) : (
-            <CardComponent key={item.id} item={item} />
-          )
-        )}
+        {
+          loading
+          ? Array.from({ length: 10 }).map((_, i) => <Skeleton key={i} />) 
+          : data?.map((item) => <CardComponent key={item.id} item={item} />)
+        }
       </div>
     </div>
   );

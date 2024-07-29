@@ -1,7 +1,7 @@
 
-const Details = ({ item }) => {
+const Details = () => {
   return (
-    <div>{item.poster_path}</div>
+    <div>Details</div>
   )
 }
 

@@ -10,6 +10,7 @@ export default {
       fontFamily: {
         roboto: ['"Roboto Slab"', 'sans'],
         raleway: ['Raleway', 'sans-serif'],
+        bebas: ['"Bebas Neue"', 'ui-sans-serif', 'system-ui'],
       },
     },
   },

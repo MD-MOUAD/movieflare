@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const CardComponent = ({ item }) => {
   return (
-    <Link to={`/details/${item.id}`}>
+    <Link to={`/details`}>
       <div className="w-48 h-72 shrink-0 rounded-lg overflow-clip">
         <img
           className="h-full"
