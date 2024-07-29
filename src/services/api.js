@@ -9,7 +9,7 @@ export const BaseImgPathOriginal = "https://image.tmdb.org/t/p/original";
 
 // Trending
 export const fetchTrending = async (timeInterval = "day", mediaType = "all") => {
-    await new Promise((resolve) => setTimeout(resolve, 200)); // TODO: Remove this line later
+    await new Promise((resolve) => setTimeout(resolve, 300)); // TODO: Remove this line later
     const { data } = await axios.get(`${baseUrl}/trending/${mediaType}/${timeInterval}?api_key=${apiKey}`);
     return data?.results;
 };

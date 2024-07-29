@@ -8,9 +8,9 @@ const Sidebar = () => {
     { name: "Search", path: "/search" },
   ];
   return (
-    <div className="max-sm:hidden fixed top-0 left-0 h-screen w-72 max-lg:w-64 dark:text-white border-r-2 border-stone-500/5 bg-slate-200 dark:bg-neutral-950">
+    <div className="max-sm:hidden fixed top-0 left-0 h-screen w-72 max-lg:w-64 dark:text-white bg-slate-200 dark:bg-neutral-950">
       <div className="py-8 flex justify-center border-b-2 border-stone-900/5 dark:border-slate-100/5">
-        <h1 className="text-3xl lg:text-4xl font-bold font-roboto bg-gradient-to-r from-cyan-400 via-sky-900 to-sky-950 bg-clip-text text-transparent tracking-wide">
+        <h1 className="text-3xl lg:text-4xl font-bold font-roboto bg-gradient-to-r from-cyan-400 via-sky-900 to-cyan-600 bg-clip-text text-transparent tracking-wide">
           <span className="text-5xl lg:text-6xl">M</span>ovie
           <span className="text-5xl lg:text-6xl">l</span>and
         </h1>
