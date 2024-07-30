@@ -6,7 +6,7 @@ const Layout = ({ children }) => {
     <>
       <Sidebar />
       <Header />
-      <main className="lg:ml-72 sm:ml-64">
+      <main className="lg:ml-62 md:ml-60 sm:px-5 max-sm:text-sm">
         {children}
       </main>
     </>

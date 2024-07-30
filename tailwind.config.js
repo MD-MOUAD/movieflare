@@ -7,6 +7,10 @@ export default {
   ],
   theme: {
     extend: {
+      colors: {
+        inputBackGround: "#1f2123",
+        inputColor: "#a1a1a1",
+      },
       fontFamily: {
         roboto: ['"Roboto Slab"', 'sans'],
         raleway: ['Raleway', 'sans-serif'],

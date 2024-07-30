@@ -1,10 +1,12 @@
 import DarkModeToggle from "./DarkModeToggle";
 import Login from "./Login";
+import SearchBar from "./SearchBar";
 
 const Header = () => {
   return (
-    <div className="sm:ml-64 lg:ml-72 bg-slate-200 dark:bg-zinc-900 p-4 flex justify-between border-b-2 border-stone-500/5 dark:border-none shadow-md shadow-dark font-bebas">
+    <div className="md:ml-60 lg:ml-64 bg-slate-200 dark:bg-zinc-900 py-4 px-6 max-md:px-2 flex justify-between border-b-2 border-stone-500/5 dark:border-none shadow-md shadow-dark transition-all">
       <DarkModeToggle />
+      <SearchBar />
       <Login />
     </div>
   )

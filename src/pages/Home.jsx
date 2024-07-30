@@ -10,34 +10,34 @@ const Home = () => {
   const [timeInterval, setTimeInterval] = useState("day");
   const [mediaType, setMediaType] = useState("all");
 
-  // useEffect(() => {
-  //   setLoading(true);
-  //   fetchTrending(timeInterval, mediaType)
-  //   .then((results) => {
-  //     setData(results);
-  //   })
-  //   .catch((err) => {
-  //     console.log("Error fetching data:", err);
-  //   })
-  //   .finally(() => {
-  //     setLoading(false);
-  //   })
-  // }, [timeInterval, mediaType]);
+  useEffect(() => {
+    setLoading(true);
+    fetchTrending(timeInterval, mediaType)
+    .then((results) => {
+      setData(results);
+    })
+    .catch((err) => {
+      console.log("Error fetching data:", err);
+    })
+    .finally(() => {
+      setLoading(false);
+    })
+  }, [timeInterval, mediaType]);
 
   // use fake data
 
-  useEffect(() => {
-    setLoading(true);
-    setData(fakeTrendingData(timeInterval));
-    setTimeout(() => {
-      setLoading(false);
-    }, 500)
-  }, [timeInterval]);
+  // useEffect(() => {
+  //   setLoading(true);
+  //   setData(fakeTrendingData(timeInterval));
+  //   setTimeout(() => {
+  //     setLoading(false);
+  //   }, 500)
+  // }, [timeInterval]);
 
   return (
     <div className="py-4 px-6">
       <div className="flex items-center space-x-3 py-4">
-        <h2 className="uppercase text-xl">Trending</h2>
+        <h2 className="uppercase text-xl max-sm:text-lg">Trending</h2>
         <select
           id="mediaType"
           className="bg-gray-300 dark:bg-zinc-900 dark:text-gray-300 p-2 rounded-md"
@@ -50,20 +50,20 @@ const Home = () => {
         </select>
         <div className="flex border-4 border-zinc-200 dark:border-white/5 rounded-full">
           <button 
-            className={`px-5 rounded-full ${timeInterval == "day" ?"bg-gray-400 dark:bg-zinc-900" : ""} transition-all duration-300`}
+            className={`px-5 max-sm:px-2 rounded-full ${timeInterval == "day" ?"bg-cyan-600 text-slate-100" : ""} transition-all duration-300`}
             onClick={() => setTimeInterval("day")}
           >
             Today
           </button>
           <button 
-            className={`px-5 rounded-full ${timeInterval == "week" ?"bg-gray-400 dark:bg-zinc-900" : ""} transition-all duration-300`}
+            className={`px-5 max-sm:px-2 py-1 rounded-full ${timeInterval == "week" ?"bg-cyan-600 text-slate-100" : ""} transition-all duration-300`}
             onClick={() => setTimeInterval("week")}
           >
             This Week
           </button>
         </div>
       </div>
-      <div className="flex overflow-x-auto gap-5 py-3">
+      <div className="flex overflow-x-auto gap-5 py-3 max-sm:py-1 max-sm:scrollbar-none">
         {
           loading
           ? Array.from({ length: 10 }).map((_, i) => <Skeleton key={i} />) 
