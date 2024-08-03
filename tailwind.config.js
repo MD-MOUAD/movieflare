@@ -16,6 +16,9 @@ export default {
         raleway: ['Raleway', 'sans-serif'],
         bebas: ['"Bebas Neue"', 'ui-sans-serif', 'system-ui'],
       },
+      backgroundImage: {
+        'cover-gradient': 'linear-gradient(rgba(0,0,0,.60), rgba(0,0,0,.88))',
+      },
     },
   },
   plugins: [
