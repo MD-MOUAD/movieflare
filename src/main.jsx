@@ -7,7 +7,7 @@ import Home from "./pages/Home";
 import Movies from "./pages/movies/Movies";
 import Shows from "./pages/shows/Shows";
 import Search from "./pages/search/Search";
-import Details from './pages/details/Details.jsx';
+import DetailsPage from './pages/DetailsPage.jsx';
 
 
 const router = createBrowserRouter([
@@ -32,8 +32,8 @@ const router = createBrowserRouter([
         element: <Search />,
       },
       {
-        path: "/details",
-        element: <Details />,
+        path: "/:type/:id",
+        element: <DetailsPage />,
       },
     ],
   },

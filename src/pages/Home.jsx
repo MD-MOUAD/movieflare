@@ -11,29 +11,29 @@ const Home = () => {
   const [timeInterval, setTimeInterval] = useState("day");
   const [mediaType, setMediaType] = useState("all");
 
-  useEffect(() => {
-    setLoading(true);
-    fetchTrending(timeInterval, mediaType)
-      .then((results) => {
-        setData(results);
-      })
-      .catch((err) => {
-        console.log("Error fetching data:", err);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, [timeInterval, mediaType]);
+  // useEffect(() => {
+  //   setLoading(true);
+  //   fetchTrending(timeInterval, mediaType)
+  //     .then((results) => {
+  //       setData(results);
+  //     })
+  //     .catch((err) => {
+  //       console.log("Error fetching data:", err);
+  //     })
+  //     .finally(() => {
+  //       setLoading(false);
+  //     });
+  // }, [timeInterval, mediaType]);
 
   // use fake data
 
-  // useEffect(() => {
-  //   setLoading(true);
-  //   setData(fakeTrendingData(timeInterval));
-  //   setTimeout(() => {
-  //     setLoading(false);
-  //   }, 1000)
-  // }, [timeInterval]);
+  useEffect(() => {
+    setLoading(true);
+    setData(fakeTrendingData(timeInterval));
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000)
+  }, [timeInterval]);
 
   return (
     <div className="py-1">
@@ -69,7 +69,7 @@ const Home = () => {
           </button>
         </div>
       </div>
-      <div className="flex overflow-x-auto gap-5 py-3 px-1 mx-4 max-sm:py-1 max-sm:mx-0 max-sm:scrollbar-none">
+      <div className="flex overflow-x-auto gap-5 pt-3 pb-5 px-1 mx-4 max-sm:py-1 max-sm:mx-0 max-sm:scrollbar-none">
         {loading
           ? [...Array(19)].map((_, i) => <Skeleton key={i} />)
           : data?.map(

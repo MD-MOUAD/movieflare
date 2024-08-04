@@ -19,7 +19,7 @@ const CoverComponent = ({ item }) => {
             className="w-28 lg:w-48 rounded-lg shadow-lg opacity-65 max-sm:hidden"
           />
           <div className="mt-6 md:mt-0 ml-3 md:ml-6 text-left">
-            <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold text-cyan-400">
+            <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold text-cyan-400 backdrop-filter backdrop-blur-sm">
               {title}
             </h1>
             <p className="mt-2 md:mt-4 text-sm lg:text-lg max-sm:hidden">
