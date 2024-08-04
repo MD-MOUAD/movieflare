@@ -6,7 +6,7 @@ import { FaStar } from "react-icons/fa";
 const CardComponent = ({ item }) => {
   return (
     <Link to={`/`}>
-      <div className="sm:w-48 sm:h-72 max-sm:w-28 max-sm:h shrink-0 rounded-lg overflow-clip relative  hover:scale-105 transition-transition duration-300 group">
+      <div className="w-28 sm:w-32 md:w-36 lg:w-40 shrink-0 rounded-lg overflow-clip relative hover:scale-105 transition-transition duration-300 group">
         <img
           className="h-full group-hover:opacity-40 dark:group-hover:opacity-10"
           src={`${baseImgPath}/${item.poster_path}`}

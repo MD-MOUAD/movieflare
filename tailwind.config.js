@@ -17,7 +17,10 @@ export default {
         bebas: ['"Bebas Neue"', 'ui-sans-serif', 'system-ui'],
       },
       backgroundImage: {
-        'cover-gradient': 'linear-gradient(rgba(0,0,0,.60), rgba(0,0,0,.88))',
+        'cover-gradient': 'linear-gradient(rgba(0,0,0,.3), rgba(0,0,0,1))',
+      },
+      aspectRatio: {
+        'card': '2 / 3', // equivalent to 1.5 / 1
       },
     },
   },

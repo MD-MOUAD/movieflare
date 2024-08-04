@@ -1,6 +1,6 @@
 const Skeleton = () => {
   return (
-    <div className="flex justify-center items-center w-48 h-72 rounded-lg shrink-0 bg-gray-300 animate-pulse">
+    <div className="flex justify-center items-center aspect-card w-28 sm:w-32 md:w-36 lg:w-40 rounded-lg shrink-0 bg-gray-300 animate-pulse">
       <svg
         className="w-10 h-10 text-gray-200 dark:text-gray-600"
         aria-hidden="true"
