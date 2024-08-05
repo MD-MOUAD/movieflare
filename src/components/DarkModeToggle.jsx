@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import sunIcon from "../assets/icons/sun.svg";
-import moonIcon from "../assets/icons/moon.svg";
+import { FaMoon, FaSun } from "../utils/icons";
 
 const DarkModeToggle = () => {
   const [isDarkMode, setIsDarkMode] = useState(() => {
@@ -27,13 +26,9 @@ const DarkModeToggle = () => {
       className="rounded-full hover:bg-slate-300 dark:hover:bg-neutral-800 focus:outline-none"
       onClick={() => setIsDarkMode(!isDarkMode)}
     >
-      <span className="group inline-flex shrink-0 justify-center items-center size-9">
-        <img
-          src={isDarkMode ? sunIcon : moonIcon}
-          alt="Preference"
-          className="shrink-0 size-5 max-md:size-4"
-        />
-      </span>
+      <div className="flex shrink-0 justify-center items-center size-9">
+        {isDarkMode ? (<FaSun />) : (<FaMoon />)}
+      </div>
     </button>
   );
 };

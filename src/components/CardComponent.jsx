@@ -1,12 +1,13 @@
 import { baseImgPath } from "../services/api";
 import { Link } from "react-router-dom";
 import getYear from "../utils/getYear";
-import { FaStar } from "react-icons/fa";
+import { FaStar } from "../utils/icons";
 
 const CardComponent = ({ item }) => {
   return (
     <Link to={`/${item?.media_type}/${item?.id}`}>
-      <div className="w-28 sm:w-32 md:w-36 lg:w-40 shrink-0 rounded-lg overflow-clip relative hover:scale-105 transition-transition duration-300 group">
+      <div
+        className="w-28 sm:w-32 md:w-36 lg:w-40 shrink-0 rounded-lg overflow-clip relative hover:scale-105 transition-transition duration-300 group">
         <img
           className="h-full group-hover:opacity-40 dark:group-hover:opacity-10"
           src={`${baseImgPath}/${item.poster_path}`}

@@ -10,7 +10,9 @@ const CoverComponent = ({ item }) => {
         backgroundImage: `url("${BaseImgPathOriginal}/${item.backdrop_path})")`,
       }}
     >
+      {/* overlay */}
       <div className="absolute inset-0 bg-cover-gradient"></div>
+
       <div className="relative p-6 md:p-12 rounded-lg">
         <div className="flex items-center text-white w-fit max-w-7xl bg-opacity-75 sm:backdrop-filter sm:backdrop-blur-sm">
           <img

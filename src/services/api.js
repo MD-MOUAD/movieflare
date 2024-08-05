@@ -16,6 +16,7 @@ export const fetchTrending = async (timeInterval = "day", mediaType = "all") => 
 
 // Movies & Tv - Details
 export const fetchDetails = async (mediaType, id) => {
+    await new Promise((resolve) => setTimeout(resolve, 500)); // TODO: Remove this line later
     const { data } = await axios.get(`${baseUrl}/${mediaType}/${id}?api_key=${apiKey}`);
     return data;
 };

@@ -32,7 +32,7 @@ const Home = () => {
     setData(fakeTrendingData(timeInterval));
     setTimeout(() => {
       setLoading(false);
-    }, 1000)
+    }, 1000);
   }, [timeInterval]);
 
   return (
