@@ -4,6 +4,8 @@ import { BaseImgPathOriginal, fetchDetails } from "../services/api";
 import Spinner from "../components/Spinner";
 import { onePieceDetails } from "../data/data";
 import CircularProgress from "../components/CircularProgress";
+import { FaRegCalendarAlt } from "../utils/icons";
+
 
 const DetailsPage = () => {
   const { type, id } = useParams();
@@ -50,10 +52,16 @@ const DetailsPage = () => {
           alt="poster"
           className="w-72 rounded-lg"
         />
-        <div className="text-white">
+        <div className="text-white space-y-4">
           <h1 className="font-roboto font-bold text-3xl">
             {title + " "}<span className="text-gray-400 font-normal">{new Date(releaseDate).getFullYear()}</span>
           </h1>
+          <div className="flex items-center gap-2">
+            <FaRegCalendarAlt />
+            <div>
+              {`${new Date(releaseDate).toLocaleDateString('en-US')} (US)`} 
+            </div>
+          </div>
           <CircularProgress
             progress={45}
             size={55}

@@ -18,7 +18,7 @@ const CoverComponent = ({ item }) => {
           <img
             src={`${BaseImgPathOriginal}/${item.poster_path}`}
             alt="Movie Poster"
-            className="w-28 lg:w-48 rounded-lg shadow-lg opacity-65 max-sm:hidden"
+            className="w-28 md:w-48 rounded-lg shadow-lg opacity-65 max-sm:hidden"
           />
           <div className="mt-6 md:mt-0 ml-3 md:ml-6 text-left">
             <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold text-cyan-400 backdrop-filter backdrop-blur-sm">
