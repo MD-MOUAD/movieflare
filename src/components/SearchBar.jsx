@@ -1,4 +1,4 @@
-import { FaSearch } from "react-icons/fa";
+import { FaSearch } from "../utils/icons";
 import searchIcon from "../assets/icons/search.svg";
 
 const SearchBar = () => {

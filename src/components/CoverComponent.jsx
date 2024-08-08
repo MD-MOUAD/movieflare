@@ -16,16 +16,16 @@ const CoverComponent = ({ item }) => {
       <div className="relative p-6 md:p-12 rounded-lg">
         <div className="flex items-center text-white w-fit max-w-7xl bg-opacity-75 sm:backdrop-filter sm:backdrop-blur-sm">
           <img
-            src={`${BaseImgPathOriginal}/${item.poster_path}`}
+            src={`${baseImgPath}/${item.poster_path}`}
             alt="Movie Poster"
             className="w-28 md:w-48 rounded-lg shadow-lg opacity-65 max-sm:hidden"
           />
           <div className="mt-6 md:mt-0 ml-3 md:ml-6 text-left">
-            <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold text-cyan-400 backdrop-filter backdrop-blur-sm">
+            <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold text-cyan-300 backdrop-filter backdrop-blur-sm">
               {title}
             </h1>
             <p className="mt-2 md:mt-4 text-sm lg:text-lg max-sm:hidden">
-              {(item?.release_date && "Release") || "First air"} Date:{" "}
+              {(item?.release_date && "Release") || "First Air"} Date:{" "}
               <span className="font-semibold">{releaseDate}</span>
             </p>
             <p className="md:mt-2 text-sm lg:text-lg max-sm:hidden">
@@ -36,7 +36,7 @@ const CoverComponent = ({ item }) => {
             </p>
             <div className="mt-6">
               <button className="bg-red-600 hover:bg-red-700 text-sm text-white font-semibold py-2 px-4 rounded-lg shadow-lg">
-                <Link to={`/`}>Watch Now</Link>
+                <Link to={`${item?.media_type}/${item?.id}`}>Watch Now</Link>
               </button>
             </div>
           </div>

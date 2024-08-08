@@ -1,3 +1,4 @@
+// fa icons
 import {
   FaRegCalendarAlt,
   FaUser,
@@ -6,6 +7,8 @@ import {
   FaSun,
   FaStar,
   FaSearch,
+  FaCheckCircle,
+  FaFilm,
 } from "react-icons/fa";
 
 export {
@@ -16,4 +19,14 @@ export {
   FaSun,
   FaStar,
   FaSearch,
+  FaCheckCircle,
+  FaFilm,
 };
+
+// io icons
+import { IoIosAdd } from "react-icons/io";
+export { IoIosAdd };
+ 
+// md icons
+import { MdLiveTv } from "react-icons/md";
+export { MdLiveTv };
