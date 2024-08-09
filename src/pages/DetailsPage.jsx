@@ -53,7 +53,7 @@ const DetailsPage = () => {
             className="w-72 rounded-lg"
           />
           <div className="flex flex-col text-white space-y-2 max-md:items-center">
-            <h1 className="font-roboto font-bold text-3xl text-cyan-500 max-md:text-center">
+            <h1 className="font-roboto font-bold text-3xl text-red-500 max-md:text-center">
               {title + " "}
               <span className="text-gray-400 font-normal">
                 {new Date(releaseDate).getFullYear()}
@@ -69,9 +69,6 @@ const DetailsPage = () => {
                 size={55}
               />
               <p className="text-md lg:text-xl max-md:hidden">User Score</p>
-              {/* <button className="border-2 border-blue-500 px-4 py-2 rounded hover:bg-blue-500 transition-colors duration-200">
-              Add to watchlist
-            </button> */}
               <button
                 className="flex items-center px-3 py-2 border-2 rounded-md border-slate-200/20 font-bold hover:bg-orange-300/10 max-md:scale-125 "
                 onClick={() => console.log("clicked")}
@@ -87,7 +84,14 @@ const DetailsPage = () => {
                 In watchlist
               </button>
             </div>
-            <p className="italic text-gray-300">{details?.tagline}</p>
+            <p className="italic text-gray-300 pb-2 max-sm:text-base">{details?.tagline}</p>
+            <h3 className="font-bold text-lg">Overview</h3>
+            <p className="text-lg text-white/75 pb-6">{details?.overview}</p>
+            <div className="flex gap-2">
+              {details?.genres?.map((genre) => (
+                <div className="text-sm max-md:text-base font-bold uppercase py-1 px-2 rounded-sm bg-gray-700/60">{genre?.name}</div>
+              ))}
+            </div>
           </div>
         </div>
       </div>

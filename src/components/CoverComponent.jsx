@@ -21,17 +21,17 @@ const CoverComponent = ({ item }) => {
             className="w-28 md:w-48 rounded-lg shadow-lg opacity-65 max-sm:hidden"
           />
           <div className="mt-6 md:mt-0 ml-3 md:ml-6 text-left">
-            <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold text-cyan-300 backdrop-filter backdrop-blur-sm">
+            <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold text-red-400 backdrop-filter backdrop-blur-sm">
               {title}
             </h1>
-            <p className="mt-2 md:mt-4 text-sm lg:text-lg max-sm:hidden">
+            <p className="mt-2 md:mt-4 text-sm text-white/90 lg:text-lg max-sm:hidden">
               {(item?.release_date && "Release") || "First Air"} Date:{" "}
-              <span className="font-semibold">{releaseDate}</span>
+              <span className="font-semibold text-rose-300">{releaseDate}</span>
             </p>
-            <p className="md:mt-2 text-sm lg:text-lg max-sm:hidden">
-              Genre: <span className="font-semibold">Action, Adventure</span>
+            <p className="md:mt-2 text-sm text-white/90 lg:text-lg max-sm:hidden">
+              Genre: <span className="font-semibold text-rose-300">Action, Adventure</span>
             </p>
-            <p className="mt-4 xl:text-lg line-clamp-2 max-md:hidden">
+            <p className="mt-4 xl:text-lg text-white/50 font-[500] line-clamp-2 max-md:hidden">
               {item?.overview}
             </p>
             <div className="mt-6">
