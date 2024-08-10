@@ -1,4 +1,4 @@
-const Skeleton = () => {
+const CardSkeleton = () => {
   return (
     <div className="flex justify-center items-center aspect-card w-28 sm:w-32 md:w-36 lg:w-40 rounded-lg shrink-0 bg-gray-300 animate-pulse">
       <svg
@@ -14,4 +14,4 @@ const Skeleton = () => {
   )
 }
 
-export default Skeleton;
+export default CardSkeleton;
