@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { BaseImgPathOriginal, fetchDetails } from "../services/api";
+import {
+  BaseImgPathOriginal,
+  baseImgPath,
+  fetchCredits,
+  fetchDetails,
+} from "../services/api";
 import Spinner from "../components/Spinner";
-import { onePieceDetails } from "../data/data";
 import CircularProgress from "../components/CircularProgress";
 import { FaCheckCircle, FaRegCalendarAlt, IoIosAdd } from "../utils/icons";
 import { ratingPercentage } from "../utils/helpers";
@@ -11,25 +15,31 @@ const DetailsPage = () => {
   const { type, id } = useParams();
   const [loading, setLoading] = useState(true);
   const [details, setDetails] = useState({});
+  const [cast, setCast] = useState({});
 
   useEffect(() => {
     setLoading(true);
-    fetchDetails(type, id)
-      .then((results) => {
-        setDetails(results);
-      })
-      .catch((err) => {
-        console.log("Error fetching data:", err);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, []);
+    const fetchAllData = async () => {
+      try {
+        const [detailsData, creditsData] = await Promise.all([
+          fetchDetails(type, id),
+          fetchCredits(type, id),
+        ]);
 
-  // useEffect(() => {
-  //   setDetails(onePieceDetails)
-  //   setLoading(false)
-  // }, []);
+        // Set Details
+        setDetails(detailsData);
+
+        // Set Cast
+        setCast(creditsData);
+      } catch (error) {
+        console.log("Error fetching data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchAllData();
+  }, [type, id]);
 
   if (loading) {
     return <Spinner />;
@@ -46,13 +56,13 @@ const DetailsPage = () => {
         }}
       >
         <div className="absolute inset-0 bg-backdrop-gradient"></div>
-        <div className="relative container mx-auto p-6 flex flex-col sm:flex-row items-center gap-10">
+        <div className="relative container mx-auto p-6 flex flex-col md:flex-row items-center gap-10">
           <img
-            src={`${BaseImgPathOriginal}/${details.poster_path}`}
+            src={`${baseImgPath}/${details.poster_path}`}
             alt="poster"
             className="w-72 rounded-lg"
           />
-          <div className="flex flex-col text-white space-y-2 max-md:items-center">
+          <div className="flex flex-col text-white space-y-2 max-lg:items-center">
             <h1 className="font-roboto font-bold text-3xl text-red-500 max-md:text-center">
               {title + " "}
               <span className="text-gray-400 font-normal">
@@ -62,8 +72,9 @@ const DetailsPage = () => {
             <div className="flex items-center gap-2 text-lg">
               <FaRegCalendarAlt />
               <div>{new Date(releaseDate).toLocaleDateString("en-US")}</div>
+              <p className="uppercase text-base text-gray-300">({type})</p>
             </div>
-            <div className="flex max-md:flex-col items-center gap-4 py-5">
+            <div className="flex max-md:flex-col items-center gap-5 py-5">
               <CircularProgress
                 progress={ratingPercentage(details?.vote_average)}
                 size={55}
@@ -77,19 +88,26 @@ const DetailsPage = () => {
                 Add to watchlist
               </button>
               <button
-                className=" flex items-center px-3 py-2 border-2 rounded-md border-slate-200/20 text-green-400 font-bold hover:bg-green-600/30 max-md:scale-125"
+                className="hidden items-center px-3 py-2 border-2 rounded-md border-slate-200/20 text-green-400 font-bold hover:bg-green-600/30 max-md:scale-125"
                 onClick={() => console.log("clicked")}
               >
                 <FaCheckCircle size={20} className="mr-2" />
                 In watchlist
               </button>
             </div>
-            <p className="italic text-gray-300 pb-2 max-sm:text-base">{details?.tagline}</p>
+            <p className="italic text-gray-300 pb-2 max-sm:text-base">
+              {details?.tagline}
+            </p>
             <h3 className="font-bold text-lg">Overview</h3>
             <p className="text-lg text-white/75 pb-6">{details?.overview}</p>
-            <div className="flex gap-2">
+            <div className="flex flex-wrap gap-2">
               {details?.genres?.map((genre) => (
-                <div className="text-sm max-md:text-base font-bold uppercase py-1 px-2 rounded-sm bg-gray-700/60">{genre?.name}</div>
+                <div
+                  key={genre?.id}
+                  className="text-sm max-md:text-base font-bold uppercase py-1 px-2 rounded-sm bg-gray-700/60"
+                >
+                  {genre?.name}
+                </div>
               ))}
             </div>
           </div>
