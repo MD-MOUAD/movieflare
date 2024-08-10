@@ -1,6 +1,7 @@
 import CardComponent from "../components/CardComponent";
-import CoverComponent from "../components/CoverComponent";
-import Skeleton from "../components/Skeleton";
+import FeaturedMovie from "../components/FeaturedMovie";
+import CardSkeleton from "../components/Skeletons/CardSkeleton";
+import BannerSkeleton from "../components/Skeletons/BannerSkeleton";
 import { useState, useEffect } from "react";
 import { fetchTrending } from "../services/api";
 import fakeTrendingData from "../data/data";
@@ -8,12 +9,12 @@ import fakeTrendingData from "../data/data";
 const Home = () => {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
-  const [timeInterval, setTimeInterval] = useState("day");
+  const [timeFrame, setTimeFrame] = useState("day");
   const [mediaType, setMediaType] = useState("all");
 
   useEffect(() => {
     setLoading(true);
-    fetchTrending(timeInterval, mediaType)
+    fetchTrending(timeFrame, mediaType)
       .then((results) => {
         setData(results);
       })
@@ -23,21 +24,24 @@ const Home = () => {
       .finally(() => {
         setLoading(false);
       });
-  }, [timeInterval, mediaType]);
+  }, [timeFrame, mediaType]);
 
   // use fake data
 
   // useEffect(() => {
   //   setLoading(true);
-  //   setData(fakeTrendingData(timeInterval));
+  //   setData(fakeTrendingData(timeFrame));
   //   setTimeout(() => {
   //     setLoading(false);
   //   }, 1000);
-  // }, [timeInterval]);
+  // }, [timeFrame]);
 
   return (
     <div className="py-1">
-      {data?.length > 0 && <CoverComponent item={data[0]} />}
+      {loading
+        ? <BannerSkeleton/>
+        : <FeaturedMovie item={data[0]} />
+      }
       <div className="flex items-center space-x-3 max-sm:space-x-8 py-4 px-4">
         <h2 className="font-bold text-xl max-sm:text-lg text-red-500">Trending</h2>
         <select
@@ -53,17 +57,17 @@ const Home = () => {
         <div className="flex font-[500] border-2 border-black/50 dark:border-white/50 rounded-full shadow-md max-sm:scale-110">
           <button
             className={`px-5 max-sm:px-2 rounded-full ${
-              timeInterval == "day" ? "bg-red-600 text-slate-100" : ""
+              timeFrame == "day" ? "bg-red-600 text-slate-100" : ""
             } transition-all duration-300 shrink-0`}
-            onClick={() => setTimeInterval("day")}
+            onClick={() => setTimeFrame("day")}
           >
             Today
           </button>
           <button
             className={`px-5 max-sm:px-2 py-1 rounded-full ${
-              timeInterval == "week" ? "bg-red-600 text-slate-100" : ""
+              timeFrame == "week" ? "bg-red-600 text-slate-100" : ""
             } transition-all duration-300 shrink-0`}
-            onClick={() => setTimeInterval("week")}
+            onClick={() => setTimeFrame("week")}
           >
             This Week
           </button>
@@ -71,7 +75,7 @@ const Home = () => {
       </div>
       <div className="flex overflow-x-auto gap-5 pt-3 pb-5 px-1 mx-4 max-sm:py-1 max-sm:mx-0 max-sm:scrollbar-none">
         {loading
-          ? [...Array(19)].map((_, i) => <Skeleton key={i} />)
+          ? [...Array(19)].map((_, i) => <CardSkeleton key={i} />)
           : data?.map(
               (item, i) => i > 0 && <CardComponent key={item.id} item={item} />
             )}
