@@ -30,7 +30,7 @@ const FeaturedMovie = ({ item }) => {
               <span className="font-semibold text-red-400">{releaseDate}</span>
             </p>
             <p className="md:mt-2 text-sm text-white/90 lg:text-lg max-md:hidden">
-              Genre: <span className="font-semibold text-red-400">Action, Adventure</span>
+              Genre: <span className="font-semibold text-red-400">{item.genres?.map(genre => genre.name).join(', ')}</span>
             </p>
             <p className="mt-4 xl:text-lg text-white/50 font-[500] line-clamp-2 max-md:hidden">
               {item?.overview}

@@ -30,7 +30,7 @@ const DetailsPage = () => {
         setDetails(detailsData);
 
         // Set Cast
-        setCast(creditsData);
+        setCast(creditsData?.cast);
       } catch (error) {
         console.log("Error fetching data:", error);
       } finally {
@@ -56,7 +56,7 @@ const DetailsPage = () => {
         }}
       >
         <div className="absolute inset-0 bg-backdrop-gradient"></div>
-        <div className="relative container mx-auto p-6 flex flex-col md:flex-row items-center gap-10">
+        <div className="relative container mx-auto px-6 py-10 flex flex-col md:flex-row items-center gap-10">
           <img
             src={`${baseImgPath}/${details.poster_path}`}
             alt="poster"

@@ -26,3 +26,10 @@ export const fetchCredits = async (mediaType, id) => {
     const { data } = await axios.get(`${baseUrl}/${mediaType}/${id}/credits?api_key=${apiKey}`);
     return data;
 };
+
+// Movies & Tv - Genres
+export const fetchGenres = async () => {
+    const { tvGenres } = await axios.get(`${baseUrl}/genre/tv/list?api_key=${apiKey}`);
+    const { movieGenres } = await axios.get(`${baseUrl}/genre/movie/list?api_key=${apiKey}`);
+    return { tvGenres, movieGenres };
+};

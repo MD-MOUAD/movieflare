@@ -8,7 +8,7 @@ const CircularProgress = ({ progress, size }) => {
   const getProgressColor = (percentage) => {
     if (percentage < 40) return '#e53e3e';
     if (percentage < 60) return '#dd6b20';
-    if (percentage < 80) return '#d69e2e';
+    if (percentage < 70) return '#d69e2e';
     return '#38a169';
   };
 
