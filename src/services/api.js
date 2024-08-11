@@ -13,6 +13,11 @@ export const fetchTrending = async (timeFrame = "day", mediaType = "all") => {
     const { data } = await axios.get(`${baseUrl}/trending/${mediaType}/${timeFrame}?api_key=${apiKey}`);
     return data?.results;
 };
+// Top Rated
+export const fetchTopRated = async (mediaType = "movie") => {
+    const { data } = await axios.get(`${baseUrl}/${mediaType}/top_rated?api_key=${apiKey}`);
+    return data?.results;
+};
 
 // Movies & Tv - Details
 export const fetchDetails = async (mediaType, id) => {

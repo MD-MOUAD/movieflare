@@ -39,7 +39,6 @@ const FeaturedMovie = ({ item }) => {
 
   const title = item?.name || item?.title;
 
-
   return (
     <div
       className="relative bg-cover bg-center sm:rounded-md"
@@ -69,7 +68,10 @@ const FeaturedMovie = ({ item }) => {
               </div>
             </div>
             <p className="md:mt-2 text-white/65 lg:text-lg max-md:hidden">
-            {mapGenreIdsToNames(item?.genre_ids, genreDict[item?.media_type]).join(", ")}
+              {mapGenreIdsToNames(
+                item?.genre_ids,
+                genreDict[item?.media_type]
+              ).join(", ")}
             </p>
             <p className="mt-4 xl:text-lg text-white/50 font-[500] line-clamp-2 max-md:hidden">
               {item?.overview}

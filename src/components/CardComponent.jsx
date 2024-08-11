@@ -31,7 +31,7 @@ const CardComponent = ({ item }) => {
           </div>
         </div>
           {/* display vote average only for mobile devices */}
-          <div className="sm:hidden mt-1 flex justify-center items-center gap-2 text-red-600">
+          <div className="sm:hidden mt-1 flex justify-center items-center gap-2 text-yellow-600">
             <FaStar />
             {item?.vote_average?.toFixed(1)}
           </div>
