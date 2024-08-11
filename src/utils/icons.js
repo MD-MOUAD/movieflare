@@ -28,7 +28,7 @@ export {
 // io icons
 import { IoIosAdd, IoIosTrendingUp } from "react-icons/io";
 export { IoIosAdd, IoIosTrendingUp };
- 
+
 // md icons
 import { MdLiveTv } from "react-icons/md";
 export { MdLiveTv };

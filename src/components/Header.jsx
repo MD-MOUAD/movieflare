@@ -13,7 +13,7 @@ const Header = () => {
         <Login />
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Header;

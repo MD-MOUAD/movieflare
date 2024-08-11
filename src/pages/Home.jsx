@@ -51,11 +51,15 @@ const Home = () => {
 
   return (
     <div className="py-1 sm:p-4">
-      {trendingLoading ? <BannerSkeleton /> : <FeaturedMovie item={trendingData[0]} />}
+      {trendingLoading ? (
+        <BannerSkeleton />
+      ) : (
+        <FeaturedMovie item={trendingData[0]} />
+      )}
       <div className="flex items-center space-x-3 max-sm:space-x-8 p-4">
         <h2 className="flex items-center gap-1 font-bold text-xl max-sm:text-lg text-red-500">
           Trending
-          <IoIosTrendingUp size={25}/>
+          <IoIosTrendingUp size={25} />
         </h2>
         <select
           id="mediaType"
@@ -96,7 +100,7 @@ const Home = () => {
       <div className="mt-4 flex items-center space-x-3 max-sm:space-x-8 p-4">
         <h2 className="flex items-center gap-1 font-bold text-xl max-sm:text-lg text-red-500">
           Top Rated
-          <FaStar size={18}/>
+          <FaStar size={18} />
         </h2>
         <div className="flex font-[500] border-2 border-black/50 dark:border-white/50 rounded-full shadow-md max-sm:scale-110">
           <button

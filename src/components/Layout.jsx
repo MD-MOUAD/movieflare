@@ -10,7 +10,7 @@ const Layout = ({ children }) => {
         {children}
       </main>
     </>
-  )
-}
+  );
+};
 
 export default Layout;

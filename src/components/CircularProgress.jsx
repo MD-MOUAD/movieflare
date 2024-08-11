@@ -6,10 +6,10 @@ const CircularProgress = ({ progress, size }) => {
   const circumference = 2 * Math.PI * radius;
 
   const getProgressColor = (percentage) => {
-    if (percentage < 40) return '#e53e3e';
-    if (percentage < 60) return '#dd6b20';
-    if (percentage < 70) return '#d69e2e';
-    return '#38a169';
+    if (percentage < 40) return "#e53e3e";
+    if (percentage < 60) return "#dd6b20";
+    if (percentage < 70) return "#d69e2e";
+    return "#38a169";
   };
 
   const progressColor = getProgressColor(progress);
@@ -34,7 +34,7 @@ const CircularProgress = ({ progress, size }) => {
         strokeDasharray={circumference}
         strokeDashoffset={circumference - (progress / 100) * circumference}
         strokeLinecap="round"
-        style={{ transition: 'stroke-dashoffset 0.35s' }}
+        style={{ transition: "stroke-dashoffset 0.35s" }}
       />
       <text
         x={center}
@@ -51,4 +51,3 @@ const CircularProgress = ({ progress, size }) => {
 };
 
 export default CircularProgress;
-

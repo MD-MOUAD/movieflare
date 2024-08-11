@@ -5,7 +5,7 @@ const App = () => {
     <Layout>
       <Outlet />
     </Layout>
-  )
-}
+  );
+};
 
 export default App;

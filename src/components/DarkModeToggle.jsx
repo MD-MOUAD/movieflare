@@ -27,7 +27,7 @@ const DarkModeToggle = () => {
       onClick={() => setIsDarkMode(!isDarkMode)}
     >
       <div className="flex shrink-0 justify-center items-center size-9">
-        {isDarkMode ? (<FaSun />) : (<FaMoon />)}
+        {isDarkMode ? <FaSun /> : <FaMoon />}
       </div>
     </button>
   );

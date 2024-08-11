@@ -6,8 +6,7 @@ import { FaStar } from "../utils/icons";
 const CardComponent = ({ item }) => {
   return (
     <Link to={`/${item?.media_type}/${item?.id}`}>
-      <div
-        className="w-28 sm:w-32 md:w-36 lg:w-40 shrink-0 rounded-lg overflow-clip relative hover:scale-105 transition-transition duration-300 group">
+      <div className="w-28 sm:w-32 md:w-36 lg:w-40 shrink-0 rounded-lg overflow-clip relative hover:scale-105 transition-transition duration-300 group">
         <img
           className="h-full group-hover:brightness-50 dark:group-hover:opacity-50"
           src={`${baseImgPath}/${item.poster_path}`}
@@ -30,11 +29,11 @@ const CardComponent = ({ item }) => {
             {item?.vote_average?.toFixed(1)}
           </div>
         </div>
-          {/* display vote average only for mobile devices */}
-          <div className="sm:hidden mt-1 flex justify-center items-center gap-2 text-yellow-600">
-            <FaStar />
-            {item?.vote_average?.toFixed(1)}
-          </div>
+        {/* display vote average only for mobile devices */}
+        <div className="sm:hidden mt-1 flex justify-center items-center gap-2 text-yellow-600">
+          <FaStar />
+          {item?.vote_average?.toFixed(1)}
+        </div>
       </div>
     </Link>
   );

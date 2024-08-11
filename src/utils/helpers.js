@@ -15,5 +15,5 @@ export const createGenreDict = (genres) => {
 };
 
 export const mapGenreIdsToNames = (genreIds, genreDict) => {
-  return genreIds.map(id => genreDict[id] || 'Unknown');
+  return genreIds.map((id) => genreDict[id] || "Unknown");
 };
