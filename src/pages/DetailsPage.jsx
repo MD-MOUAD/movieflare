@@ -104,7 +104,7 @@ const DetailsPage = () => {
               {details?.genres?.map((genre) => (
                 <div
                   key={genre?.id}
-                  className="text-sm max-md:text-base font-bold uppercase py-1 px-2 rounded-sm bg-gray-700/60"
+                  className="text-sm max-md:text-base font-bold uppercase p-2 rounded-sm bg-gray-700/60"
                 >
                   {genre?.name}
                 </div>

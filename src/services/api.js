@@ -9,14 +9,13 @@ export const BaseImgPathOriginal = "https://image.tmdb.org/t/p/original";
 
 // Trending
 export const fetchTrending = async (timeFrame = "day", mediaType = "all") => {
-    await new Promise((resolve) => setTimeout(resolve, 1000)); // TODO: Remove this line later
+    // await new Promise((resolve) => setTimeout(resolve, 1000)); // TODO: Remove this line later
     const { data } = await axios.get(`${baseUrl}/trending/${mediaType}/${timeFrame}?api_key=${apiKey}`);
     return data?.results;
 };
 
 // Movies & Tv - Details
 export const fetchDetails = async (mediaType, id) => {
-    await new Promise((resolve) => setTimeout(resolve, 1000)); // TODO: Remove this line later
     const { data } = await axios.get(`${baseUrl}/${mediaType}/${id}?api_key=${apiKey}`);
     return data;
 };
@@ -28,8 +27,7 @@ export const fetchCredits = async (mediaType, id) => {
 };
 
 // Movies & Tv - Genres
-export const fetchGenres = async () => {
-    const { tvGenres } = await axios.get(`${baseUrl}/genre/tv/list?api_key=${apiKey}`);
-    const { movieGenres } = await axios.get(`${baseUrl}/genre/movie/list?api_key=${apiKey}`);
-    return { tvGenres, movieGenres };
+export const fetchGenreList = async (genreType) => {
+    const { data } = await axios.get(`${baseUrl}/genre/${genreType}/list?api_key=${apiKey}`);
+    return data?.genres;
 };

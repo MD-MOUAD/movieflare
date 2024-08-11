@@ -9,6 +9,7 @@ import {
   FaSearch,
   FaCheckCircle,
   FaFilm,
+  FaRegPlayCircle,
 } from "react-icons/fa";
 
 export {
@@ -21,6 +22,7 @@ export {
   FaSearch,
   FaCheckCircle,
   FaFilm,
+  FaRegPlayCircle,
 };
 
 // io icons
@@ -30,3 +32,7 @@ export { IoIosAdd };
 // md icons
 import { MdLiveTv } from "react-icons/md";
 export { MdLiveTv };
+
+// bi icons
+import { BiCameraMovie } from "react-icons/bi";
+export { BiCameraMovie };

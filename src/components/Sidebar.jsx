@@ -9,13 +9,7 @@ const Sidebar = () => {
     { name: "Search", path: "/search", icon: (<FaSearch />) },
   ];
   return (
-    <div className="max-lg:hidden fixed top-0 left-0 h-screen w-64  dark:text-white bg-slate-200 dark:bg-neutral-950">
-      <div className="py-4 flex justify-center border-b-2 border-stone-900/5 dark:border-slate-100/5">
-        <h1 className="text-3xl font-bold font-raleway bg-gradient-to-r from-red-400 via-red-900 to-red-600 bg-clip-text text-transparent">
-          <span className="text-4xl">M</span>ovie
-          <span className="text-4xl">l</span>and
-        </h1>
-      </div>
+    <div className="max-lg:hidden fixed top-16 left-0 h-[calc(100vh-4rem)] w-52 dark:text-white bg-slate-200 dark:bg-neutral-900">
       <ul className="flex-col space-y-4 pt-5">
         {Links.map((link, index) => (
           <li key={index}>

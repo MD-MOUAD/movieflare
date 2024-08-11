@@ -3,29 +3,24 @@ import FeaturedMovie from "../components/FeaturedMovie";
 import CardSkeleton from "../components/Skeletons/CardSkeleton";
 import BannerSkeleton from "../components/Skeletons/BannerSkeleton";
 import { useState, useEffect } from "react";
-import { fetchDetails, fetchTrending } from "../services/api";
+import { fetchTrending } from "../services/api";
 import fakeTrendingData from "../data/data";
+
+
 const Home = () => {
   const [loading, setLoading] = useState(true);
   const [trendingData, setTrendingData] = useState([]);
   const [timeFrame, setTimeFrame] = useState("day");
   const [mediaType, setMediaType] = useState("all");
-  const [featuredMovie, setFeaturedMovie] = useState({});
-
 
   useEffect(() => {
     setLoading(true);
     const fetchTrendingData = async () => {
       try {
         const trending = await fetchTrending(timeFrame, mediaType);
+
         // Set trendingData
         setTrendingData(trending);
-
-        // Set featuredMovie
-        const [{id, media_type}] = trending;
-        const featured = await fetchDetails(media_type, id);
-        featured["media_type"] = media_type;
-        setFeaturedMovie(featured);
       } catch (error) {
         console.log("Error fetching data:", error);
       } finally {
@@ -47,10 +42,10 @@ const Home = () => {
   // }, [timeFrame]);
 
   return (
-    <div className="py-1">
+    <div className="py-1 sm:p-4">
       {loading
         ? <BannerSkeleton/>
-        : <FeaturedMovie item={featuredMovie} />
+        : <FeaturedMovie item={trendingData[0]} />
       }
       <div className="flex items-center space-x-3 max-sm:space-x-8 py-4 px-4">
         <h2 className="font-bold text-xl max-sm:text-lg text-red-500">Trending</h2>

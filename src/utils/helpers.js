@@ -5,3 +5,15 @@ export const getYear = (item) => {
 };
 
 export const ratingPercentage = (rating) => (rating * 10)?.toFixed(0);
+
+export const createGenreDict = (genres) => {
+  const genreDict = {};
+  genres.forEach(({ id, name }) => {
+    genreDict[id] = name;
+  });
+  return genreDict;
+};
+
+export const mapGenreIdsToNames = (genreIds, genreDict) => {
+  return genreIds.map(id => genreDict[id] || 'Unknown');
+};
