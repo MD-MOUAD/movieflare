@@ -10,6 +10,7 @@ import {
   FaCheckCircle,
   FaFilm,
   FaRegPlayCircle,
+  FaChevronCircleRight,
 } from "react-icons/fa";
 
 export {
@@ -23,6 +24,7 @@ export {
   FaCheckCircle,
   FaFilm,
   FaRegPlayCircle,
+  FaChevronCircleRight,
 };
 
 // io icons

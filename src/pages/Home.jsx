@@ -4,7 +4,7 @@ import CardSkeleton from "../components/Skeletons/CardSkeleton";
 import BannerSkeleton from "../components/Skeletons/BannerSkeleton";
 import { useState, useEffect } from "react";
 import { fetchTopRated, fetchTrending } from "../services/api";
-import { IoIosTrendingUp, FaStar } from "../utils/icons";
+import { IoIosTrendingUp, FaStar, FaChevronCircleRight } from "../utils/icons";
 
 const Home = () => {
   const [trendingLoading, setTrendingLoading] = useState(true);
@@ -56,7 +56,7 @@ const Home = () => {
       ) : (
         <FeaturedMovie item={trendingData[0]} />
       )}
-      <div className="flex items-center space-x-3 max-sm:space-x-8 p-4">
+      <div className="mt-6 flex items-center space-x-3 max-sm:space-x-8 p-4">
         <h2 className="flex items-center gap-1 font-bold text-xl max-sm:text-lg text-red-500">
           Trending
           <IoIosTrendingUp size={25} />
@@ -121,12 +121,14 @@ const Home = () => {
           </button>
         </div>
       </div>
-      <div className="flex overflow-x-auto gap-5 pt-3 pb-5 px-1 mx-4 max-sm:py-1 max-sm:mx-0 max-sm:scrollbar-none">
+      <div className="flex items-center overflow-x-auto gap-5 pt-3 pb-5 px-1 mx-4 max-sm:py-1 max-sm:mx-0 max-sm:scrollbar-none">
         {topRatedLoading
-          ? [...Array(19)].map((_, i) => <CardSkeleton key={i} />)
-          : topRatedData?.map(
-              (item, i) => i > 0 && <CardComponent key={item.id} item={item} />
-            )}
+          ? [...Array(20)].map((_, i) => <CardSkeleton key={i} />)
+          : topRatedData?.map((item) => {
+            item["media_type"] = topRatedType;
+            return <CardComponent key={item.id} item={item} />;
+          })}
+        <button className="pr-2"><FaChevronCircleRight size={40} /></button>
       </div>
     </div>
   );
