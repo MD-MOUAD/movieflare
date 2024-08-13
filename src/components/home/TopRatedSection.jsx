@@ -1,7 +1,7 @@
 import React from "react";
-import CardComponent from "../components/CardComponent";
-import CardSkeleton from "../components/Skeletons/CardSkeleton";
-import { FaStar, FaChevronCircleRight } from "../utils/icons";
+import CardComponent from "../CardComponent";
+import CardSkeleton from "../Skeletons/CardSkeleton";
+import { FaStar, FaChevronCircleRight } from "../../utils/icons";
 
 const TopRatedSection = ({ topRatedLoading, topRatedData, topRatedType, setTopRatedType }) => {
   return (

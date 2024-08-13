@@ -1,7 +1,7 @@
 import React from "react";
-import CardComponent from "./CardComponent";
-import CardSkeleton from "./Skeletons/CardSkeleton";
-import { IoIosTrendingUp } from "../utils/icons";
+import CardComponent from "../CardComponent";
+import CardSkeleton from "../Skeletons/CardSkeleton";
+import { IoIosTrendingUp } from "../../utils/icons";
 
 const TrendingSection = ({ trendingLoading, trendingData, timeFrame, setTimeFrame, trendingType, setTrendingType }) => {
   return (

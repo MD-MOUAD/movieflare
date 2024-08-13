@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import FeaturedMovie from "../components/FeaturedMovie";
 import BannerSkeleton from "../components/Skeletons/BannerSkeleton";
-import TrendingSection from "../components/TrendingSection";
-import TopRatedSection from "../components/TopRatedSection";
+import TrendingSection from "../components/home/TrendingSection";
+import TopRatedSection from "../components/home/TopRatedSection";
 import { fetchTopRated, fetchTrending } from "../services/api";
 
 const Home = () => {
