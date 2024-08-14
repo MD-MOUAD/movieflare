@@ -10,7 +10,7 @@ import Spinner from "../components/Spinner";
 import CircularProgress from "../components/CircularProgress";
 import { FaCheckCircle, FaRegCalendarAlt, IoIosAdd } from "../utils/icons";
 import { ratingPercentage } from "../utils/helpers";
-
+import noProfileImg from "../assets/no-profile-img.svg";
 const DetailsPage = () => {
   const { type, id } = useParams();
   const [loading, setLoading] = useState(true);
@@ -47,8 +47,10 @@ const DetailsPage = () => {
 
   const releaseDate = details?.release_date || details?.first_air_date;
   const title = details?.name || details?.title;
+  console.log(cast);
   return (
     <>
+      {/* details */}
       <div
         className="relative bg-cover bg-center"
         style={{
@@ -111,6 +113,34 @@ const DetailsPage = () => {
               ))}
             </div>
           </div>
+        </div>
+      </div>
+      {/* cast */}
+      <div className="mt-4 container mx-auto">
+        <h2 className="text-lg sm:text-xl font-roboto ml-2">
+          {type == "tv" ? "Series" : "Top Billed"} Cast
+        </h2>
+        <div className="flex gap-5 pl-2 md:px-5 md:py-2 mt-4 mb-10 overflow-x-auto max-sm:scrollbar-none">
+          {cast &&
+            cast.map((item) => (
+              <div>
+                <div
+                  key={item.id}
+                  className="w-28 sm:w-32 md:w-36 lg:w-40 shrink-0 rounded-lg overflow-clip relative"
+                >
+                  <img
+                    className="h"
+                    src={`${baseImgPath}/${item?.profile_path}`}
+                    alt={`${item.name}-profile`}
+                    onError={(e) => (e.currentTarget.src = noProfileImg)}
+                  />
+                </div>
+                <p className="my-2 text-center font-bold">{item.name}</p>
+                <p className="text-sm opacity-70 text-center">
+                  {item.character}
+                </p>
+              </div>
+            ))}
         </div>
       </div>
     </>

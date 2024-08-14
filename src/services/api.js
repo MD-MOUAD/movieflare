@@ -19,15 +19,34 @@ export const fetchTrending = async (
   );
   return data?.results;
 };
+
 // Top Rated
 export const fetchTopRated = async (mediaType = "movie", page = 1) => {
   const { data } = await axios.get(
     `${baseUrl}/${mediaType}/top_rated?api_key=${apiKey}&page=${page}`
   );
-  console.log("requested")
   return data?.results;
 };
 
+// Upcoming Movies
+export const fetchUpcomingMovies = async () => {
+  const { data } = await axios.get(
+    `${baseUrl}/movie/upcoming?api_key=${apiKey}`
+  );
+  return data?.results;
+};
+
+// Movies - Latest Trailer
+export const fetchLatestTrailer = async (movieId) => {
+  const { data } = await axios.get(
+    `${baseUrl}/movie/${movieId}/videos?api_key=${apiKey}`
+  );
+  const officialTrailers = data.results.filter(
+    video => video.type === "Trailer" && video.official === true && video.site === "YouTube"
+  );
+  officialTrailers.sort((a, b) => new Date(b.published_at) - new Date(a.published_at));
+  return officialTrailers.length > 0 ? officialTrailers[0] : null;
+} 
 // Movies & Tv - Details
 export const fetchDetails = async (mediaType, id) => {
   const { data } = await axios.get(

@@ -83,10 +83,10 @@ const TrendingSection = () => {
           : trendingData?.map(
               (item, i) => i > 0 && <CardComponent key={item.id} item={item} />
             )}
-        {page < 100 && (
+        {page < 10 && (
           <button
             className="pr-2"
-            onClick={() => page < 100 && setPage(page + 1)}
+            onClick={() => page < 10 && setPage(page + 1)}
           >
             <FaChevronCircleRight size={30} />
           </button>
