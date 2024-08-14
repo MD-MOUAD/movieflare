@@ -18,7 +18,7 @@ export default {
       },
       backgroundImage: {
         'cover-gradient': 'linear-gradient(rgba(0,0,0,.3), rgba(0,0,0,1))',
-        'backdrop-gradient': 'linear-gradient(rgba(0,0,0,.75), rgba(0,0,0,.8))',
+        'backdrop-gradient': 'linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.7))',
       },
       aspectRatio: {
         'card': '2 / 3', // equivalent to 1.5 / 1

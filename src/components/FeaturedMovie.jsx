@@ -49,8 +49,8 @@ const FeaturedMovie = ({ item }) => {
       {/* overlay */}
       <div className="absolute inset-0 bg-cover-gradient sm:rounded-md"></div>
 
-      <div className="relative py-9 px-1 sm:p-6 md:p-12 rounded-lg sm:backdrop-filter sm:backdrop-blur-sm">
-        <div className="flex items-center text-white w-fit max-w-7xl bg-opacity-75 ">
+      <div className="relative py-9 px-1 sm:p-6 md:p-12 rounded-lg sm:backdrop-filter">
+        <div className="flex items-center text-white w-fit max-w-5xl bg-opacity-75 ">
           <img
             src={`${baseImgPath}/${item.poster_path}`}
             alt="Movie Poster"
