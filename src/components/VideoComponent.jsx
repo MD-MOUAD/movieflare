@@ -1,5 +1,3 @@
-import PropTypes from "prop-types";
-
 const VideoComponent = ({ id, title, small }) => {
   return (
     <iframe
@@ -12,9 +10,5 @@ const VideoComponent = ({ id, title, small }) => {
   );
 };
 
-VideoComponent.PropTypes = {
-  id: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  small: PropTypes.bool,
-};
+
 export default VideoComponent;

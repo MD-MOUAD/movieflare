@@ -17,3 +17,9 @@ export const createGenreDict = (genres) => {
 export const mapGenreIdsToNames = (genreIds, genreDict) => {
   return genreIds.map((id) => genreDict[id] || "Unknown");
 };
+
+export const minutesToHours = (time) => {
+  const hours = Math.floor(time / 60);
+  const minutes = time % 60;
+  return `${hours}h ${minutes}m`;
+};

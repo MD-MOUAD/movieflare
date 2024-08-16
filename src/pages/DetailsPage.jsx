@@ -9,8 +9,13 @@ import {
 } from "../services/api";
 import Spinner from "../components/Spinner";
 import CircularProgress from "../components/CircularProgress";
-import { FaCheckCircle, FaRegCalendarAlt, IoIosAdd } from "../utils/icons";
-import { ratingPercentage } from "../utils/helpers";
+import {
+  FaCheckCircle,
+  FaRegCalendarAlt,
+  IoIosAdd,
+  IoMdTime,
+} from "../utils/icons";
+import { ratingPercentage, minutesToHours } from "../utils/helpers";
 import noProfileImg from "../assets/no-profile-img.svg";
 import VideoComponent from "../components/VideoComponent";
 const DetailsPage = () => {
@@ -66,9 +71,8 @@ const DetailsPage = () => {
 
   const releaseDate = details?.release_date || details?.first_air_date;
   const title = details?.name || details?.title;
-  console.log(cast);
   return (
-    <>
+    <div className="">
       {/* details */}
       <div
         className="relative bg-cover bg-center"
@@ -90,10 +94,18 @@ const DetailsPage = () => {
                 {new Date(releaseDate).getFullYear()}
               </span>
             </h1>
-            <div className="flex items-center gap-2 text-lg">
-              <FaRegCalendarAlt />
-              <div>{new Date(releaseDate).toLocaleDateString("en-US")}</div>
-              <p className="uppercase text-base text-gray-300">({type})</p>
+            <div className="flex max-sm:flex-col items-center gap-5 max-sm:gap-2 text-lg">
+              <div className="flex items-center gap-2 text-white/75">
+                <FaRegCalendarAlt />
+                <div>{new Date(releaseDate).toLocaleDateString("en-US")} (US)</div>
+
+              </div>
+              {type === "movie" && (
+                <div className="flex items-center gap-1 text-gray-300">
+                  <IoMdTime className="size-5"/>
+                  <p>{minutesToHours(details?.runtime)}</p>
+                </div>
+              )}
             </div>
             <div className="flex max-md:flex-col items-center gap-5 py-5">
               <CircularProgress
@@ -145,11 +157,8 @@ const DetailsPage = () => {
           )}
           {cast &&
             cast.map((item) => (
-              <div>
-                <div
-                  key={item.id}
-                  className="w-28 sm:w-32 md:w-36 lg:w-40 shrink-0 rounded-lg overflow-clip relative"
-                >
+              <div key={item.id}>
+                <div className="w-28 sm:w-32 md:w-36 lg:w-40 shrink-0 rounded-lg overflow-clip relative">
                   <img
                     className="h"
                     src={`${baseImgPath}/${item?.profile_path}`}
@@ -165,23 +174,26 @@ const DetailsPage = () => {
             ))}
         </div>
         {/* Trailers */}
-        <h2 className="text-lg sm:text-xl font-roboto ml-2 mb-4">Latest Trailer</h2>
+        <h2 className="text-lg sm:text-xl font-roboto ml-2 mb-4">
+          Latest Trailer
+        </h2>
         {officialTrailers.length > 0 ? (
           <VideoComponent id={officialTrailers[0]?.key} />
         ) : (
-          <p className="mt-10 text-center">No Trailers available</p>
+          <p className="mt-10 ml-32 py-5">No Trailers available</p>
         )}
 
         {/* Other Videos */}
-        {videos?.length > 0 && (<h2 className="mt-8 text-lg sm:text-xl font-roboto ml-2 mb-4">
-          Other Videos
-        </h2>)}
-        <div className="flex mt-5 mb-10 overflow-x-auto gap-5">
+        {videos?.length > 0 && (
+          <h2 className="mt-8 text-lg sm:text-xl font-roboto ml-2 mb-4">
+            Other Videos
+          </h2>
+        )}
+        <div className="flex mt-5 overflow-x-auto gap-5">
           {videos &&
             videos.map((item) => {
-              console.log(item);
               return (
-                <div className="flex-shrink-0" key={item?.key}>
+                <div className="flex-shrink-0" key={item.key}>
                   <VideoComponent id={item?.key} small />
                   <p className="text-sm text-center font mt-2 mb-5 line-clamp-2">
                     {item?.name}
@@ -191,7 +203,7 @@ const DetailsPage = () => {
             })}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

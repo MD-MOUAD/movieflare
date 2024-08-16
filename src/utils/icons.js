@@ -28,8 +28,8 @@ export {
 };
 
 // io icons
-import { IoIosAdd, IoIosTrendingUp } from "react-icons/io";
-export { IoIosAdd, IoIosTrendingUp };
+import { IoIosAdd, IoIosTrendingUp, IoMdTime } from "react-icons/io";
+export { IoIosAdd, IoIosTrendingUp, IoMdTime };
 
 // md icons
 import { MdLiveTv } from "react-icons/md";
