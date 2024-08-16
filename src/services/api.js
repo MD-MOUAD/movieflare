@@ -37,9 +37,9 @@ export const fetchUpcomingMovies = async () => {
 };
 
 // Movies - Latest Trailer
-export const fetchLatestTrailer = async (movieId) => {
+export const fetchLatestTrailer = async (mediaType, movieId) => {
   const { data } = await axios.get(
-    `${baseUrl}/movie/${movieId}/videos?api_key=${apiKey}`
+    `${baseUrl}/${mediaType}/${movieId}/videos?api_key=${apiKey}`
   );
   const officialTrailers = data.results.filter(
     video => video.type === "Trailer" && video.official === true && video.site === "YouTube"
@@ -75,6 +75,21 @@ export const fetchGenreList = async (genreType) => {
 export const fetchVideos = async (mediaType, id) => {
   const { data } = await axios.get(
     `${baseUrl}/${mediaType}/${id}/videos?api_key=${apiKey}`
+  );
+  return data;
+};
+
+// Discover
+export const fetchMovies = async () => {
+  await new Promise((resolve) => setTimeout(resolve, 1000)); // TODO: Remove this line later
+  const { data } = await axios.get(
+    `${baseUrl}/discover/movie?api_key=${apiKey}`
+  );
+  return data;
+};
+export const fetchTv = async () => {
+  const { data } = await axios.get(
+    `${baseUrl}/discover/tv?api_key=${apiKey}`
   );
   return data;
 };

@@ -68,14 +68,14 @@ const TopRatedSection = () => {
           ? [...Array(20)].map((_, i) => <CardSkeleton key={i} />)
           : topRatedData?.map((item) => {
               item["media_type"] = mediaType;
-              return <CardComponent key={item.id} item={item} />;
+              return <CardComponent key={item.id} item={item} small />;
             })}
         {page < 10 && (
           <button
             className="pr-2"
             onClick={() => page < 10 && setPage(page + 1)}
           >
-            <FaChevronCircleRight size={30} />
+            <FaChevronCircleRight size={30} className="mb-3" />
           </button>
         )}
       </div>

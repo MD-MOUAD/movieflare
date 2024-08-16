@@ -5,7 +5,7 @@ const Sidebar = () => {
   const Links = [
     { name: "Home", path: "/", icon: <FaHome /> },
     { name: "Movies", path: "/movies", icon: <FaFilm /> },
-    { name: "Tv shows", path: "/shows", icon: <MdLiveTv /> },
+    { name: "Tv Shows", path: "/shows", icon: <MdLiveTv /> },
     { name: "Search", path: "/search", icon: <FaSearch /> },
   ];
   return (

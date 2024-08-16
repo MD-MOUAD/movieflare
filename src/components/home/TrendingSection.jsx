@@ -55,8 +55,8 @@ const TrendingSection = () => {
           defaultValue={"all"}
         >
           <option value="all">all</option>
+          <option value="tv">Tv Series</option>
           <option value="movie">Movies</option>
-          <option value="tv">TV Shows</option>
         </select>
         <div className="flex font-[500] border-2 border-black/50 dark:border-white/50 rounded-full shadow-md max-sm:scale-110">
           <button
@@ -81,14 +81,14 @@ const TrendingSection = () => {
         {loading
           ? [...Array(19)].map((_, i) => <CardSkeleton key={i} />)
           : trendingData?.map(
-              (item, i) => i > 0 && <CardComponent key={item.id} item={item} />
+              (item, i) => i > 0 && <CardComponent key={item.id} item={item} small />
             )}
         {page < 10 && (
           <button
             className="pr-2"
             onClick={() => page < 10 && setPage(page + 1)}
           >
-            <FaChevronCircleRight size={30} />
+            <FaChevronCircleRight size={30} className="mb-3" />
           </button>
         )}
       </div>
