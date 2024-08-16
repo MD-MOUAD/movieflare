@@ -70,3 +70,11 @@ export const fetchGenreList = async (genreType) => {
   );
   return data?.genres;
 };
+
+// Movies & Tv - Videos
+export const fetchVideos = async (mediaType, id) => {
+  const { data } = await axios.get(
+    `${baseUrl}/${mediaType}/${id}/videos?api_key=${apiKey}`
+  );
+  return data;
+};

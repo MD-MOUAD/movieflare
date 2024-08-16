@@ -5,25 +5,30 @@ import {
   baseImgPath,
   fetchCredits,
   fetchDetails,
+  fetchVideos,
 } from "../services/api";
 import Spinner from "../components/Spinner";
 import CircularProgress from "../components/CircularProgress";
 import { FaCheckCircle, FaRegCalendarAlt, IoIosAdd } from "../utils/icons";
 import { ratingPercentage } from "../utils/helpers";
 import noProfileImg from "../assets/no-profile-img.svg";
+import VideoComponent from "../components/VideoComponent";
 const DetailsPage = () => {
   const { type, id } = useParams();
   const [loading, setLoading] = useState(true);
   const [details, setDetails] = useState({});
-  const [cast, setCast] = useState({});
+  const [cast, setCast] = useState([]);
+  const [officialTrailers, setOfficialTrailers] = useState([]);
+  const [videos, setVideos] = useState([]);
 
   useEffect(() => {
     setLoading(true);
     const fetchAllData = async () => {
       try {
-        const [detailsData, creditsData] = await Promise.all([
+        const [detailsData, creditsData, VideosData] = await Promise.all([
           fetchDetails(type, id),
           fetchCredits(type, id),
+          fetchVideos(type, id),
         ]);
 
         // Set Details
@@ -31,6 +36,20 @@ const DetailsPage = () => {
 
         // Set Cast
         setCast(creditsData?.cast);
+
+        // Set officialTrailers
+        const trailers = VideosData?.results?.filter(
+          (video) =>
+            video.type === "Trailer" &&
+            video.official === true &&
+            video.site === "YouTube"
+        );
+        setOfficialTrailers(trailers);
+        // set Videos
+        const vids = VideosData?.results
+          ?.filter((video) => video?.type != "Trailer")
+          ?.slice(0, 10);
+        setVideos(vids);
       } catch (error) {
         console.log("Error fetching data:", error);
       } finally {
@@ -115,12 +134,15 @@ const DetailsPage = () => {
           </div>
         </div>
       </div>
-      {/* cast */}
       <div className="mt-4 container mx-auto">
+        {/* cast */}
         <h2 className="text-lg sm:text-xl font-roboto ml-2">
           {type == "tv" ? "Series" : "Top Billed"} Cast
         </h2>
         <div className="flex gap-5 pl-2 md:px-5 md:py-2 mt-4 mb-10 overflow-x-auto max-sm:scrollbar-none">
+          {cast?.length === 0 && (
+            <p className="mt-10 text-center">No cast found</p>
+          )}
           {cast &&
             cast.map((item) => (
               <div>
@@ -141,6 +163,32 @@ const DetailsPage = () => {
                 </p>
               </div>
             ))}
+        </div>
+        {/* Trailers */}
+        <h2 className="text-lg sm:text-xl font-roboto ml-2 mb-4">Latest Trailer</h2>
+        {officialTrailers.length > 0 ? (
+          <VideoComponent id={officialTrailers[0]?.key} />
+        ) : (
+          <p className="mt-10 text-center">No Trailers available</p>
+        )}
+
+        {/* Other Videos */}
+        {videos?.length > 0 && (<h2 className="mt-8 text-lg sm:text-xl font-roboto ml-2 mb-4">
+          Other Videos
+        </h2>)}
+        <div className="flex mt-5 mb-10 overflow-x-auto gap-5">
+          {videos &&
+            videos.map((item) => {
+              console.log(item);
+              return (
+                <div className="flex-shrink-0" key={item?.key}>
+                  <VideoComponent id={item?.key} small />
+                  <p className="text-sm text-center font mt-2 mb-5 line-clamp-2">
+                    {item?.name}
+                  </p>
+                </div>
+              );
+            })}
         </div>
       </div>
     </>

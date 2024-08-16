@@ -67,7 +67,7 @@ const FeaturedMovie = ({ item }) => {
                 {item?.vote_average?.toFixed(1)}
               </div>
             </div>
-            <p className="md:mt-2 text-white/65 lg:text-lg max-md:hidden">
+            <p className="md:mt-2 text-white font-[500] lg:text-lg max-md:hidden">
               {mapGenreIdsToNames(
                 item?.genre_ids,
                 genreDict[item?.media_type]
