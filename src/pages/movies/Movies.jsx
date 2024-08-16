@@ -27,7 +27,7 @@ const Movies = () => {
     <div className="container mx-auto py-10">
       <div className="flex items-center justify-center flex-wrap gap-8">
       {loading
-          ? [...Array(20)].map((_, i) => <CardSkeleton key={i} />)
+          ? [...Array(20)].map((_, i) => <CardSkeleton key={i} small={false}/>)
           : movies?.map((item) => {
               item["media_type"] = "movie";
               return <CardComponent key={item.id} item={item} />;

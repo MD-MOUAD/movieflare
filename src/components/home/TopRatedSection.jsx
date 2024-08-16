@@ -65,7 +65,7 @@ const TopRatedSection = () => {
       </div>
       <div className="flex items-center overflow-x-auto gap-5 pt-3 pb-5 px-1 mx-4 max-sm:py-1 max-sm:mx-0 max-sm:scrollbar-none">
         {loading
-          ? [...Array(20)].map((_, i) => <CardSkeleton key={i} />)
+          ? [...Array(20)].map((_, i) => <CardSkeleton key={i} small />)
           : topRatedData?.map((item) => {
               item["media_type"] = mediaType;
               return <CardComponent key={item.id} item={item} small />;

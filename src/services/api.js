@@ -13,7 +13,7 @@ export const fetchTrending = async (
   mediaType = "all",
   page = 1
 ) => {
-  // await new Promise((resolve) => setTimeout(resolve, 1000)); // TODO: Remove this line later
+  await new Promise((resolve) => setTimeout(resolve, 500)); // TODO: Remove this line later
   const { data } = await axios.get(
     `${baseUrl}/trending/${mediaType}/${timeFrame}?api_key=${apiKey}&page=${page}`
   );
@@ -22,6 +22,7 @@ export const fetchTrending = async (
 
 // Top Rated
 export const fetchTopRated = async (mediaType = "movie", page = 1) => {
+  await new Promise((resolve) => setTimeout(resolve, 500)); // TODO: Remove this line later
   const { data } = await axios.get(
     `${baseUrl}/${mediaType}/top_rated?api_key=${apiKey}&page=${page}`
   );
@@ -81,7 +82,7 @@ export const fetchVideos = async (mediaType, id) => {
 
 // Discover
 export const fetchMovies = async () => {
-  await new Promise((resolve) => setTimeout(resolve, 1000)); // TODO: Remove this line later
+  await new Promise((resolve) => setTimeout(resolve, 500)); // TODO: Remove this line later
   const { data } = await axios.get(
     `${baseUrl}/discover/movie?api_key=${apiKey}`
   );

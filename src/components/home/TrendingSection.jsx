@@ -79,7 +79,7 @@ const TrendingSection = () => {
       </div>
       <div className="flex overflow-x-auto gap-5 pt-3 pb-5 px-1 mx-4 max-sm:py-1 max-sm:mx-0 max-sm:scrollbar-none">
         {loading
-          ? [...Array(19)].map((_, i) => <CardSkeleton key={i} />)
+          ? [...Array(19)].map((_, i) => <CardSkeleton key={i} small />)
           : trendingData?.map(
               (item, i) => i > 0 && <CardComponent key={item.id} item={item} small />
             )}
