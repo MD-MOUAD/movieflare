@@ -97,14 +97,17 @@ const DetailsPage = () => {
             <div className="flex max-sm:flex-col items-center gap-5 max-sm:gap-2 text-lg">
               <div className="flex items-center gap-2 text-white/75">
                 <FaRegCalendarAlt />
-                <div>{new Date(releaseDate).toLocaleDateString("en-US")} (US)</div>
-
+                <div>
+                  {new Date(releaseDate).toLocaleDateString("en-US")} (US)
+                </div>
               </div>
-              {type === "movie" && (
+              {type === "movie" ? (
                 <div className="flex items-center gap-1 text-gray-300">
-                  <IoMdTime className="size-5"/>
+                  <IoMdTime className="size-5" />
                   <p>{minutesToHours(details?.runtime)}</p>
                 </div>
+              ) : (
+                <span className="uppercase text-gray-300">({type})</span>
               )}
             </div>
             <div className="flex max-md:flex-col items-center gap-5 py-5">
