@@ -28,14 +28,14 @@ const Movies = () => {
   
   return (
     <div className="container mx-auto py-10">
-      <div className="flex items-center justify-center flex-wrap gap-8">
+      <div className="flex items-center justify-center flex-wrap gap-8 max-md:gap-6 max-sm:gap-3">
       {loading
           ? [...Array(20)].map((_, i) => <CardSkeleton key={i}/>)
           : movies?.map((item) => {
               item["media_type"] = "movie";
               return <CardComponent key={item.id} item={item} />;
             })}
-        <Pagination totalPages={totalPages}  onPageChange={setPage}/>
+        {totalPages > 1 && (<Pagination totalPages={totalPages}  onPageChange={setPage}/>)}
       </div>
     </div>
   );

@@ -11,6 +11,7 @@ import {
   FaFilm,
   FaRegPlayCircle,
   FaChevronCircleRight,
+  FaTimes,
 } from "react-icons/fa";
 
 export {
@@ -25,11 +26,12 @@ export {
   FaFilm,
   FaRegPlayCircle,
   FaChevronCircleRight,
+  FaTimes,
 };
 
 // io icons
-import { IoIosAdd, IoIosTrendingUp, IoMdTime } from "react-icons/io";
-export { IoIosAdd, IoIosTrendingUp, IoMdTime };
+import { IoIosAdd, IoIosTrendingUp, IoMdTime, IoIosMenu } from "react-icons/io";
+export { IoIosAdd, IoIosTrendingUp, IoMdTime, IoIosMenu };
 
 // md icons
 import { MdLiveTv } from "react-icons/md";

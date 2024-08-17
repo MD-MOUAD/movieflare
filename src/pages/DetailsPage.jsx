@@ -85,7 +85,7 @@ const DetailsPage = () => {
           <img
             src={`${baseImgPath}/${details.poster_path}`}
             alt="poster"
-            className="w-72 rounded-lg"
+            className="w-72 rounded-lg max-md:w-60"
           />
           <div className="flex flex-col text-white space-y-2 max-lg:items-center">
             <h1 className="font-roboto font-bold text-3xl text-red-500 max-md:text-center">
