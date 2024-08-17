@@ -2,7 +2,7 @@ import { FaSearch } from "../utils/icons";
 
 const SearchBar = () => {
   return (
-    <div className="mx-5 px-5 h-10 rounded-lg max-w-96  flex justify-center items-center bg-slate-300 dark:bg-gray-50 focus-within:ring-2 ring-black dark:ring-red-600 shadow-lg text-black dark:text-gray-900 relative z-10 group">
+    <div className="mx-5 px-5 h-10 rounded-lg max-w-96  flex justify-center items-center bg-slate-300 dark:bg-gray-50 focus-within:ring-2 ring-black dark:ring-red-600 shadow-lg text-black dark:text-gray-900 relative z-10 group max-sm:hidden">
       <input
         id="searchBar"
         type="text"
