@@ -24,7 +24,7 @@ const Pagination = ({ totalPages, onPageChange }) => {
   const getItemProps = (index) => ({
     variant: active === index ? "filled" : "text",
     color: "gray",
-    className: `transition-colors duration-300 ${active === index ? 'bg-gray-700 dark:bg-gray-600' : 'bg-gray-200 dark:bg-gray-800'} hover:bg-gray-300 dark:hover:bg-gray-700`,
+    className: `px-6 flex items-center justify-center transition-colors duration-300 ${active === index ? 'bg-gray-700 dark:bg-gray-600  font-bold' : 'bg-gray-200 dark:bg-gray-800'} ${active !== index && "hover:bg-gray-300 dark:hover:bg-gray-700"}`,
     onClick: () => {
       setActive(index);
       onPageChange(index);
@@ -48,7 +48,7 @@ const Pagination = ({ totalPages, onPageChange }) => {
   const { start, end } = getPageRange();
 
   return (
-    <div className="flex items-center gap-4">
+    <div className="flex items-center gap-4 max-sm:scale-75 max-sm:gap-1">
       <Button
         variant="text"
         className={`flex items-center gap-2 ${active === 1 ? 'opacity-50 cursor-not-allowed' : 'text-gray-800 dark:text-gray-200'} transition-opacity duration-300`}
