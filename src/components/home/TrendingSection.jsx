@@ -60,7 +60,7 @@ const TrendingSection = () => {
         </select>
         <div className="flex font-[500] border-2 border-black/50 dark:border-white/50 rounded-full shadow-md max-sm:scale-110">
           <button
-            className={`px-5 max-sm:px-2 rounded-full ${
+            className={`px-7 max-sm:px-5 rounded-full ${
               timeFrame === "day" ? "bg-red-600 text-slate-100" : ""
             } transition-all duration-300 shrink-0`}
             onClick={() => setTimeFrame("day") && setPage(1)}

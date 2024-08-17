@@ -4,7 +4,7 @@ import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
 
 const Pagination = ({ totalPages, onPageChange }) => {
   const [active, setActive] = useState(1);
-  const pageLimit = 5; // Number of page buttons to show at a time
+  const pageLimit = 4; // Number of page buttons to show at a time
   const totalPagesMax500 = Math.min(totalPages, 500);
   const getPageRange = () => {
     let start = Math.max(1, active - Math.floor(pageLimit / 2));
@@ -24,7 +24,7 @@ const Pagination = ({ totalPages, onPageChange }) => {
   const getItemProps = (index) => ({
     variant: active === index ? "filled" : "text",
     color: "gray",
-    className: `px-6 flex items-center justify-center transition-colors duration-300 ${active === index ? 'bg-gray-700 dark:bg-gray-600  font-bold' : 'bg-gray-200 dark:bg-gray-800'} ${active !== index && "hover:bg-gray-300 dark:hover:bg-gray-700"}`,
+    className: `flex items-center justify-center transition-colors duration-300 ${active === index ? 'bg-gray-700 dark:bg-red-600  font-bold' : 'bg-gray-200 dark:bg-transparent'} ${active !== index && "hover:bg-gray-300 dark:hover:bg-gray-600"}`,
     onClick: () => {
       setActive(index);
       onPageChange(index);
@@ -48,7 +48,7 @@ const Pagination = ({ totalPages, onPageChange }) => {
   const { start, end } = getPageRange();
 
   return (
-    <div className="flex items-center gap-4 max-sm:scale-75 max-sm:gap-1">
+    <div className="flex items-center gap-4 py-5 max-sm:scale-75 max-sm:gap-1">
       <Button
         variant="text"
         className={`flex items-center gap-2 ${active === 1 ? 'opacity-50 cursor-not-allowed' : 'text-gray-800 dark:text-gray-200'} transition-opacity duration-300`}
