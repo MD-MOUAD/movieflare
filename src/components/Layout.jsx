@@ -55,7 +55,6 @@ const Layout = ({ children }) => {
     };
 
     addClickOutsideListener();
-    console.log(isOpen)
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };

@@ -6,7 +6,7 @@ import { fetchTopRated } from "../../services/api";
 
 const TopRatedSection = () => {
   const [topRatedData, setTopRatedData] = useState([]);
-  const [mediaType, setMediaType] = useState("movie");
+  const [mediaType, setMediaType] = useState("tv");
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
 
@@ -46,20 +46,20 @@ const TopRatedSection = () => {
         </h2>
         <div className="flex font-[500] border-2 border-black/50 dark:border-white/50 rounded-full shadow-md max-sm:scale-110">
           <button
-            className={`px-5 max-sm:px-4 rounded-full ${
-              mediaType === "movie" ? "bg-red-600 text-slate-100" : ""
-            } transition-all duration-300 shrink-0`}
-            onClick={() => setMediaType("movie") && setPage(1)}
-          >
-            Movies
-          </button>
-          <button
             className={`px-10 max-sm:px-8 py-1 rounded-full ${
               mediaType === "tv" ? "bg-red-600 text-slate-100" : ""
             } transition-all duration-300 shrink-0`}
             onClick={() => setMediaType("tv") && setPage(1)}
           >
             Tv
+          </button>
+          <button
+            className={`px-5 max-sm:px-4 rounded-full ${
+              mediaType === "movie" ? "bg-red-600 text-slate-100" : ""
+            } transition-all duration-300 shrink-0`}
+            onClick={() => setMediaType("movie") && setPage(1)}
+          >
+            Movies
           </button>
         </div>
       </div>

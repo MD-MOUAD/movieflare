@@ -27,7 +27,7 @@ const Sidebar = ({ isOpen }) => {
               onClick={() => setActiveLink(index)}
               className={`flex items-center font-bold text-gray-800 rounded-lg hover:bg-gray-400 dark:hover:bg-neutral-700 dark:text-slate-50 ${
                 isOpen
-                  ? "px-7 py-3 gap-4"
+                  ? "px-7 py-3 gap-4 max-lg:pl-16"
                   : "flex-col justify-center gap-2 py-4 font-medium text-sm"
               } ${
                 isOpen &&
