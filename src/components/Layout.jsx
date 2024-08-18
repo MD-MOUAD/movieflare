@@ -3,7 +3,7 @@ import Header from "../components/Header";
 import { useEffect, useState, useRef } from "react";
 
 const Layout = ({ children }) => {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(() => window.innerWidth > 1536);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const mainRef = useRef(null);
 
@@ -14,7 +14,6 @@ const Layout = ({ children }) => {
   const handleResize = () => {
     const currentWidth = window.innerWidth;
 
-    // Check if the window size has changed from > 1024 to < 1024 to close menu
     if (windowWidth > 1536 && currentWidth <= 1536) {
       setIsOpen(false);
     } else if (windowWidth <= 1536 && currentWidth > 1536) {

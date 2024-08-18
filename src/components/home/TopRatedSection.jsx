@@ -48,7 +48,7 @@ const TopRatedSection = () => {
           <button
             className={`px-10 max-sm:px-8 py-1 rounded-full ${
               mediaType === "tv" ? "bg-red-600 text-slate-100" : ""
-            } transition-all duration-300 shrink-0`}
+            } transition-all duration-100 shrink-0`}
             onClick={() => setMediaType("tv") && setPage(1)}
           >
             Tv
@@ -56,7 +56,7 @@ const TopRatedSection = () => {
           <button
             className={`px-5 max-sm:px-4 rounded-full ${
               mediaType === "movie" ? "bg-red-600 text-slate-100" : ""
-            } transition-all duration-300 shrink-0`}
+            } transition-all duration-100 shrink-0`}
             onClick={() => setMediaType("movie") && setPage(1)}
           >
             Movies

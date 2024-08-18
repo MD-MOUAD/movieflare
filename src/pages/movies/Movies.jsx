@@ -4,6 +4,7 @@ import CardComponent from "../../components/CardComponent";
 import CardSkeleton from "../../components/Skeletons/CardSkeleton";
 import Pagination from "../../components/Pagination";
 
+
 const Movies = () => {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState([]);
@@ -25,16 +26,19 @@ const Movies = () => {
     };
     fetchData();
   }, [page]);
-  
+
   return (
-    <div className="container mx-auto py-10">
-      <div className="flex items-center justify-center flex-wrap gap-8 max-md:gap-6 max-sm:gap-3">
+    <div className="container mx-auto py-2">
+      <h2 className="text-lg sm:text-xl font-bold text-red-500 py-4 px-5">Discover Movies</h2>
+      <div className="flex items-center flex-wrap gap-8 max-md:gap-6 max-sm:gap-3">
       {loading
           ? [...Array(20)].map((_, i) => <CardSkeleton key={i}/>)
           : movies?.map((item) => {
               item["media_type"] = "movie";
               return <CardComponent key={item.id} item={item} />;
             })}
+      </div>
+      <div className="flex items-center justify-center mt-12">
         {totalPages > 1 && (<Pagination totalPages={totalPages}  onPageChange={setPage}/>)}
       </div>
     </div>

@@ -17,7 +17,7 @@ const Sidebar = ({ isOpen }) => {
         isOpen
           ? "w-52 max-lg:w-72 max-sm:w-64 translate-x-0"
           : "w-20 max-lg:-translate-x-full"
-      } transition-transform duration-300 ease-in-out`}
+      } transition-transform duration-500 ease-in-out`}
     >
       <ul className={`flex-col px-1 ${isOpen ? "pt-5 space-y-4" : "pt-1"}`}>
         {Links.map((link, index) => (
@@ -35,7 +35,9 @@ const Sidebar = ({ isOpen }) => {
                 "bg-gray-400 dark:bg-neutral-700"
               }`}
             >
-              {link.icon}
+              <div className="text-red-500">
+                {link.icon}
+              </div>
               <h2>{link.name}</h2>
             </Link>
           </li>

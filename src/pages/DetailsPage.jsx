@@ -117,7 +117,7 @@ const DetailsPage = () => {
               />
               <p className="text-md lg:text-xl max-md:hidden">User Score</p>
               <button
-                className="flex items-center px-3 py-2 border-2 rounded-md border-slate-200/20 font-bold hover:bg-orange-300/10 max-md:scale-125 "
+                className="flex items-center px-3 py-2 border-2 rounded-md border-slate-200/20 font-bold hover:bg-orange-300/10 max-md:scale-125"
                 onClick={() => console.log("clicked")}
               >
                 <IoIosAdd size={25} className="mr-1" />

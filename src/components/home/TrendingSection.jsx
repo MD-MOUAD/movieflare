@@ -62,7 +62,7 @@ const TrendingSection = () => {
           <button
             className={`px-7 max-sm:px-5 rounded-full ${
               timeFrame === "day" ? "bg-red-600 text-slate-100" : ""
-            } transition-all duration-300 shrink-0`}
+            } transition-all duration-100 shrink-0`}
             onClick={() => setTimeFrame("day") && setPage(1)}
           >
             Today
@@ -70,7 +70,7 @@ const TrendingSection = () => {
           <button
             className={`px-5 max-sm:px-2 py-1 rounded-full ${
               timeFrame === "week" ? "bg-red-600 text-slate-100" : ""
-            } transition-all duration-300 shrink-0`}
+            } transition-all duration-100 shrink-0`}
             onClick={() => setTimeFrame("week") && setPage(1)}
           >
             This Week
