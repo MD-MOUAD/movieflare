@@ -1,10 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaFilm, FaHome, FaSearch, MdLiveTv } from "../utils/icons";
 import { Link } from "react-router-dom";
 
 const Sidebar = ({ isOpen }) => {
   const [activeLink, setActiveLink] = useState(0);
-  
   const Links = [
     { name: "Home", path: "/", icon: <FaHome size={22} /> },
     { name: "Movies", path: "/movies", icon: <FaFilm size={22} /> },

@@ -3,6 +3,7 @@ import { fetchMovies } from "../../services/api";
 import CardComponent from "../../components/CardComponent";
 import CardSkeleton from "../../components/Skeletons/CardSkeleton";
 import Pagination from "../../components/Pagination";
+import FilterComponent from "../../components/FilterComponent";
 
 
 const Movies = () => {
@@ -29,8 +30,16 @@ const Movies = () => {
 
   return (
     <div className="container mx-auto py-2">
-      <h2 className="text-lg sm:text-xl font-bold text-red-500 py-4 px-5">Discover Movies</h2>
-      <div className="flex items-center flex-wrap gap-8 max-md:gap-6 max-sm:gap-3">
+      <section id="filter" className=" px-10 sm:px-20 mb-4">
+        <div className="flex justify-between items-center">
+          <h2 className="text-lg sm:text-xl font-bold text-red-500 py-4">
+            Discover Movies
+          </h2>
+          <button className="px-3 py-1 rounded-md bg-red-600 text-white">Filter</button>
+        </div>
+      <FilterComponent/>
+      </section>
+      <div className="flex items-center justify-center flex-wrap gap-8 max-md:gap-6 max-sm:gap-3">
       {loading
           ? [...Array(20)].map((_, i) => <CardSkeleton key={i}/>)
           : movies?.map((item) => {

@@ -8,7 +8,7 @@ const CardComponent = ({ item, small }) => {
     <div className="flex flex-col">
 
       <Link to={`/${item?.media_type}/${item?.id}`}>
-        <div className={`${small ? "w-28 sm:w-32 md:w-36 lg:w-40" : "w-32 sm:w-36 md:w-48"} shrink-0 rounded-lg overflow-clip relative hover:scale-105 transition-transition duration-300 group`}>
+        <div className={`${small ? "w-28 sm:w-32 md:w-36 lg:w-40" : "w-32 sm:w-36 md:w-52"} shrink-0 rounded-lg overflow-clip relative hover:scale-105 transition-transition duration-300 group`}>
           <img
             className="h-full group-hover:brightness-50 dark:group-hover:opacity-50"
             src={`${baseImgPath}/${item.poster_path}`}
