@@ -2,40 +2,13 @@ import { FaRegPlayCircle } from "../utils/icons";
 import {
   BaseImgPathOriginal,
   baseImgPath,
-  fetchGenreList,
+  genresDict,
 } from "../services/api";
 import { Link } from "react-router-dom";
-import { createGenreDict, getYear, mapGenreIdsToNames } from "../utils/helpers";
+import { getYear, mapGenreIdsToNames } from "../utils/helpers";
 import { FaStar } from "../utils/icons";
-import { useEffect, useState } from "react";
 
 const FeaturedMovie = ({ item }) => {
-  const [genreDict, setGenreDict] = useState({ movie: {}, tv: {} });
-
-  useEffect(() => {
-    const fetchGenres = async () => {
-      const movieGenres = JSON.parse(localStorage.getItem("movieGenres"));
-      const tvGenres = JSON.parse(localStorage.getItem("tvGenres"));
-
-      if (movieGenres && tvGenres) {
-        setGenreDict({ movie: movieGenres, tv: tvGenres });
-      } else {
-        const [movieGenresData, tvGenresData] = await Promise.all([
-          fetchGenreList("movie"),
-          fetchGenreList("tv"),
-        ]);
-        const movieGenreDict = createGenreDict(movieGenresData);
-        const tvGenreDict = createGenreDict(tvGenresData);
-
-        localStorage.setItem("movieGenres", JSON.stringify(movieGenreDict));
-        localStorage.setItem("tvGenres", JSON.stringify(tvGenreDict));
-
-        setGenreDict({ movie: movieGenreDict, tv: tvGenreDict });
-      }
-    };
-
-    fetchGenres();
-  }, []);
 
   const title = item?.name || item?.title;
 
@@ -70,7 +43,7 @@ const FeaturedMovie = ({ item }) => {
             <p className="md:mt-2 text-white font-[500] lg:text-lg max-md:hidden">
               {mapGenreIdsToNames(
                 item?.genre_ids,
-                genreDict[item?.media_type]
+                genresDict[item?.media_type]
               ).join(", ")}
             </p>
             <p className="mt-4 xl:text-lg text-white/50 font-[500] line-clamp-2 max-md:hidden">

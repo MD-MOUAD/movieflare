@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { FaFilm, FaHome, FaSearch, MdLiveTv } from "../utils/icons";
 import { Link } from "react-router-dom";
 

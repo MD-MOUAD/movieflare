@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button, IconButton } from "@material-tailwind/react";
 import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
 
@@ -6,6 +6,11 @@ const Pagination = ({ totalPages, onPageChange }) => {
   const [active, setActive] = useState(1);
   const pageLimit = 4; // Number of page buttons to show at a time
   const totalPagesMax500 = Math.min(totalPages, 500);
+  
+  useEffect(() => {
+    console.log(window.scrollTo(0, 0));
+  }, [active]);
+
   const getPageRange = () => {
     let start = Math.max(1, active - Math.floor(pageLimit / 2));
     let end = Math.min(totalPagesMax500, active + Math.floor(pageLimit / 2));

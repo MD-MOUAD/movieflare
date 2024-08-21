@@ -1,4 +1,5 @@
 import axios from "axios";
+import { createGenreDict } from "../utils/helpers";
 
 const apiKey = import.meta.env.VITE_API_KEY;
 const baseUrl = "https://api.themoviedb.org/3";
@@ -71,6 +72,29 @@ export const fetchGenreList = async (genreType) => {
   return data?.genres;
 };
 
+const genresDict = {};
+const movieGenres = JSON.parse(localStorage.getItem("movieGenres"));
+const tvGenres = JSON.parse(localStorage.getItem("tvGenres"));
+
+if (movieGenres && tvGenres) {
+  genresDict["movie"] = movieGenres;
+  genresDict["tv"] = tvGenres;
+} else {
+  const [movieGenresData, tvGenresData] = await Promise.all([
+    fetchGenreList("movie"),
+    fetchGenreList("tv"),
+  ]);
+  const movieGenreDict = createGenreDict(movieGenresData);
+  const tvGenreDict = createGenreDict(tvGenresData);
+
+  localStorage.setItem("movieGenres", JSON.stringify(movieGenreDict));
+  localStorage.setItem("tvGenres", JSON.stringify(tvGenreDict));
+
+  genresDict["movie"] = movieGenreDict;
+  genresDict["tv"] = tvGenreDict;
+}
+export { genresDict };
+
 // Movies & Tv - Videos
 export const fetchVideos = async (mediaType, id) => {
   const { data } = await axios.get(
@@ -80,15 +104,15 @@ export const fetchVideos = async (mediaType, id) => {
 };
 
 // Discover
-export const fetchMovies = async (page) => {
+export const fetchMovies = async (page, genreId) => {
   const { data } = await axios.get(
-    `${baseUrl}/discover/movie?api_key=${apiKey}&page=${page}`
+    `${baseUrl}/discover/movie?api_key=${apiKey}&page=${page}&with_genres=${genreId}`
   );
   return data;
 };
-export const fetchTvShows = async () => {
+export const fetchTvShows = async (page, genreId) => {
   const { data } = await axios.get(
-    `${baseUrl}/discover/tv?api_key=${apiKey}`
+    `${baseUrl}/discover/tv?api_key=${apiKey}&page=${page}&with_genres=${genreId}`
   );
   return data;
 };
