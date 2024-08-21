@@ -1,15 +1,41 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaFilm, FaHome, FaSearch, MdLiveTv } from "../utils/icons";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const Sidebar = ({ isOpen }) => {
+  const path = useLocation().pathname;
+
   const [activeLink, setActiveLink] = useState(0);
   const Links = [
-    { name: "Home", path: "/", icon: <FaHome size={22} /> },
-    { name: "Movies", path: "/movies", icon: <FaFilm size={22} /> },
-    { name: "Tv Shows", path: "/shows", icon: <MdLiveTv size={22} /> },
-    { name: "Search", path: "/search", icon: <FaSearch size={22} /> },
+    {
+      name: "Home",
+      path: "/",
+      icon: <FaHome size={22} />,
+      relatedPaths: ["home"],
+    },
+    {
+      name: "Movies",
+      path: "/movies",
+      icon: <FaFilm size={22} />,
+      relatedPaths: ["movie"],
+    },
+    {
+      name: "Tv Shows",
+      path: "/shows",
+      icon: <MdLiveTv size={22} />,
+      relatedPaths: ["tv", "show", "series"],
+    },
+    { name: "Search", path: "/search", icon: <FaSearch size={22} />, relatedPath: [] },
   ];
+
+  useEffect(() => {
+    Links.forEach((link, i) => {
+      if (path.includes(link.path) || link.relatedPaths?.some((relatedPath) => path.includes(relatedPath))) {
+        setActiveLink(i);
+      }
+    });
+  }, [path]);
+
   return (
     <div
       className={`z-50 fixed top-16 left-0 h-[calc(100vh-4rem)]  dark:text-white bg-slate-200 dark:bg-neutral-900 transform ${
@@ -34,9 +60,7 @@ const Sidebar = ({ isOpen }) => {
                 "bg-gray-400 dark:bg-neutral-700"
               }`}
             >
-              <div className="text-red-500">
-                {link.icon}
-              </div>
+              <div className="text-red-500">{link.icon}</div>
               <h2>{link.name}</h2>
             </Link>
           </li>
