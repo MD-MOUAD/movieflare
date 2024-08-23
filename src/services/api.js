@@ -104,10 +104,12 @@ export const fetchVideos = async (mediaType, id) => {
 };
 
 // Discover
-export const fetchMovies = async (page, genreId) => {
+export const fetchMovies = async (page, genreId, sortOption, dateGte, dateLte) => {
+  const url = `${baseUrl}/discover/movie?api_key=${apiKey}&with_genres=${genreId}&sort_by=${sortOption}&release_date.gte=${dateGte}&release_date.lte=${dateLte}&vote_count.gte=100&page=${page}`;
   const { data } = await axios.get(
-    `${baseUrl}/discover/movie?api_key=${apiKey}&page=${page}&with_genres=${genreId}`
+    url
   );
+  console.log(url)
   return data;
 };
 export const fetchTvShows = async (page, genreId) => {

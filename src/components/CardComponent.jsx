@@ -8,7 +8,7 @@ const CardComponent = ({ item, small }) => {
     <div className="flex flex-col">
 
       <Link to={`/${item?.media_type}/${item?.id}`}>
-        <div className={`${small ? "w-28 sm:w-32 md:w-36 lg:w-40" : "w-32 sm:w-36 md:w-52"} shrink-0 rounded-lg overflow-clip relative hover:scale-105 transition-transition duration-300 group`}>
+        <div className={`${small ? "w-28 sm:w-32 md:w-36 lg:w-40" : "w-32 sm:w-36 md:w-52"} shrink-0 rounded-lg overflow-clip relative hover:scale-105 transition-transition duration-300 group aspect-card`}>
           <img
             className="h-full group-hover:brightness-50 dark:group-hover:opacity-50"
             src={`${baseImgPath}/${item.poster_path}`}
@@ -28,7 +28,7 @@ const CardComponent = ({ item, small }) => {
             <h3 className={`mt-1 mb-2 text-cyan-500 text-xs  font-bold text-center ${small ? 'lg:text-sm xl:text-base' : "sm:text-sm md:text-base lg:text-lg"} `}>
               {item?.title || item?.name}
             </h3>
-            <p className={`text-center ${small ? "text-[8px] lg:text-xs":  "text-[10px] md:text-xs font-bold"}`}>
+            <p className={`text-center text-white ${small ? "text-[8px] lg:text-xs":  "text-[10px] md:text-xs font-bold"}`}>
               {mapGenreIdsToNames(
                 item?.genre_ids,
                 genresDict[item?.media_type]

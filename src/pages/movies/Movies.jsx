@@ -4,20 +4,31 @@ import CardComponent from "../../components/CardComponent";
 import CardSkeleton from "../../components/Skeletons/CardSkeleton";
 import Pagination from "../../components/Pagination";
 import FilterComponent from "../../components/FilterComponent";
-import { FaFilm } from "../../utils/icons";
+import { FaFilm, FaFilter } from "../../utils/icons";
 
 const Movies = () => {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState([]);
   const [page, setPage] = useState(1);
   const [genre, setGenre] = useState("");
+  const [sortOption, setSortOption] = useState("");
+  const [dateGte, setDateGte] = useState("2000-01-01");
+  const [dateLte, setDateLte] = useState(
+    `${new Date().toISOString().split("T")[0]}`
+  );
   const [totalPages, setTotalPage] = useState(1);
 
   useEffect(() => {
     setLoading(true);
     const fetchData = async () => {
       try {
-        const data = await fetchMovies(page, genre);
+        const data = await fetchMovies(
+          page,
+          genre,
+          sortOption,
+          dateGte,
+          dateLte
+        );
         setMovies(data?.results);
         setTotalPage(data?.total_pages);
       } catch (error) {
@@ -27,7 +38,7 @@ const Movies = () => {
       }
     };
     fetchData();
-  }, [page, genre]);
+  }, [genre, sortOption, page]);
 
   return (
     <div className="container mx-auto py-2">
@@ -42,13 +53,19 @@ const Movies = () => {
               onClick={() => {
                 document.querySelector(".filter").classList.toggle("hidden");
               }}
-              className="px-3 py-1 rounded-md bg-red-600 text-white"
+              className="flex items-center gap-2 px-3 py-1 rounded-md bg-red-600 text-white"
             >
+              <FaFilter />
               Filter
             </button>
           </div>
+          <FilterComponent
+            setGenre={setGenre}
+            setSort={setSortOption}
+            mediaType={"movie"}
+            resetPage={setPage}
+          />
         </div>
-        <FilterComponent setGenre={setGenre} mediaType={"movie"} />
       </section>
       <div className="flex items-center justify-center flex-wrap gap-8 max-md:gap-6 max-sm:gap-3">
         {loading
@@ -59,7 +76,7 @@ const Movies = () => {
             })}
       </div>
       <div className="flex items-center justify-center mt-12">
-        {totalPages > 1 && (
+        {totalPages > 1 && movies.length > 0 && (
           <Pagination totalPages={totalPages} onPageChange={setPage} />
         )}
       </div>

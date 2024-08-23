@@ -8,8 +8,14 @@ const Pagination = ({ totalPages, onPageChange }) => {
   const totalPagesMax500 = Math.min(totalPages, 500);
   
   useEffect(() => {
-    console.log(window.scrollTo(0, 0));
+    window.scrollTo(0, 0);
   }, [active]);
+
+  useEffect(() => {
+    setActive(1);
+    onPageChange(1);
+    window.scrollTo(0, 0);
+  }, [totalPages]);
 
   const getPageRange = () => {
     let start = Math.max(1, active - Math.floor(pageLimit / 2));

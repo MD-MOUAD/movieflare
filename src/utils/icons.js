@@ -12,6 +12,7 @@ import {
   FaRegPlayCircle,
   FaChevronCircleRight,
   FaTimes,
+  FaFilter,
 } from "react-icons/fa";
 
 export {
@@ -27,6 +28,7 @@ export {
   FaRegPlayCircle,
   FaChevronCircleRight,
   FaTimes,
+  FaFilter,
 };
 
 // io icons
