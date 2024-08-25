@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+import { useRef, useEffect, useState } from "react";
 import CardComponent from "../CardComponent";
 import FeaturedMovie from "../FeaturedMovie";
 import CardSkeleton from "../Skeletons/CardSkeleton";
 import BannerSkeleton from "../Skeletons/BannerSkeleton";
 import { IoIosTrendingUp, FaChevronCircleRight } from "../../utils/icons";
 import { fetchTrending } from "../../services/api";
+import Select from "react-select";
+import selectStyles from "../../utils/selectStyles";
 
 const TrendingSection = () => {
   const [loading, setLoading] = useState(true);
@@ -12,6 +14,7 @@ const TrendingSection = () => {
   const [mediaType, setMediaType] = useState("all");
   const [trendingData, setTrendingData] = useState([]);
   const [page, setPage] = useState(1);
+  const containerRef = useRef(null);
 
   useEffect(() => {
     setLoading(true);
@@ -40,6 +43,37 @@ const TrendingSection = () => {
     fetchNexTwenty();
   }, [page]);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (containerRef.current) {
+        const { scrollLeft, scrollWidth, clientWidth } = containerRef.current;
+        if (scrollLeft + clientWidth >= scrollWidth - 1 && page < 10) {
+          setPage((prevPage) => prevPage + 1);
+        }
+      }
+    };
+
+    const currentRef = containerRef.current;
+    if (currentRef) {
+      currentRef.addEventListener("scroll", handleScroll);
+    }
+
+    return () => {
+      if (currentRef) {
+        currentRef.removeEventListener("scroll", handleScroll);
+      }
+    };
+  }, [page]);
+
+  const mediaTypeOptions = [
+    { value: "all", label: "All" },
+    { value: "tv", label: "Tv Series" },
+    { value: "movie", label: "Movies" },
+  ];
+  const handleTypeChange = (option) => {
+    setPage(1);
+    setMediaType(option.value);
+  };
   return (
     <>
       {loading ? <BannerSkeleton /> : <FeaturedMovie item={trendingData[0]} />}
@@ -48,20 +82,18 @@ const TrendingSection = () => {
           Trending
           <IoIosTrendingUp size={25} />
         </h2>
-        <select
+        <Select
           id="mediaType"
-          className="bg-gray-300 dark:bg-zinc-900 dark:text-gray-300 py-2 px-1 rounded-md max-sm:hidden"
-          onChange={(e) => setMediaType(e.target.value) && setPage(1)}
-          defaultValue={"all"}
-        >
-          <option value="all">all</option>
-          <option value="tv">Tv Series</option>
-          <option value="movie">Movies</option>
-        </select>
+          options={mediaTypeOptions}
+          placeholder="All"
+          className="text-black w-32 max-sm:hidden"
+          onChange={handleTypeChange}
+          styles={selectStyles}
+        />
         <div className="flex font-[500] border-2 border-black/50 dark:border-white/50 rounded-full shadow-md max-sm:scale-110">
           <button
             className={`px-7 max-sm:px-5 rounded-full ${
-              timeFrame === "day" ? "bg-red-600 text-slate-100" : ""
+              timeFrame === "day" ? "bg-red-600 text-slate-100 hover:scale-105" : "opacity-75"
             } transition-all duration-100 shrink-0`}
             onClick={() => setTimeFrame("day") && setPage(1)}
           >
@@ -69,7 +101,7 @@ const TrendingSection = () => {
           </button>
           <button
             className={`px-5 max-sm:px-2 py-1 rounded-full ${
-              timeFrame === "week" ? "bg-red-600 text-slate-100" : ""
+              timeFrame === "week" ? "bg-red-600 text-slate-100 hover:scale-105" : "opacity-75"
             } transition-all duration-100 shrink-0`}
             onClick={() => setTimeFrame("week") && setPage(1)}
           >
@@ -77,11 +109,15 @@ const TrendingSection = () => {
           </button>
         </div>
       </div>
-      <div className="flex overflow-x-auto gap-5 pt-3 pb-5 px-1 mx-4 max-sm:py-1 max-sm:mx-0 max-sm:scrollbar-none">
+      <div
+        className="flex overflow-x-auto gap-5 pt-3 pb-5 px-1 mx-4 max-sm:py-1 max-sm:mx-0 max-sm:scrollbar-none"
+        ref={containerRef}
+      >
         {loading
           ? [...Array(19)].map((_, i) => <CardSkeleton key={i} small />)
           : trendingData?.map(
-              (item, i) => i > 0 && <CardComponent key={item.id} item={item} small />
+              (item, i) =>
+                i > 0 && <CardComponent key={item.id} item={item} small />
             )}
         {page < 10 && (
           <button

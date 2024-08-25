@@ -12,10 +12,6 @@ const Movies = () => {
   const [page, setPage] = useState(1);
   const [genre, setGenre] = useState("");
   const [sortOption, setSortOption] = useState("");
-  const [dateGte, setDateGte] = useState("2000-01-01");
-  const [dateLte, setDateLte] = useState(
-    `${new Date().toISOString().split("T")[0]}`
-  );
   const [totalPages, setTotalPage] = useState(1);
 
   useEffect(() => {
@@ -26,8 +22,6 @@ const Movies = () => {
           page,
           genre,
           sortOption,
-          dateGte,
-          dateLte
         );
         setMovies(data?.results);
         setTotalPage(data?.total_pages);
@@ -42,7 +36,7 @@ const Movies = () => {
 
   return (
     <div className="container mx-auto py-2">
-      <section id="filter" className="mb-4">
+      <section id="filter" className="mb-5">
         <div className="px-10 sm:px-20">
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-2 text-lg sm:text-xl font-bold text-red-500 py-4">
@@ -53,7 +47,7 @@ const Movies = () => {
               onClick={() => {
                 document.querySelector(".filter").classList.toggle("hidden");
               }}
-              className="flex items-center gap-2 px-3 py-1 rounded-md bg-red-600 text-white"
+              className="flex items-center gap-2 px-3 py-1 rounded-md bg-red-600 text-white hover:bg-red-700 hover:scale-105"
             >
               <FaFilter />
               Filter
@@ -70,10 +64,12 @@ const Movies = () => {
       <div className="flex items-center justify-center flex-wrap gap-8 max-md:gap-6 max-sm:gap-3">
         {loading
           ? [...Array(20)].map((_, i) => <CardSkeleton key={i} />)
-          : movies?.map((item) => {
+          : movies.length > 0 ? movies?.map((item) => {
               item["media_type"] = "movie";
               return <CardComponent key={item.id} item={item} />;
-            })}
+            }): (
+              <p className="mt-10 text-center">No data found</p>
+            )}
       </div>
       <div className="flex items-center justify-center mt-12">
         {totalPages > 1 && movies.length > 0 && (

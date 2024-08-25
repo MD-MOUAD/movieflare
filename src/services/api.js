@@ -43,11 +43,17 @@ export const fetchLatestTrailer = async (mediaType, movieId) => {
     `${baseUrl}/${mediaType}/${movieId}/videos?api_key=${apiKey}`
   );
   const officialTrailers = data.results.filter(
-    video => video.type === "Trailer" && video.official === true && video.site === "YouTube"
+    (video) =>
+      video.type === "Trailer" &&
+      video.official === true &&
+      video.site === "YouTube"
   );
-  officialTrailers.sort((a, b) => new Date(b.published_at) - new Date(a.published_at));
+  officialTrailers.sort(
+    (a, b) => new Date(b.published_at) - new Date(a.published_at)
+  );
   return officialTrailers.length > 0 ? officialTrailers[0] : null;
-} 
+};
+
 // Movies & Tv - Details
 export const fetchDetails = async (mediaType, id) => {
   const { data } = await axios.get(
@@ -103,18 +109,44 @@ export const fetchVideos = async (mediaType, id) => {
   return data;
 };
 
-// Discover
-export const fetchMovies = async (page, genreId, sortOption, dateGte, dateLte) => {
-  const url = `${baseUrl}/discover/movie?api_key=${apiKey}&with_genres=${genreId}&sort_by=${sortOption}&release_date.gte=${dateGte}&release_date.lte=${dateLte}&vote_count.gte=100&page=${page}`;
+// Movies & Tv - Similar
+export const fetchSimilar = async (mediaType, id) => {
   const { data } = await axios.get(
-    url
+    `${baseUrl}/${mediaType}/${id}/similar?api_key=${apiKey}`
   );
-  console.log(url)
+  return data?.results;
+};
+
+// Discover
+export const fetchMovies = async (page, genreId, sortOption) => {
+  const today = new Date().toISOString().split("T")[0];
+  let voteCountGte = 100;
+  let sort = sortOption;
+
+  if (sort.includes("&vote_count.gte=1000")) {
+    sort = sort.replace("&vote_count.gte=1000", "");
+    voteCountGte = 1000;
+  }
+  const { data } = await axios.get(
+    `${baseUrl}/discover/movie?api_key=${apiKey}&release_date.lte=${today}&with_genres=${genreId}&sort_by=${sort}&vote_count.gte=${voteCountGte}&page=${page}`
+  );
+
   return data;
 };
-export const fetchTvShows = async (page, genreId) => {
+
+export const fetchTvShows = async (page, genreId, sortOption) => {
+  const today = new Date().toISOString().split("T")[0];
+  let voteCountGte = 10;
+  let sort = sortOption;
+
+  if (sort.includes("&vote_count.gte=1000")) {
+    sort = sort.replace("&vote_count.gte=1000", "");
+    voteCountGte = 1000;
+  }
+
   const { data } = await axios.get(
-    `${baseUrl}/discover/tv?api_key=${apiKey}&page=${page}&with_genres=${genreId}`
+    `${baseUrl}/discover/tv?api_key=${apiKey}&air_date.lte=${today}&with_genres=${genreId}&sort_by=${sort}&vote_count.gte=${voteCountGte}&page=${page}`
   );
+
   return data;
 };

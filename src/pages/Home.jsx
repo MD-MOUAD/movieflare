@@ -1,5 +1,5 @@
-import TrendingSection from "../components/home/TrendingSection";
-import TopRatedSection from "../components/home/TopRatedSection";
+import TrendingSection from "../components/homePage_components/TrendingSection";
+import TopRatedSection from "../components/homePage_components/TopRatedSection";
 
 const Home = () => {
   return (

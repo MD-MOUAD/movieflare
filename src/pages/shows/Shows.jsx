@@ -4,20 +4,25 @@ import CardComponent from "../../components/CardComponent";
 import CardSkeleton from "../../components/Skeletons/CardSkeleton";
 import Pagination from "../../components/Pagination";
 import FilterComponent from "../../components/FilterComponent";
-import { MdLiveTv } from "../../utils/icons";
+import { MdLiveTv, FaFilter } from "../../utils/icons";
 
 const Shows = () => {
   const [shows, setShows] = useState([]);
   const [loading, setLoading] = useState([]);
   const [page, setPage] = useState(1);
   const [genre, setGenre] = useState("");
+  const [sortOption, setSortOption] = useState("");
   const [totalPages, setTotalPage] = useState(1);
 
   useEffect(() => {
     setLoading(true);
     const fetchData = async () => {
       try {
-        const data = await fetchTvShows(page, genre);
+        const data = await fetchTvShows(
+          page,
+          genre,
+          sortOption,
+        );
         setShows(data?.results);
         setTotalPage(data?.total_pages);
       } catch (error) {
@@ -27,39 +32,47 @@ const Shows = () => {
       }
     };
     fetchData();
-  }, [page, genre]);
+  }, [genre, sortOption, page]);
 
   return (
     <div className="container mx-auto py-2">
-      <section id="filter" className="mb-4">
+      <section id="filter" className="mb-5">
         <div className="px-10 sm:px-20">
           <div className="flex justify-between items-center">
-          <div className="flex items-center gap-2 text-lg sm:text-xl font-bold text-red-500 py-4">
+            <div className="flex items-center gap-2 text-lg sm:text-xl font-bold text-red-500 py-4">
               <h2>Discover Tv Series</h2>
-              <MdLiveTv size={22}/>
+              <MdLiveTv size={22} />
             </div>
             <button
               onClick={() => {
                 document.querySelector(".filter").classList.toggle("hidden");
               }}
-              className="px-3 py-1 rounded-md bg-red-600 text-white"
+              className="flex items-center gap-2 px-3 py-1 rounded-md bg-red-600 text-white hover:bg-red-700 hover:scale-105"
             >
+              <FaFilter />
               Filter
             </button>
           </div>
+          <FilterComponent
+            setGenre={setGenre}
+            setSort={setSortOption}
+            mediaType={"tv"}
+            resetPage={setPage}
+          />
         </div>
-        <FilterComponent setGenre={setGenre} mediaType={"tv"} />
       </section>
       <div className="flex items-center justify-center flex-wrap gap-8 max-md:gap-6 max-sm:gap-3">
-        {loading
+      {loading
           ? [...Array(20)].map((_, i) => <CardSkeleton key={i} />)
-          : shows?.map((item) => {
+          : shows?.length > 0 ? shows?.map((item) => {
               item["media_type"] = "tv";
               return <CardComponent key={item.id} item={item} />;
-            })}
+            }): (
+              <p className="mt-10 text-center">No data found</p>
+            )}
       </div>
       <div className="flex items-center justify-center mt-12">
-        {totalPages > 1 && (
+        {totalPages > 1 && shows.length > 0 && (
           <Pagination totalPages={totalPages} onPageChange={setPage} />
         )}
       </div>

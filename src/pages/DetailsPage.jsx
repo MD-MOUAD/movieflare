@@ -18,6 +18,9 @@ import {
 import { ratingPercentage, minutesToHours } from "../utils/helpers";
 import noProfileImg from "../assets/no-profile-img.svg";
 import VideoComponent from "../components/VideoComponent";
+import Similar from "../components/detailsPage_components/Similar";
+import HomeLink from "../components/HomeLink";
+
 const DetailsPage = () => {
   const { type, id } = useParams();
   const [loading, setLoading] = useState(true);
@@ -72,7 +75,7 @@ const DetailsPage = () => {
   const releaseDate = details?.release_date || details?.first_air_date;
   const title = details?.name || details?.title;
   return (
-    <div className="">
+    <>
       {/* details */}
       <div
         className="relative bg-cover bg-center"
@@ -205,8 +208,13 @@ const DetailsPage = () => {
               );
             })}
         </div>
+        {/* similar */}
+        <Similar itemId={id} mediaType={type} />
+        <div className="flex justify-end pb-4">
+          <HomeLink />
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
