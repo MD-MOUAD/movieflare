@@ -60,7 +60,7 @@ const Sidebar = ({ isOpen }) => {
                 "bg-gray-400 dark:bg-neutral-700"
               }`}
             >
-              <div className="text-red-500">{link.icon}</div>
+              <div className="text-red-600 dark:text-red-500">{link.icon}</div>
               <h2>{link.name}</h2>
             </Link>
           </li>

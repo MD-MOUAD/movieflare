@@ -59,7 +59,7 @@ const Pagination = ({ totalPages, onPageChange }) => {
   const { start, end } = getPageRange();
 
   return (
-    <div className="flex items-center gap-4 py-5 max-sm:scale-75 max-sm:gap-1 mb-6">
+    <div className="flex items-center gap-4 py-2 max-sm:scale-75 max-sm:gap-1 mb-6">
       <Button
         variant="text"
         className={`flex items-center gap-2 ${active === 1 ? 'opacity-50 cursor-not-allowed' : 'text-gray-800 dark:text-gray-200'} transition-opacity duration-300`}
