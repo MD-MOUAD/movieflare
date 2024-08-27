@@ -8,7 +8,7 @@ import { FaFilm, FaFilter } from "../../utils/icons";
 
 const Movies = () => {
   const [movies, setMovies] = useState([]);
-  const [loading, setLoading] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
   const [genre, setGenre] = useState("");
   const [sortOption, setSortOption] = useState("");

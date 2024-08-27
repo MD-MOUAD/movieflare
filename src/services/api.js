@@ -1,7 +1,7 @@
 import axios from "axios";
 import { createGenreDict } from "../utils/helpers";
 
-const apiKey = import.meta.env.VITE_API_KEY;
+const apiKey = import.meta.env.VITE_TMDB_API_KEY;
 const baseUrl = "https://api.themoviedb.org/3";
 
 // Image path base
