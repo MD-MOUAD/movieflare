@@ -154,8 +154,8 @@ export const fetchTvShows = async (page = 1, genreId, sortOption) => {
 // Search
 export const searchMulti = async (query, page = 1) => {
   const { data } = await axios.get(
-    `${baseUrl}/search/multi?api_key=${apiKey}&query=${query}&page=${page}`
+    `${baseUrl}/search/multi?api_key=${apiKey}&page=${page}&query=${query}`
   );
-  console.log(data);
-  return data?.results;
+  // console.log(`${baseUrl}/search/multi?api_key=${apiKey}&page=${page}&query=${query}`)
+  return data;
 };

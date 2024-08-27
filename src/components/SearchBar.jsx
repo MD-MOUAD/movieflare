@@ -13,8 +13,8 @@ const SearchBar = () => {
     setQuery("");
     setSearchResults([]);
   };
+
   useEffect(() => {
-    console.log("query:", query);
     const handler = setTimeout(() => {
       setDebouncedQuery(query);
     }, 1000);
@@ -26,11 +26,10 @@ const SearchBar = () => {
 
   useEffect(() => {
     if (debouncedQuery) {
-      console.log("debouncedQuery is", debouncedQuery);
       const fetchData = async () => {
         try {
-          const results = await searchMulti(debouncedQuery);
-          setSearchResults(results);
+          const data = await searchMulti(debouncedQuery);
+          setSearchResults(data?.results);
         } catch (error) {
           console.log("Error fetching data:", error);
         }
@@ -56,7 +55,7 @@ const SearchBar = () => {
         <FaTimes />
       </button>
       <FaSearch
-        className="text-red-500 cursor-pointer hover:scale-110 hover:text-red-600"
+        className="text-red-500"
         size={20}
       />
       <ul className="hidden absolute top-full left-0  w-[140%] mt-2 rounded-lg bg-slate-200 dark:bg-neutral-900  max-h-[50vh] z-10 group-focus-within:block overflow-auto">
