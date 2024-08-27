@@ -18,12 +18,9 @@ const Movies = () => {
     setLoading(true);
     const fetchData = async () => {
       try {
-        const data = await fetchMovies(
-          page,
-          genre,
-          sortOption,
-        );
-        setMovies(data?.results);
+        const data = await fetchMovies(page, genre, sortOption);
+        const nextPageData = await fetchMovies(page + 1, genre, sortOption);
+        setMovies([...data?.results, ...nextPageData?.results]);
         setTotalPage(data?.total_pages);
       } catch (error) {
         console.log("Error fetching data:", error);
@@ -62,14 +59,16 @@ const Movies = () => {
         </div>
       </section>
       <div className="flex items-center justify-center flex-wrap gap-8 max-md:gap-6 max-sm:gap-3">
-        {loading
-          ? [...Array(20)].map((_, i) => <CardSkeleton key={i} />)
-          : movies.length > 0 ? movies?.map((item) => {
-              item["media_type"] = "movie";
-              return <CardComponent key={item.id} item={item} />;
-            }): (
-              <p className="mt-10 text-center">No data found</p>
-            )}
+        {loading ? (
+          [...Array(20)].map((_, i) => <CardSkeleton key={i} />)
+        ) : movies.length > 0 ? (
+          movies?.map((item, i) => {
+            item["media_type"] = "movie";
+            return <CardComponent key={i} item={item} />;
+          })
+        ) : (
+          <p className="mt-10 text-center">No data found</p>
+        )}
       </div>
       <div className="flex items-center justify-center mt-12">
         {totalPages > 1 && movies.length > 0 && (
