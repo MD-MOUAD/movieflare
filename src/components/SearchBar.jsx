@@ -50,7 +50,7 @@ const SearchBar = () => {
         className="px-5 h-full w-4/6 bg-inherit outline-none flex-1 placeholder:text-gray-600 dark:placeholder:text-inputColor"
       />
       <button
-        className="invisible group-focus-within:visible cursor-pointer opacity-35 hover:scale-105 hover:opacity-100"
+        className={`invisible ${debouncedQuery !== "" &&"group-focus-within:visible"} cursor-pointer opacity-35 hover:scale-105 hover:opacity-100`}
         onClick={handleClear}
       >
         <FaTimes />
