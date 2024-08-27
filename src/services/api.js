@@ -118,7 +118,7 @@ export const fetchSimilar = async (mediaType, id) => {
 };
 
 // Discover
-export const fetchMovies = async (page, genreId, sortOption) => {
+export const fetchMovies = async (page = 1, genreId, sortOption) => {
   const today = new Date().toISOString().split("T")[0];
   let voteCountGte = 100;
   let sort = sortOption;
@@ -134,7 +134,7 @@ export const fetchMovies = async (page, genreId, sortOption) => {
   return data;
 };
 
-export const fetchTvShows = async (page, genreId, sortOption) => {
+export const fetchTvShows = async (page = 1, genreId, sortOption) => {
   const today = new Date().toISOString().split("T")[0];
   let voteCountGte = 10;
   let sort = sortOption;
@@ -149,4 +149,13 @@ export const fetchTvShows = async (page, genreId, sortOption) => {
   );
 
   return data;
+};
+
+// Search
+export const searchMulti = async (query, page = 1) => {
+  const { data } = await axios.get(
+    `${baseUrl}/search/multi?api_key=${apiKey}&query=${query}&page=${page}`
+  );
+  console.log(data);
+  return data?.results;
 };
