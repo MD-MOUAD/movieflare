@@ -20,14 +20,20 @@ import noProfileImg from "../assets/no-profile-img.svg";
 import VideoComponent from "../components/VideoComponent";
 import Similar from "../components/detailsPage_components/Similar";
 import HomeLink from "../components/HomeLink";
+import { useAuth } from "../context/useAuth";
+import { useToast } from "@chakra-ui/react";
+import HomeRedirection from "../components/HomeRedirection";
 
 const DetailsPage = () => {
   const { type, id } = useParams();
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
   const [details, setDetails] = useState({});
   const [cast, setCast] = useState([]);
   const [officialTrailers, setOfficialTrailers] = useState([]);
   const [videos, setVideos] = useState([]);
+  const { user } = useAuth();
+  const toast = useToast();
 
   useEffect(() => {
     setLoading(true);
@@ -58,8 +64,8 @@ const DetailsPage = () => {
           ?.filter((video) => video?.type != "Trailer")
           ?.slice(0, 10);
         setVideos(vids);
-      } catch (error) {
-        console.log("Error fetching data:", error);
+      } catch (err) {
+        setError(true);
       } finally {
         setLoading(false);
       }
@@ -68,12 +74,43 @@ const DetailsPage = () => {
     fetchAllData();
   }, [type, id]);
 
+  const releaseDate = details?.release_date || details?.first_air_date;
+  const title = details?.name || details?.title;
+
+  const handleSaveToWatchlist = async () => {
+    if (user) {
+      toast({
+        title: "Added to Watchlist",
+        description: `${title} has been added to your watchlist.`,
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+        position: "top",
+      });
+      const data = {
+        id,
+        type,
+        title,
+        releaseDate,
+      };
+      console.log(data);
+    } else {
+      toast({
+        title: "Action Required",
+        description: "Please log in to add to your watchlist.",
+        status: "error",
+        duration: 4000,
+        isClosable: true,
+        position: "top",
+      });
+    }
+  };
   if (loading) {
     return <Spinner />;
   }
-
-  const releaseDate = details?.release_date || details?.first_air_date;
-  const title = details?.name || details?.title;
+  if (error) {
+    return <HomeRedirection />;
+  }
   return (
     <>
       {/* details */}
@@ -94,14 +131,18 @@ const DetailsPage = () => {
             <h1 className="font-roboto font-bold text-3xl text-red-500 max-md:text-center">
               {title + " "}
               <span className="text-gray-400 font-normal">
-                {new Date(releaseDate).getFullYear()}
+                {new Date(releaseDate).getFullYear() || "N/A"}
               </span>
             </h1>
             <div className="flex max-sm:flex-col items-center gap-5 max-sm:gap-2 text-lg">
               <div className="flex items-center gap-2 text-white/75">
                 <FaRegCalendarAlt />
                 <div>
-                  {new Date(releaseDate).toLocaleDateString("en-US")} (US)
+                  {releaseDate
+                    ? `${new Date(releaseDate).toLocaleDateString(
+                        "en-US"
+                      )} (US)`
+                    : "Unknown"}
                 </div>
               </div>
               {type === "movie" ? (
@@ -121,7 +162,7 @@ const DetailsPage = () => {
               <p className="text-md lg:text-xl max-md:hidden">User Score</p>
               <button
                 className="flex items-center px-3 py-2 border-2 rounded-md border-slate-200/20 font-bold hover:bg-orange-300/10 max-md:scale-125"
-                onClick={() => console.log("clicked")}
+                onClick={handleSaveToWatchlist}
               >
                 <IoIosAdd size={25} className="mr-1" />
                 Add to watchlist

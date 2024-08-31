@@ -7,11 +7,14 @@ import "./index.css";
 import Home from "./pages/Home";
 import Movies from "./pages/movies/Movies";
 import Shows from "./pages/shows/Shows";
-import Search from "./pages/search/Search";
 import DetailsPage from "./pages/DetailsPage.jsx";
 import WatchList from "./pages/WatchList.jsx";
 import { AuthProvider } from "./context/authProvider.jsx";
 import Protected from "./components/routes/Protected.jsx";
+import HomeRedirection from "./components/HomeRedirection.js";
+import GenrePage from "./pages/GenrePage.jsx";
+import DetailsPageVerifier from "./components/routes/DetailsPageVerifier.jsx";
+
 
 const router = createBrowserRouter([
   {
@@ -31,12 +34,14 @@ const router = createBrowserRouter([
         element: <Shows />,
       },
       {
-        path: "/search",
-        element: <Search />,
+        path: "/:type/:id",
+        element: (<DetailsPageVerifier>
+          <DetailsPage />
+        </DetailsPageVerifier>),
       },
       {
-        path: "/:type/:id",
-        element: <DetailsPage />,
+        path: "/genre/:id",
+        element: <GenrePage />,
       },
       {
         path: "watchlist",
@@ -45,6 +50,7 @@ const router = createBrowserRouter([
         </Protected>),
       },
     ],
+    errorElement: <HomeRedirection />,
   },
 ]);
 

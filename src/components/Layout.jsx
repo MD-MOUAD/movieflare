@@ -65,7 +65,7 @@ const Layout = ({ children }) => {
       <Sidebar isOpen={isOpen} />
       <main
         ref={mainRef}
-        className={`relative min-h-screen  mt-16 max-sm:text-sm rounded-tl-xl bg-slate-100 dark:bg-neutral-950 ${
+        className={`relative min-h-[calc(100vh-4rem)] max-sm:min-h-[calc(100vh-56px)] mt-16 max-sm:mt-14 max-sm:text-sm rounded-tl-xl bg-slate-100 dark:bg-neutral-950 ${
           isOpen ? "lg:ml-52 max-lg:b" : "lg:ml-20"
         }`}
       >
