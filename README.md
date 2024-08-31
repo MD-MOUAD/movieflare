@@ -1,5 +1,5 @@
-# Movies Land App
-Movies Land App is a user interface (UI) built with React and Tailwind CSS. This project uses Vite for fast development and Firebase for backend services.
+# Movies Flare App
+Movies Flare App is a user interface (UI) built with React and Tailwind CSS. This project uses Vite for fast development and Firebase for backend services.
 
 ## Table of Contents
 * Features

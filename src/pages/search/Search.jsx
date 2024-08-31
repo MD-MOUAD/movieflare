@@ -56,7 +56,7 @@ const Search = () => {
           <BiCameraMovie className="text-5xl max-sm:text-4xl" />
           <h1 className="text-4xl max-sm:text-3xl font-bold font-raleway bg-gradient-to-r from-red-400 via-red-900 to-red-600 bg-clip-text text-transparent tracking-wide">
             <span className="text-5xl max-sm:text-4xl">M</span>ovie
-            <span className="text-5xl max-sm:text-4xl">l</span>and
+            <span className="text-5xl max-sm:text-4xl">F</span>lare
           </h1>
         </Link>
       </div>
