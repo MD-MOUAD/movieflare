@@ -22,10 +22,9 @@ const TrendingSection = () => {
       try {
         const trending = await fetchTrending(timeFrame, mediaType);
         setTrendingData(trending);
+        setLoading(false);
       } catch (error) {
         console.log("Error fetching data:", error);
-      } finally {
-        setLoading(false);
       }
     };
     fetchData();

@@ -16,7 +16,7 @@ const FeaturedMovie = ({ item }) => {
     <div
       className="relative bg-cover bg-center sm:rounded-md"
       style={{
-        backgroundImage: `url("${BaseImgPathOriginal}/${item.backdrop_path})")`,
+        backgroundImage: `url("${BaseImgPathOriginal}/${item?.backdrop_path})")`,
       }}
     >
       {/* overlay */}
@@ -25,7 +25,7 @@ const FeaturedMovie = ({ item }) => {
       <div className="relative py-9 px-1 sm:p-6 md:p-12 rounded-lg sm:backdrop-filter">
         <div className="flex items-center text-white w-fit max-w-5xl bg-opacity-75 ">
           <img
-            src={`${baseImgPath}/${item.poster_path}`}
+            src={`${baseImgPath}/${item?.poster_path}`}
             alt="Movie Poster"
             className="w-28 md:w-48 rounded-lg shadow-lg opacity-65 max-sm:hidden"
           />
@@ -44,7 +44,7 @@ const FeaturedMovie = ({ item }) => {
               {mapGenreIdsToNames(
                 item?.genre_ids,
                 genresDict[item?.media_type]
-              ).join(", ")}
+              )?.join(", ")}
             </p>
             <p className="mt-4 xl:text-lg text-white/50 font-[500] line-clamp-2 max-md:hidden">
               {item?.overview}

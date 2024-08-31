@@ -2,6 +2,7 @@ import { createContext, useEffect, useState } from "react";
 import { auth } from "../services/firebase";
 import {
   GoogleAuthProvider,
+  FacebookAuthProvider,
   onAuthStateChanged,
   signInWithPopup,
   signOut,
@@ -16,6 +17,10 @@ export const AuthProvider = ({ children }) => {
 
   const signInWithGoogle = () => {
     const provider = new GoogleAuthProvider();
+    return signInWithPopup(auth, provider);
+  };
+  const signInWithFacebook = () => {
+    const provider = new FacebookAuthProvider();
     return signInWithPopup(auth, provider);
   };
 
@@ -33,7 +38,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, loading, signInWithGoogle, logout }}>
+    <AuthContext.Provider value={{ user, loading, signInWithGoogle, signInWithFacebook, logout }}>
       {children}
     </AuthContext.Provider>
   );

@@ -13,6 +13,8 @@ import {
   FaChevronCircleRight,
   FaTimes,
   FaFilter,
+  FaFacebook,
+  FaBookmark,
 } from "react-icons/fa";
 
 export {
@@ -29,6 +31,8 @@ export {
   FaChevronCircleRight,
   FaTimes,
   FaFilter,
+  FaFacebook,
+  FaBookmark,
 };
 
 // io icons
@@ -36,9 +40,12 @@ import { IoIosAdd, IoIosTrendingUp, IoMdTime, IoIosMenu } from "react-icons/io";
 export { IoIosAdd, IoIosTrendingUp, IoMdTime, IoIosMenu };
 
 // md icons
-import { MdLiveTv } from "react-icons/md";
-export { MdLiveTv };
+import { MdLiveTv, MdLogout } from "react-icons/md";
+export { MdLiveTv, MdLogout };
 
 // bi icons
 import { BiCameraMovie } from "react-icons/bi";
 export { BiCameraMovie };
+// fc icons
+import { FcGoogle } from "react-icons/fc";
+export { FcGoogle };

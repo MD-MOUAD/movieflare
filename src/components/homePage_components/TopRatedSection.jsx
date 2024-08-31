@@ -17,10 +17,9 @@ const TopRatedSection = () => {
       try {
         const trending = await fetchTopRated(mediaType);
         setTopRatedData(trending);
+        setLoading(false);
       } catch (error) {
         console.log("Error fetching data:", error);
-      } finally {
-        setLoading(false);
       }
     };
     fetchData();
