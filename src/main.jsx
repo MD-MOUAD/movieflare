@@ -14,6 +14,7 @@ import Protected from "./components/routes/Protected.jsx";
 import HomeRedirection from "./components/HomeRedirection.js";
 import GenrePage from "./pages/GenrePage.jsx";
 import DetailsPageVerifier from "./components/routes/DetailsPageVerifier.jsx";
+import theme from "../theme.js"
 
 
 const router = createBrowserRouter([
@@ -56,7 +57,7 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <ChakraProvider>
+    <ChakraProvider theme={theme}>
       <AuthProvider>
         <RouterProvider router={router} />
       </AuthProvider>

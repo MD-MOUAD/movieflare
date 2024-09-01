@@ -23,6 +23,7 @@ import HomeLink from "../components/HomeLink";
 import { useAuth } from "../context/useAuth";
 import { useToast } from "@chakra-ui/react";
 import HomeRedirection from "../components/HomeRedirection";
+import { useFirestore } from "../services/firestore";
 
 const DetailsPage = () => {
   const { type, id } = useParams();
@@ -34,6 +35,7 @@ const DetailsPage = () => {
   const [videos, setVideos] = useState([]);
   const { user } = useAuth();
   const toast = useToast();
+  const { addToWatchlist } = useFirestore();
 
   useEffect(() => {
     setLoading(true);
@@ -77,23 +79,19 @@ const DetailsPage = () => {
   const releaseDate = details?.release_date || details?.first_air_date;
   const title = details?.name || details?.title;
 
-  const handleSaveToWatchlist = async () => {
+  const saveToWatchlist = async () => {
     if (user) {
-      toast({
-        title: "Added to Watchlist",
-        description: `${title} has been added to your watchlist.`,
-        status: "success",
-        duration: 3000,
-        isClosable: true,
-        position: "top",
-      });
       const data = {
         id,
         type,
-        title,
+        title: details?.name || details?.title,
         releaseDate,
+        poster_path: details?.poster_path,
+        vote_average: details?.vote_average,
+        overview: details?.overview,
       };
-      console.log(data);
+      const dataId = data?.id?.toString();
+      addToWatchlist(user?.uid, dataId, data);
     } else {
       toast({
         title: "Action Required",
@@ -162,7 +160,7 @@ const DetailsPage = () => {
               <p className="text-md lg:text-xl max-md:hidden">User Score</p>
               <button
                 className="flex items-center px-3 py-2 border-2 rounded-md border-slate-200/20 font-bold hover:bg-orange-300/10 max-md:scale-125"
-                onClick={handleSaveToWatchlist}
+                onClick={saveToWatchlist}
               >
                 <IoIosAdd size={25} className="mr-1" />
                 Add to watchlist

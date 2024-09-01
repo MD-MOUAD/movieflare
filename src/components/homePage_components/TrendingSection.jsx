@@ -4,8 +4,7 @@ import CardSkeleton from "../Skeletons/CardSkeleton";
 import BannerSkeleton from "../Skeletons/BannerSkeleton";
 import { IoIosTrendingUp, FaChevronCircleRight } from "../../utils/icons";
 import { fetchTrending } from "../../services/api";
-import Select from "react-select";
-import selectStyles from "../../utils/selectStyles";
+import { Select } from "@chakra-ui/react";
 import BannerSlider from "../BannerSlider";
 
 const TrendingSection = () => {
@@ -69,9 +68,10 @@ const TrendingSection = () => {
     { value: "tv", label: "Tv Series" },
     { value: "movie", label: "Movies" },
   ];
-  const handleTypeChange = (option) => {
+  const handleTypeChange = (event) => {
+    const selectedValue = event.target.value;
     setPage(1);
-    setMediaType(option.value);
+    setMediaType(selectedValue);
   };
 
   return (
@@ -86,14 +86,23 @@ const TrendingSection = () => {
           Trending
           <IoIosTrendingUp size={25} />
         </h2>
-        <Select
-          id="mediaType"
-          options={mediaTypeOptions}
-          placeholder="All"
-          className="text-black w-32 max-sm:hidden"
-          onChange={handleTypeChange}
-          styles={selectStyles}
-        />
+        <div className="max-sm:hidden">
+          <Select
+            id="mediaType"
+            onChange={handleTypeChange}
+            w={"8rem"}
+            h={"2.4rem"}
+            rounded={"lg"}
+            variant="outline"
+            focusBorderColor="red.500"
+          >
+            {mediaTypeOptions.map((option) => (
+              <option key={option.value} value={option.value} className="custom-option" variant={"bg"}>
+                {option.label}
+              </option>
+            ))}
+          </Select>
+        </div>
         <div className="flex font-[500] border-2 border-black/50 dark:border-white/50 rounded-full shadow-md">
           <button
             className={`px-7 max-sm:px-5 rounded-full ${

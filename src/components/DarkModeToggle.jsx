@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { FaMoon, FaSun } from "../utils/icons";
+import { useColorMode } from "@chakra-ui/react";
 
 const DarkModeToggle = () => {
+  const { colorMode, setColorMode } = useColorMode();
   const [isDarkMode, setIsDarkMode] = useState(() => {
     // Retrieve the dark mode preference from local storage
     const savedMode = localStorage.getItem("darkMode");
@@ -9,6 +11,8 @@ const DarkModeToggle = () => {
   });
 
   useEffect(() => {
+    // Sync Chakra UI color mode with custom dark mode state
+    setColorMode(isDarkMode ? "dark" : "light");
     // Apply the dark mode class to the document element
     if (isDarkMode) {
       document.documentElement.classList.add("dark");

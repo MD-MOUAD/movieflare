@@ -1,25 +1,41 @@
 import { FcGoogle, FaFacebook, MdLogout, FaBookmark } from "../utils/icons";
 import { useAuth } from "../context/useAuth";
-import { Avatar, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
+import { Avatar, Menu, MenuButton, MenuItem, MenuList, useToast } from "@chakra-ui/react";
 import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const { user, signInWithGoogle, signInWithFacebook, logout } = useAuth();
   const navigate = useNavigate();
+  const toast = useToast();
 
+  const loginError = {
+    title: "Login error",
+    description: "An error occurred while login",
+    status: "error",
+    duration: 4000,
+    isClosable: true,
+  }
+  const LoginSuccess = {
+    title: "Login success",
+    status: "success",
+    duration: 3000,
+    isClosable: true,
+  }
   const handleGoogleLogin = async () => {
     try {
       await signInWithGoogle();
-      console.log("google login successfully");
+      toast(LoginSuccess)
     } catch (error) {
-      console.log("error: ", error);
+      toast(loginError)
     }
   };
   const handleFacebookLogin = async () => {
     try {
       await signInWithFacebook();
       console.log("facebook login successfully");
+      toast(LoginSuccess)
     } catch (error) {
+      toast(loginError)
       console.log("error: ", error);
     }
   };
@@ -42,14 +58,14 @@ const Login = () => {
       <MenuList>
         <Link to={"/watchlist"}>
           <MenuItem>
-            <div className="flex items-center gap-4 text-black">
+            <div className="flex items-center gap-4 dark:text-white">
               <FaBookmark />
               WatchList
             </div>
           </MenuItem>
         </Link>
         <MenuItem onClick={handleLogout}>
-          <div className="flex items-center gap-4  text-black">
+          <div className="flex items-center gap-4">
             <MdLogout />
             Logout
           </div>
@@ -59,17 +75,17 @@ const Login = () => {
   ) : (
     <Menu>
       <MenuButton>
-        <Avatar bg={"gray.800"} color={"white"} size={"sm"} />
+        <Avatar bg={"#404040"} color={"white"} size={"sm"} />
       </MenuButton>
       <MenuList>
         <MenuItem onClick={handleGoogleLogin}>
-          <div className="flex items-center gap-4  text-black">
+          <div className="flex items-center gap-4">
             <FcGoogle />
             Sign in with Google
           </div>
         </MenuItem>
         <MenuItem onClick={handleFacebookLogin}>
-          <div className="flex items-center gap-4  text-black">
+          <div className="flex items-center gap-4">
             <FaFacebook color="#1877F2" />
             Sign in with facebook
           </div>
