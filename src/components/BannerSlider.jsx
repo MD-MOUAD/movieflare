@@ -41,6 +41,7 @@ const BannerSlider = ({ movies }) => {
           height="100%"
           initial={{ opacity: 0 }}
           animate={{ opacity: currentSlide === index ? 1 : 0 }}
+          zIndex={currentSlide === index ? 1 : -1}
           transition={{ duration: 0.8 }}
         >
           <div

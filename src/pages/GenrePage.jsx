@@ -43,9 +43,9 @@ const GenrePage = () => {
 
   return (
     <div className="container mx-auto py-2">
-      <div className="px-10 sm:px-20 mb-4">
+      <div className="px-10 sm:px-20 sm:mb-4">
         <div className="flex justify-between items-center">
-          <div className="flex items-center gap-2 text-lg sm:text-xl font-bold text-red-500 py-4">
+          <div className="flex items-center gap-2 text-lg sm:text-xl font-bold text-red-500 py-2 sm:py-4">
             <h2>Genre: {genresDict["movie"][id]}</h2>
           </div>
         </div>
