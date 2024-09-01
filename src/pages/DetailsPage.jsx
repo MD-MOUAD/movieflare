@@ -22,6 +22,7 @@ import Similar from "../components/detailsPage_components/Similar";
 import HomeLink from "../components/HomeLink";
 import { useAuth } from "../context/useAuth";
 import { useToast } from "@chakra-ui/react";
+import { Spinner as ChakraSpinner } from "@chakra-ui/react";
 import HomeRedirection from "../components/HomeRedirection";
 import { useFirestore } from "../services/firestore";
 
@@ -35,7 +36,9 @@ const DetailsPage = () => {
   const [videos, setVideos] = useState([]);
   const { user } = useAuth();
   const toast = useToast();
-  const { addToWatchlist } = useFirestore();
+  const { addToWatchlist, checkInWatchlist, removeFromWatchlist } = useFirestore();
+  const [addToWatchlistLoading, setAddToWatchlistLoading] = useState(false);
+  const [isInWatchlist, setIsInWatchlist] = useState(false);
 
   useEffect(() => {
     setLoading(true);
@@ -76,10 +79,20 @@ const DetailsPage = () => {
     fetchAllData();
   }, [type, id]);
 
+  useEffect(() => {
+    if (user) {
+      checkInWatchlist(user?.uid, id).then((result) => {
+        setIsInWatchlist(result);
+      });
+    } else {
+      setIsInWatchlist(false);
+    }
+  }, [id, user, checkInWatchlist]);
+
   const releaseDate = details?.release_date || details?.first_air_date;
   const title = details?.name || details?.title;
 
-  const saveToWatchlist = async () => {
+  const handleSaveToWatchlist = async () => {
     if (user) {
       const data = {
         id,
@@ -91,7 +104,9 @@ const DetailsPage = () => {
         overview: details?.overview,
       };
       const dataId = data?.id?.toString();
-      addToWatchlist(user?.uid, dataId, data);
+      await addToWatchlist(user?.uid, dataId, data, setAddToWatchlistLoading);
+      const setToWatchList = await checkInWatchlist(user?.uid, dataId);
+      setIsInWatchlist(setToWatchList);
     } else {
       toast({
         title: "Action Required",
@@ -103,12 +118,21 @@ const DetailsPage = () => {
       });
     }
   };
+
+  const handleRemoveFromWatchlist = async () => {
+    await removeFromWatchlist(user?.uid, id);
+    const setToWatchList = await checkInWatchlist(user?.uid, id);
+    setIsInWatchlist(setToWatchList);
+  }
+
   if (loading) {
     return <Spinner />;
   }
+
   if (error) {
     return <HomeRedirection />;
   }
+
   return (
     <>
       {/* details */}
@@ -158,20 +182,29 @@ const DetailsPage = () => {
                 size={55}
               />
               <p className="text-md lg:text-xl max-md:hidden">User Score</p>
-              <button
-                className="flex items-center px-3 py-2 border-2 rounded-md border-slate-200/20 font-bold hover:bg-orange-300/10 max-md:scale-125"
-                onClick={saveToWatchlist}
-              >
-                <IoIosAdd size={25} className="mr-1" />
-                Add to watchlist
-              </button>
-              <button
-                className="hidden items-center px-3 py-2 border-2 rounded-md border-slate-200/20 text-green-400 font-bold hover:bg-green-600/30 max-md:scale-125"
-                onClick={() => console.log("clicked")}
-              >
-                <FaCheckCircle size={20} className="mr-2" />
-                In watchlist
-              </button>
+              {isInWatchlist ? (
+                <button
+                  className="flex items-center justify-center w-52 px-3 py-2 border-2 rounded-md border-slate-200/20 text-green-400 font-bold bg-green-600/30 hover:bg-green-700/30 max-md:scale-125"
+                  onClick={handleRemoveFromWatchlist}
+                >
+                  <FaCheckCircle size={20} className="mr-2" />
+                  In watchlist
+                </button>
+              ) : (
+                <button
+                  className="flex items-center justify-center w-52 py-2 border-2 rounded-md border-slate-200/20 font-bold hover:bg-orange-300/10 max-md:scale-125"
+                  onClick={handleSaveToWatchlist}
+                >
+                  <div className="mr-2 flex items-center">
+                    {addToWatchlistLoading ? (
+                      <ChakraSpinner />
+                    ) : (
+                      <IoIosAdd size={25} />
+                    )}
+                  </div>
+                  Add to watchlist
+                </button>
+              )}
             </div>
             <p className="italic text-gray-300 pb-2 max-sm:text-base">
               {details?.tagline}

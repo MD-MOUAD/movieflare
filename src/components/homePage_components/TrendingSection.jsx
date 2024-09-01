@@ -97,7 +97,7 @@ const TrendingSection = () => {
             focusBorderColor="red.500"
           >
             {mediaTypeOptions.map((option) => (
-              <option key={option.value} value={option.value} className="custom-option" variant={"bg"}>
+              <option key={option.value} value={option.value}>
                 {option.label}
               </option>
             ))}

@@ -1,4 +1,4 @@
-import { collection, addDoc, setDoc, doc, getDoc } from "firebase/firestore";
+import { collection, addDoc, setDoc, doc, getDoc, deleteDoc } from "firebase/firestore";
 import { db } from "../services/firebase";
 import { useToast } from "@chakra-ui/react";
 
@@ -16,8 +16,10 @@ export const useFirestore = () => {
     const docSnap = await getDoc(docRef);
     return docSnap.exists();
   };
-  const addToWatchlist = async (userID, movieID, data) => {
+
+  const addToWatchlist = async (userID, movieID, data, setLoading) => {
     try {
+      setLoading(true);
       if (await checkInWatchlist(userID, movieID)) {
         toast({
           title: "Error",
@@ -34,9 +36,8 @@ export const useFirestore = () => {
         title: "Added to Watchlist",
         description: `${data?.title} has been added to your watchlist.`,
         status: "success",
-        duration: 3000,
+        duration: 4000,
         isClosable: true,
-        position: "top",
       });
     } catch (error) {
       toast({
@@ -47,9 +48,34 @@ export const useFirestore = () => {
         isClosable: true,
         position: "top",
       });
-      console.log("error adding document", error);
+      console.log("error while adding document", error);
+    } finally {
+      setLoading(false);
     }
   };
 
-  return { addDocument, addToWatchlist };
+  const removeFromWatchlist = async (userID, movieID) => {
+    try {
+      await deleteDoc(doc(db, "users", userID, "watchlist", movieID));
+      toast({
+        title: "Success!",
+        description: "Removed from Watchlist",
+        status: "success",
+        duration: 4000,
+        isClosable: true,
+      });
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "An error occurred",
+        status: "error",
+        duration: 4000,
+        isClosable: true,
+        position: "top",
+      });
+      console.log("error while deleting document", error);
+    }
+  }
+
+  return { addDocument, addToWatchlist, checkInWatchlist, removeFromWatchlist };
 };

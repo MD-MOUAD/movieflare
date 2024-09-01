@@ -29,7 +29,7 @@ const Similar = ({ itemId, mediaType }) => {
   return (
     <div className="py-6">
       <h2 className="text-lg sm:text-xl font-roboto ml-2 mb-6">Similar {mediaType === "tv" ? "Tv Series" : "Movies"}</h2>
-      <div className="flex items-center justify-center flex-wrap gap-10 max-md:gap-6 max-sm:gap-3">
+      <div className="flex items-center justify-center flex-wrap gap-10 max-md:gap-6 max-sm:gap-4">
         {similarData.length > 0 ? (
           similarData?.map((item, i) => {
             item["media_type"] = mediaType;
