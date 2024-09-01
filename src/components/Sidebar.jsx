@@ -56,7 +56,7 @@ const Sidebar = ({ isOpen }) => {
       } transition-transform duration-500 ease-in-out`}
     >
       <div className="h-[calc(100vh-4rem)] max-sm:h-[calc(100vh-3.5rem)] overflow-y-auto">
-        <ul className={`flex-col px-1 ${isOpen ? "pt-5 space-y-4" : "pt-1"}`}>
+        <ul className={`flex-col px-1 mb-5 ${isOpen ? "pt-5 space-y-4" : "pt-1"}`}>
           {Links.map((link, index) => (
             <li key={index}>
               <Link

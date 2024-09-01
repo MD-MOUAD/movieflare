@@ -66,7 +66,7 @@ const TopRatedSection = () => {
           Top Rated
           <FaStar size={18} />
         </h2>
-        <div className="flex font-[500] border-2 border-black/50 dark:border-white/50 rounded-full shadow-md max-sm:scale-110">
+        <div className="flex font-[500] border-2 border-black/50 dark:border-white/50 rounded-full shadow-md">
           <button
             className={`px-10 max-sm:px-8 py-1 rounded-full ${
               mediaType === "tv" ? "bg-red-600 text-slate-100 hover:scale-105" : "opacity-75"
@@ -86,7 +86,7 @@ const TopRatedSection = () => {
         </div>
       </div>
       <div
-        className="flex items-center overflow-x-auto gap-5 pt-3 pb-5 px-1 mx-4 max-sm:py-1 max-sm:mx-0 max-sm:scrollbar-none"
+        className="flex items-center overflow-x-auto gap-5 max-sm:gap-3 pt-3 pb-5 px-1 mx-4 max-sm:py-1 max-sm:mx-0 max-sm:scrollbar-none"
         ref={containerRef}
       >
         {loading

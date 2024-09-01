@@ -1,12 +1,12 @@
 import { useRef, useEffect, useState } from "react";
 import CardComponent from "../CardComponent";
-import FeaturedMovie from "../FeaturedMovie";
 import CardSkeleton from "../Skeletons/CardSkeleton";
 import BannerSkeleton from "../Skeletons/BannerSkeleton";
 import { IoIosTrendingUp, FaChevronCircleRight } from "../../utils/icons";
 import { fetchTrending } from "../../services/api";
 import Select from "react-select";
 import selectStyles from "../../utils/selectStyles";
+import BannerSlider from "../BannerSlider";
 
 const TrendingSection = () => {
   const [loading, setLoading] = useState(true);
@@ -73,10 +73,15 @@ const TrendingSection = () => {
     setPage(1);
     setMediaType(option.value);
   };
+
   return (
     <>
-      {loading ? <BannerSkeleton /> : <FeaturedMovie item={trendingData[0]} />}
-      <div className="mt-6 flex items-center space-x-3 max-sm:space-x-8 p-4">
+      {loading ? (
+        <BannerSkeleton />
+      ) : (
+        <BannerSlider movies={trendingData.slice(0, 5)} />
+      )}
+      <div className="mt-2 flex items-center space-x-3 max-sm:space-x-8 p-4">
         <h2 className="flex items-center gap-1 font-bold text-xl max-sm:text-lg text-red-500">
           Trending
           <IoIosTrendingUp size={25} />
@@ -89,10 +94,12 @@ const TrendingSection = () => {
           onChange={handleTypeChange}
           styles={selectStyles}
         />
-        <div className="flex font-[500] border-2 border-black/50 dark:border-white/50 rounded-full shadow-md max-sm:scale-110">
+        <div className="flex font-[500] border-2 border-black/50 dark:border-white/50 rounded-full shadow-md">
           <button
             className={`px-7 max-sm:px-5 rounded-full ${
-              timeFrame === "day" ? "bg-red-600 text-slate-100 hover:scale-105" : "opacity-75"
+              timeFrame === "day"
+                ? "bg-red-600 text-slate-100 hover:scale-105"
+                : "opacity-75"
             } transition-all duration-100 shrink-0`}
             onClick={() => setTimeFrame("day") && setPage(1)}
           >
@@ -100,7 +107,9 @@ const TrendingSection = () => {
           </button>
           <button
             className={`px-5 max-sm:px-2 py-1 rounded-full ${
-              timeFrame === "week" ? "bg-red-600 text-slate-100 hover:scale-105" : "opacity-75"
+              timeFrame === "week"
+                ? "bg-red-600 text-slate-100 hover:scale-105"
+                : "opacity-75"
             } transition-all duration-100 shrink-0`}
             onClick={() => setTimeFrame("week") && setPage(1)}
           >
@@ -109,14 +118,14 @@ const TrendingSection = () => {
         </div>
       </div>
       <div
-        className="flex overflow-x-auto gap-5 pt-3 pb-5 px-1 mx-4 max-sm:py-1 max-sm:mx-0 max-sm:scrollbar-none"
+        className="flex overflow-x-auto gap-5 max-sm:gap-3 pt-3 pb-5 px-1 mx-4 max-sm:py-1 max-sm:mx-0 max-sm:scrollbar-none"
         ref={containerRef}
       >
         {loading
-          ? [...Array(19)].map((_, i) => <CardSkeleton key={i} small />)
+          ? [...Array(15)].map((_, i) => <CardSkeleton key={i} small />)
           : trendingData?.map(
               (item, i) =>
-                i > 0 && <CardComponent key={item.id} item={item} small />
+                i > 4 && <CardComponent key={item.id} item={item} small />
             )}
         {page < 10 && (
           <button

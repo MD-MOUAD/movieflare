@@ -14,7 +14,7 @@ export const fetchTrending = async (
   mediaType = "all",
   page = 1
 ) => {
-  // await new Promise((resolve) => setTimeout(resolve, 10000)); // TODO: Remove this line later
+  // await new Promise((resolve) => setTimeout(resolve, 2000)); // TODO: Remove this line later
   const { data } = await axios.get(
     `${baseUrl}/trending/${mediaType}/${timeFrame}?api_key=${apiKey}&page=${page}`
   );
