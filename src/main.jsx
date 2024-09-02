@@ -51,7 +51,7 @@ const router = createBrowserRouter([
         </Protected>),
       },
     ],
-    // errorElement: <HomeRedirection />, //TODO: activate in production
+    errorElement: <HomeRedirection />,
   },
 ]);
 
