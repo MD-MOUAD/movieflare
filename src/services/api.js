@@ -79,31 +79,48 @@ export const fetchGenreList = async (genreType) => {
 };
 
 const genresDict = {};
-const movieGenres = JSON.parse(localStorage.getItem("movieGenres"));
-const tvGenres = JSON.parse(localStorage.getItem("tvGenres"));
 
-if (movieGenres && tvGenres) {
-  genresDict["movie"] = movieGenres;
-  genresDict["tv"] = tvGenres;
-} else {
-  const getGenresData = async () => {
-    const [movieGenresData, tvGenresData] = await Promise.all([
-      fetchGenreList("movie"),
-      fetchGenreList("tv"),
-    ]);
-    return {movieGenresData, tvGenresData};
+const loadGenresFromLocalStorage = (key) => {
+  const data = localStorage.getItem(key);
+  return data ? JSON.parse(data) : null;
+};
+
+const saveGenresToLocalStorage = (key, data) => {
+  localStorage.setItem(key, JSON.stringify(data));
+};
+
+const initializeGenresDict = async () => {
+  const movieGenres = loadGenresFromLocalStorage("movieGenres");
+  const tvGenres = loadGenresFromLocalStorage("tvGenres");
+
+  if (movieGenres && tvGenres) {
+    genresDict["movie"] = movieGenres;
+    genresDict["tv"] = tvGenres;
+  } else {
+    try {
+      const [movieGenresData, tvGenresData] = await Promise.all([
+        fetchGenreList("movie"),
+        fetchGenreList("tv"),
+      ]);
+
+      const movieGenreDict = createGenreDict(movieGenresData);
+      const tvGenreDict = createGenreDict(tvGenresData);
+
+      saveGenresToLocalStorage("movieGenres", movieGenreDict);
+      saveGenresToLocalStorage("tvGenres", tvGenreDict);
+
+      genresDict["movie"] = movieGenreDict;
+      genresDict["tv"] = tvGenreDict;
+    } catch (error) {
+      console.error("Failed to fetch genres data:", error);
+    }
   }
-  const {movieGenresData, tvGenresData} = await getGenresData();
-  const movieGenreDict = createGenreDict(movieGenresData);
-  const tvGenreDict = createGenreDict(tvGenresData);
+};
 
-  localStorage.setItem("movieGenres", JSON.stringify(movieGenreDict));
-  localStorage.setItem("tvGenres", JSON.stringify(tvGenreDict));
+initializeGenresDict();
 
-  genresDict["movie"] = movieGenreDict;
-  genresDict["tv"] = tvGenreDict;
-}
 export { genresDict };
+
 
 // Movies & Tv - Videos
 export const fetchVideos = async (mediaType, id) => {
