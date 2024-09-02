@@ -86,10 +86,14 @@ if (movieGenres && tvGenres) {
   genresDict["movie"] = movieGenres;
   genresDict["tv"] = tvGenres;
 } else {
-  const [movieGenresData, tvGenresData] = await Promise.all([
-    fetchGenreList("movie"),
-    fetchGenreList("tv"),
-  ]);
+  const getGenresData = async () => {
+    const [movieGenresData, tvGenresData] = await Promise.all([
+      fetchGenreList("movie"),
+      fetchGenreList("tv"),
+    ]);
+    return {movieGenresData, tvGenresData};
+  }
+  const {movieGenresData, tvGenresData} = await getGenresData();
   const movieGenreDict = createGenreDict(movieGenresData);
   const tvGenreDict = createGenreDict(tvGenresData);
 
