@@ -62,7 +62,7 @@ const Layout = ({ children }) => {
   return (
     <>
       <Header toggleSidebar={toggleSidebar} />
-      <Sidebar isOpen={isOpen} />
+      <Sidebar isOpen={isOpen} setIsOpen={setIsOpen}/>
       <main
         ref={mainRef}
         className={`relative min-h-[calc(100vh-4rem)] max-sm:min-h-[calc(100vh-56px)] mt-16 max-sm:mt-14 max-sm:text-sm rounded-tl-xl bg-slate-100 dark:bg-neutral-950 ${

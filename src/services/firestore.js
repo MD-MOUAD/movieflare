@@ -79,3 +79,7 @@ export const useFirestore = () => {
 
   return { addDocument, addToWatchlist, checkInWatchlist, removeFromWatchlist };
 };
+
+const getWatchlist = async () => {
+  
+}

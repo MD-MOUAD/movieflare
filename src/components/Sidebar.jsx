@@ -8,7 +8,7 @@ import {
 } from "../utils/icons";
 import { Link, useLocation } from "react-router-dom";
 
-const Sidebar = ({ isOpen }) => {
+const Sidebar = ({ isOpen, setIsOpen }) => {
   const path = useLocation().pathname;
 
   const [activeLink, setActiveLink] = useState(0);
@@ -46,6 +46,11 @@ const Sidebar = ({ isOpen }) => {
     });
   }, [path]);
 
+  const handleMobileCloseMenu = () => {
+    if (window.innerWidth < 1024) {
+      setIsOpen(false);
+    }
+  }
   
   return (
     <div
@@ -61,6 +66,7 @@ const Sidebar = ({ isOpen }) => {
             <li key={index}>
               <Link
                 to={link.path}
+                onClick={handleMobileCloseMenu}
                 className={`flex items-center font-extrabold text-gray-800 rounded-lg hover:bg-gray-400 dark:hover:bg-neutral-700 dark:text-slate-50 opacity-80 ${
                   isOpen
                     ? "px-7 py-3 gap-4"
