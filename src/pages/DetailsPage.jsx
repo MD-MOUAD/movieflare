@@ -238,14 +238,13 @@ const DetailsPage = () => {
               <div key={item.id}>
                 <div className="w-28 sm:w-32 md:w-36 lg:w-40 shrink-0 rounded-lg overflow-clip relative">
                   <img
-                    className="h"
                     src={`${baseImgPath}/${item?.profile_path}`}
                     alt={`${item.name}-profile`}
                     onError={(e) => (e.currentTarget.src = noProfileImg)}
                   />
                 </div>
-                <p className="my-2 text-center font-bold">{item.name}</p>
-                <p className="text-sm opacity-70 text-center">
+                <p className="w-28 sm:w-32 md:w-36 lg:w-40  my-2 text-center font-bold">{item.name}</p>
+                <p className="w-28 sm:w-32 md:w-36 lg:w-40 text-sm opacity-70 text-center">
                   {item.character}
                 </p>
               </div>
