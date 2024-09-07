@@ -87,6 +87,7 @@ import {
   GiMagnifyingGlass,
   GiWarAxe,
   GiHeartWings,
+  GiMineExplosion,
 } from "react-icons/gi";
 export {
   GiCompass,
@@ -100,6 +101,7 @@ export {
   GiMagnifyingGlass,
   GiWarAxe,
   GiHeartWings,
+  GiMineExplosion,
 };
 
 export const moviesGenreIcons = [
@@ -117,7 +119,7 @@ export const moviesGenreIcons = [
   { id: "35", name: "Comedy", icon: FaLaugh, path: "/genre/35" },
   { id: "36", name: "History", icon: GiGreekTemple, path: "/genre/36" },
   { id: "37", name: "Western", icon: FaHatCowboy, path: "/genre/37" },
-  { id: "53", name: "Thriller", icon: GiKnifeFork, path: "/genre/53" },
+  { id: "53", name: "Thriller", icon: GiMineExplosion, path: "/genre/53" },
   { id: "80", name: "Crime", icon: FaGun, path: "/genre/80" },
   {
     id: "99",
