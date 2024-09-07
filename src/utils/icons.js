@@ -23,6 +23,7 @@ import {
   FaTv,
   FaHatCowboy,
   FaLaugh,
+  FaTrash,
 } from "react-icons/fa";
 
 export {
@@ -49,6 +50,7 @@ export {
   FaTv,
   FaHatCowboy,
   FaLaugh,
+  FaTrash,
 };
 
 // io icons
@@ -103,6 +105,10 @@ export {
   GiHeartWings,
   GiMineExplosion,
 };
+
+// @chakra-ui/icons
+import { StarIcon } from '@chakra-ui/icons';
+export { StarIcon };
 
 export const moviesGenreIcons = [
   { id: "12", name: "Adventure", icon: GiCompass, path: "/genre/12" },
