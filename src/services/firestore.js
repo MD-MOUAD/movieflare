@@ -1,6 +1,15 @@
-import { collection, addDoc, setDoc, doc, getDoc, deleteDoc } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  setDoc,
+  doc,
+  getDoc,
+  deleteDoc,
+  getDocs,
+} from "firebase/firestore";
 import { db } from "../services/firebase";
 import { useToast } from "@chakra-ui/react";
+import { useCallback } from "react";
 
 export const useFirestore = () => {
   const toast = useToast();
@@ -75,11 +84,22 @@ export const useFirestore = () => {
       });
       console.log("error while deleting document", error);
     }
-  }
+  };
 
-  return { addDocument, addToWatchlist, checkInWatchlist, removeFromWatchlist };
+  const getWatchlist = useCallback(async (userID) => {
+    const collectionRef = collection(db, "users", userID, "watchlist");
+    const querySnapShot = await getDocs(collectionRef);
+    const data = querySnapShot.docs.map((doc) => ({
+      ...doc.data(),
+    }));
+    return data;
+  }, []);
+
+  return {
+    addDocument,
+    addToWatchlist,
+    checkInWatchlist,
+    removeFromWatchlist,
+    getWatchlist,
+  };
 };
-
-const getWatchlist = async () => {
-  
-}

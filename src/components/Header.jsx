@@ -1,5 +1,5 @@
 import DarkModeToggle from "./DarkModeToggle";
-import Login from "./Login";
+import ProfileAvatar from "./ProfileAvatar";
 import SearchBar from "./SearchBar";
 import Logo from "./Logo";
 import Menu from "./Menu";
@@ -14,7 +14,7 @@ const Header = ({ toggleSidebar }) => {
       <div className="flex gap-5 max-sm:gap-2 items-center">
       <SearchBar />
         <DarkModeToggle />
-        <Login />
+        <ProfileAvatar />
       </div>
     </div>
   );

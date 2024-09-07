@@ -3,7 +3,7 @@ import { useAuth } from "../context/useAuth";
 import { Avatar, Menu, MenuButton, MenuItem, MenuList, useToast } from "@chakra-ui/react";
 import { Link, useNavigate } from "react-router-dom";
 
-const Login = () => {
+const ProfileAvatar = () => {
   const { user, signInWithGoogle, signInWithFacebook, logout } = useAuth();
   const navigate = useNavigate();
   const toast = useToast();
@@ -95,4 +95,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default ProfileAvatar;

@@ -14,6 +14,7 @@ import {
   FaRegCalendarAlt,
   IoIosAdd,
   IoMdTime,
+  FaBookmark,
 } from "../utils/icons";
 import { ratingPercentage, minutesToHours } from "../utils/helpers";
 import noProfileImg from "../assets/no-profile-img.svg";
@@ -203,6 +204,7 @@ const DetailsPage = () => {
                     )}
                   </div>
                   Add to watchlist
+                  <FaBookmark className="ml-2"/>
                 </button>
               )}
             </div>
