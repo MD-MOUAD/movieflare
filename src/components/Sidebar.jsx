@@ -103,6 +103,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
                     activeLink === index &&
                     "bg-gray-400 dark:bg-neutral-700"
                   }`}
+                  onClick={handleMobileCloseMenu}
                 >
                   {React.createElement(genre?.icon, {
                       className: "text-gray-800 dark:text-gray-400 text-2xl",

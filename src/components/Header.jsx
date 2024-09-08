@@ -12,7 +12,7 @@ const Header = ({ toggleSidebar }) => {
         <Logo />
       </div>
       <div className="flex gap-5 max-sm:gap-2 items-center">
-      <SearchBar />
+        <SearchBar />
         <DarkModeToggle />
         <ProfileAvatar />
       </div>

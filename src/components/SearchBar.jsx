@@ -47,14 +47,14 @@ const SearchBar = () => {
 
   return (
     <>
-      <div id="search-bar" className="px-5 h-10 rounded-lg sm:max-w-96 flex justify-center items-center gap-2 bg-slate-300 dark:bg-gray-50 sm:focus-within:ring-2 ring-black dark:ring-red-600 shadow-lg text-black dark:text-gray-900 relative z-10 max-sm:absolute max-sm:top-full max-sm:left-0 max-sm:w-screen max-sm:h-12 max-sm:hidden group">
+      <div id="search-bar" className="px-5 h-10 rounded-lg sm:max-w-60 md:max-w-96 flex justify-center items-center gap-2 bg-slate-300 dark:bg-gray-50 sm:focus-within:ring-2 ring-black dark:ring-red-600 shadow-lg text-black dark:text-gray-900 relative z-10 max-sm:absolute max-sm:top-full max-sm:left-0 max-sm:w-screen max-sm:h-12 max-sm:hidden group">
         <input
           id="searchBar"
           type="text"
           placeholder="Search on website"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          className="px-5 h-full w-4/6 bg-inherit outline-none flex-1 placeholder:text-gray-600 dark:placeholder:text-inputColor max-sm:rounded-lg"
+          className="px-2 md:px-5 h-full w-4/6 bg-inherit outline-none flex-1 placeholder:text-gray-600 dark:placeholder:text-inputColor max-sm:rounded-lg"
         />
         <button
           className={`sm:invisible ${
@@ -95,7 +95,7 @@ const SearchBar = () => {
       </div>
       {/* for mobile */}
       <div className="relative text-red-500 sm:hidden cursor-pointer">
-        <FaSearch size={24} onClick={handleMobileSearch} />
+        <FaSearch size={18} onClick={handleMobileSearch} />
         <div id="mobile-search-bar-arrow" className="size-6 absolute top-9 left-1/2 -translate-x-1/2 rotate-45 bg-slate-300 dark:bg-gray-50  max-sm:hidden"></div>
       </div>
     </>
