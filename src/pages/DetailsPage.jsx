@@ -157,7 +157,7 @@ const DetailsPage = () => {
                 {new Date(releaseDate).getFullYear() || "N/A"}
               </span>
             </h1>
-            <div className="flex max-sm:flex-col items-center gap-5 max-sm:gap-2 text-lg">
+            <div className="flex items-center gap-5  text-lg">
               <div className="flex items-center gap-2 text-white/75">
                 <FaRegCalendarAlt />
                 <div>
@@ -177,7 +177,7 @@ const DetailsPage = () => {
                 <span className="uppercase text-gray-300">({type})</span>
               )}
             </div>
-            <div className="flex max-md:flex-col items-center gap-5 py-5">
+            <div className="flex items-center gap-5 py-5">
               <CircularProgress
                 progress={ratingPercentage(details?.vote_average)}
                 size={55}
@@ -185,7 +185,7 @@ const DetailsPage = () => {
               <p className="text-md lg:text-xl max-md:hidden">User Score</p>
               {isInWatchlist ? (
                 <button
-                  className="flex items-center justify-center w-52 px-3 py-2 border-2 rounded-md border-slate-200/20 text-green-400 font-bold bg-green-600/30 hover:bg-green-700/30 max-md:scale-125"
+                  className="flex items-center justify-center w-52 px-3 py-2 border-2 rounded-md border-slate-200/20 text-green-400 font-bold bg-green-600/30 hover:bg-green-700/30"
                   onClick={handleRemoveFromWatchlist}
                 >
                   <FaCheckCircle size={20} className="mr-2" />
@@ -193,7 +193,7 @@ const DetailsPage = () => {
                 </button>
               ) : (
                 <button
-                  className="flex items-center justify-center w-52 py-2 border-2 rounded-md border-slate-200/20 font-bold hover:bg-orange-300/10 max-md:scale-125"
+                  className="flex items-center justify-center w-52 py-2 border-2 rounded-md border-slate-200/20 font-bold hover:bg-orange-300/10"
                   onClick={handleSaveToWatchlist}
                 >
                   <div className="mr-2 flex items-center">
