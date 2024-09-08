@@ -55,7 +55,7 @@ const ProfileAvatar = () => {
           src={user?.photoURL}
         />
       </MenuButton>
-      <MenuList>
+      <MenuList zIndex={"999"}>
         <Link to={"/watchlist"}>
           <MenuItem>
             <div className="flex items-center gap-4 dark:text-white">

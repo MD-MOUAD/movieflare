@@ -17,8 +17,8 @@ const SearchBar = () => {
   };
 
   const handleMobileSearch = () => {
-    document.querySelector('#search-bar').classList.remove("max-sm:hidden");
-    document.querySelector('#mobile-search-bar-arrow').classList.remove("max-sm:hidden");
+    document.querySelector('#search-bar').classList.toggle("max-sm:hidden");
+    document.querySelector('#mobile-search-bar-arrow').classList.toggle("max-sm:hidden");
   };
 
   useEffect(() => {
@@ -96,7 +96,7 @@ const SearchBar = () => {
       {/* for mobile */}
       <div className="relative text-red-500 sm:hidden cursor-pointer">
         <FaSearch size={18} onClick={handleMobileSearch} />
-        <div id="mobile-search-bar-arrow" className="size-6 absolute top-9 left-1/2 -translate-x-1/2 rotate-45 bg-slate-300 dark:bg-gray-50  max-sm:hidden"></div>
+        <div id="mobile-search-bar-arrow" className="size-6 absolute top-8 left-1/2 -translate-x-1/2 rotate-45 bg-slate-300 dark:bg-gray-50  max-sm:hidden"></div>
       </div>
     </>
   );
