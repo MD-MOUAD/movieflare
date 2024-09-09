@@ -107,7 +107,7 @@ export {
 };
 
 // @chakra-ui/icons
-import { StarIcon } from '@chakra-ui/icons';
+import { StarIcon } from "@chakra-ui/icons";
 export { StarIcon };
 
 export const moviesGenreIcons = [

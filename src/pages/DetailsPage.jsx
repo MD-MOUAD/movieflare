@@ -26,6 +26,8 @@ import { useToast } from "@chakra-ui/react";
 import { Spinner as ChakraSpinner } from "@chakra-ui/react";
 import HomeRedirection from "../components/HomeRedirection";
 import { useFirestore } from "../services/firestore";
+import { useTranslation } from "react-i18next";
+import { useLanguage } from "../context/LanguageContext";
 
 const DetailsPage = () => {
   const { type, id } = useParams();
@@ -37,16 +39,19 @@ const DetailsPage = () => {
   const [videos, setVideos] = useState([]);
   const { user } = useAuth();
   const toast = useToast();
-  const { addToWatchlist, checkInWatchlist, removeFromWatchlist } = useFirestore();
+  const { addToWatchlist, checkInWatchlist, removeFromWatchlist } =
+    useFirestore();
   const [addToWatchlistLoading, setAddToWatchlistLoading] = useState(false);
   const [isInWatchlist, setIsInWatchlist] = useState(false);
+  const { t } = useTranslation();
+  const { language } = useLanguage();
 
   useEffect(() => {
     setLoading(true);
     const fetchAllData = async () => {
       try {
         const [detailsData, creditsData, VideosData] = await Promise.all([
-          fetchDetails(type, id),
+          fetchDetails(type, id, language),
           fetchCredits(type, id),
           fetchVideos(type, id),
         ]);
@@ -78,7 +83,7 @@ const DetailsPage = () => {
     };
 
     fetchAllData();
-  }, [type, id]);
+  }, [type, id, language]);
 
   useEffect(() => {
     if (user) {
@@ -124,7 +129,7 @@ const DetailsPage = () => {
     await removeFromWatchlist(user?.uid, id);
     const setToWatchList = await checkInWatchlist(user?.uid, id);
     setIsInWatchlist(setToWatchList);
-  }
+  };
 
   if (loading) {
     return <Spinner />;
@@ -144,20 +149,24 @@ const DetailsPage = () => {
         }}
       >
         <div className="absolute inset-0 bg-backdrop-gradient"></div>
-        <div className="relative container mx-auto px-6 py-10 flex flex-col md:flex-row items-center gap-10">
+        <div
+          className={`relative container mx-auto px-6 py-10 flex flex-col items-center gap-10 ${
+            language === "ar-MA" ? "md:flex-row-reverse" : "md:flex-row "
+          }`}
+        >
           <img
             src={`${baseImgPath}/${details.poster_path}`}
             alt="poster"
             className="w-72 rounded-lg max-md:w-60"
           />
-          <div className="flex flex-col text-white space-y-2 max-lg:items-center">
+          <div className={`flex flex-col text-white space-y-2 max-lg:items-center ${language === "ar-MA" && "items-end"}`}>
             <h1 className="font-roboto font-bold text-3xl text-red-500 max-md:text-center">
               {title + " "}
               <span className="text-gray-400 font-normal">
                 {new Date(releaseDate).getFullYear() || "N/A"}
               </span>
             </h1>
-            <div className="flex items-center gap-5  text-lg">
+            <div className="flex items-center gap-5 text-lg">
               <div className="flex items-center gap-2 text-white/75">
                 <FaRegCalendarAlt />
                 <div>
@@ -177,23 +186,27 @@ const DetailsPage = () => {
                 <span className="uppercase text-gray-300">({type})</span>
               )}
             </div>
-            <div className="flex items-center gap-5 py-5">
-              <CircularProgress
-                progress={ratingPercentage(details?.vote_average)}
-                size={55}
-              />
-              <p className="text-md lg:text-xl max-md:hidden">User Score</p>
+            <div className={`flex items-center gap-5 py-5 ${language === "ar-MA" && "flex-row-reverse"}`}>
+              <div className="max-sm:scale-90">
+                <CircularProgress
+                  progress={ratingPercentage(details?.vote_average)}
+                  size={55}
+                />
+              </div>
+              <p className="text-md lg:text-xl max-lg:hidden">
+                {t("userScore")}
+              </p>
               {isInWatchlist ? (
                 <button
-                  className="flex items-center justify-center w-52 px-3 py-2 border-2 rounded-md border-slate-200/20 text-green-400 font-bold bg-green-600/30 hover:bg-green-700/30"
+                  className="flex items-center justify-center min-w-52 px-3 py-2 border-2 rounded-md border-slate-200/20 text-green-400 font-bold bg-green-600/30 hover:bg-green-700/30"
                   onClick={handleRemoveFromWatchlist}
                 >
                   <FaCheckCircle size={20} className="mr-2" />
-                  In watchlist
+                  {t("InWatchlist")}
                 </button>
               ) : (
                 <button
-                  className="flex items-center justify-center w-52 py-2 border-2 rounded-md border-slate-200/20 font-bold hover:bg-orange-300/10"
+                  className="flex items-center justify-center min-w-52 px-3 py-2 border-2 rounded-md border-slate-200/20 font-bold hover:bg-orange-300/10"
                   onClick={handleSaveToWatchlist}
                 >
                   <div className="mr-2 flex items-center">
@@ -203,16 +216,16 @@ const DetailsPage = () => {
                       <IoIosAdd size={25} />
                     )}
                   </div>
-                  Add to watchlist
-                  <FaBookmark className="ml-2"/>
+                  {t("addToWatchlist")}
+                  <FaBookmark className="ml-2" />
                 </button>
               )}
             </div>
             <p className="italic text-gray-300 pb-2 max-sm:text-base">
               {details?.tagline}
             </p>
-            <h3 className="font-bold text-lg">Overview</h3>
-            <p className="text-lg text-white/75 pb-6">{details?.overview}</p>
+            <h3 className="font-bold text-lg">{t("overview")}</h3>
+            <p dir={language === "ar-MA" ? "rtl" : "ltr"} className="text-lg text-white/75 pb-6">{details?.overview}</p>
             <div className="flex flex-wrap gap-2">
               {details?.genres?.map((genre) => (
                 <div
@@ -228,12 +241,20 @@ const DetailsPage = () => {
       </div>
       <div className="mt-4 container mx-auto">
         {/* cast */}
-        <h2 className="text-lg sm:text-xl font-roboto ml-2">
-          {type == "tv" ? "Series" : "Top Billed"} Cast
+        <h2
+          className={`text-lg sm:text-xl font-roboto ml-2 ${
+            language === "ar-MA" && "text-right"
+          }`}
+        >
+          {t(`${type == "tv" ? "Series" : "Top Billed"} Cast`)}
         </h2>
-        <div className="flex gap-5 pl-2 md:px-5 md:py-2 mt-4 mb-10 overflow-x-auto max-sm:scrollbar-none">
+        <div
+          className={`flex gap-5 pl-2 md:px-5 md:py-2 mt-4 mb-10 overflow-x-auto max-sm:scrollbar-none ${
+            language === "ar-MA" && "flex-row-reverse"
+          }`}
+        >
           {cast?.length === 0 && (
-            <p className="mt-10 text-center">No cast found</p>
+            <p className="mt-10 text-center">{t("noCastFound")}</p>
           )}
           {cast &&
             cast.map((item) => (
@@ -245,7 +266,9 @@ const DetailsPage = () => {
                     onError={(e) => (e.currentTarget.src = noProfileImg)}
                   />
                 </div>
-                <p className="w-28 sm:w-32 md:w-36 lg:w-40  my-2 text-center font-bold">{item.name}</p>
+                <p className="w-28 sm:w-32 md:w-36 lg:w-40  my-2 text-center font-bold">
+                  {item.name}
+                </p>
                 <p className="w-28 sm:w-32 md:w-36 lg:w-40 text-sm opacity-70 text-center">
                   {item.character}
                 </p>
@@ -253,22 +276,40 @@ const DetailsPage = () => {
             ))}
         </div>
         {/* Trailers */}
-        <h2 className="text-lg sm:text-xl font-roboto ml-2 mb-4">
-          Latest Trailer
+        <h2
+          className={`text-lg sm:text-xl font-roboto ml-2 mb-4 ${
+            language === "ar-MA" && "text-right"
+          }`}
+        >
+          {t("latestTrailer")}
         </h2>
         {officialTrailers.length > 0 ? (
           <VideoComponent id={officialTrailers[0]?.key} />
         ) : (
-          <p className="mt-10 ml-32 py-5">No Trailers available</p>
+          <p
+            className={`mt-10 ml-32 py-5 ${
+              language === "ar-MA" && "text-right mr-32"
+            }`}
+          >
+            {t("noTrailersAvailable")}
+          </p>
         )}
 
         {/* Other Videos */}
         {videos?.length > 0 && (
-          <h2 className="mt-8 text-lg sm:text-xl font-roboto ml-2 mb-4">
-            Other Videos
+          <h2
+            className={`mt-8 text-lg sm:text-xl font-roboto ml-2 mb-4 ${
+              language === "ar-MA" && "text-right"
+            }`}
+          >
+            {t("otherVideos")}
           </h2>
         )}
-        <div className="flex mt-5 overflow-x-auto gap-5">
+        <div
+          className={`flex mt-5 overflow-x-auto gap-5 ${
+            language === "ar-MA" && "flex-row-reverse"
+          }`}
+        >
           {videos &&
             videos.map((item) => {
               return (

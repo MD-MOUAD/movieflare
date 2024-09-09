@@ -12,35 +12,44 @@ export const BaseImgPathOriginal = "https://image.tmdb.org/t/p/original";
 export const fetchTrending = async (
   timeFrame = "day",
   mediaType = "all",
-  page = 1
+  page = 1,
+  language = "en-US"
 ) => {
   // await new Promise((resolve) => setTimeout(resolve, 2000)); // TODO: Remove this line later
   const { data } = await axios.get(
-    `${baseUrl}/trending/${mediaType}/${timeFrame}?api_key=${apiKey}&page=${page}`
+    `${baseUrl}/trending/${mediaType}/${timeFrame}?api_key=${apiKey}&page=${page}&language=${language}`
   );
   return data?.results;
 };
 
 // Top Rated
-export const fetchTopRated = async (mediaType = "movie", page = 1) => {
+export const fetchTopRated = async (
+  mediaType = "movie",
+  page = 1,
+  language = "en-US"
+) => {
   const { data } = await axios.get(
-    `${baseUrl}/${mediaType}/top_rated?api_key=${apiKey}&page=${page}`
+    `${baseUrl}/${mediaType}/top_rated?api_key=${apiKey}&page=${page}&language=${language}`
   );
   return data?.results;
 };
 
 // Upcoming Movies
-export const fetchUpcomingMovies = async () => {
+export const fetchUpcomingMovies = async (language = "en-US") => {
   const { data } = await axios.get(
-    `${baseUrl}/movie/upcoming?api_key=${apiKey}`
+    `${baseUrl}/movie/upcoming?api_key=${apiKey}&language=${language}`
   );
   return data?.results;
 };
 
 // Movies - Latest Trailer
-export const fetchLatestTrailer = async (mediaType, movieId) => {
+export const fetchLatestTrailer = async (
+  mediaType,
+  movieId,
+  language = "en-US"
+) => {
   const { data } = await axios.get(
-    `${baseUrl}/${mediaType}/${movieId}/videos?api_key=${apiKey}`
+    `${baseUrl}/${mediaType}/${movieId}/videos?api_key=${apiKey}&language=${language}`
   );
   const officialTrailers = data.results.filter(
     (video) =>
@@ -55,9 +64,9 @@ export const fetchLatestTrailer = async (mediaType, movieId) => {
 };
 
 // Movies & Tv - Details
-export const fetchDetails = async (mediaType, id) => {
+export const fetchDetails = async (mediaType, id, language = "en-US") => {
   const { data } = await axios.get(
-    `${baseUrl}/${mediaType}/${id}?api_key=${apiKey}`
+    `${baseUrl}/${mediaType}/${id}?api_key=${apiKey}&language=${language}`
   );
   return data;
 };
@@ -112,7 +121,7 @@ const initializeGenresDict = async () => {
       genresDict["movie"] = movieGenreDict;
       genresDict["tv"] = tvGenreDict;
     } catch (error) {
-      console.error("Failed to fetch genres data:", error);
+      console.log("Failed to fetch genres data:", error);
     }
   }
 };
@@ -120,7 +129,6 @@ const initializeGenresDict = async () => {
 initializeGenresDict();
 
 export { genresDict };
-
 
 // Movies & Tv - Videos
 export const fetchVideos = async (mediaType, id) => {
@@ -131,15 +139,20 @@ export const fetchVideos = async (mediaType, id) => {
 };
 
 // Movies & Tv - Similar
-export const fetchSimilar = async (mediaType, id) => {
+export const fetchSimilar = async (mediaType, id, language = "en-US") => {
   const { data } = await axios.get(
-    `${baseUrl}/${mediaType}/${id}/similar?api_key=${apiKey}`
+    `${baseUrl}/${mediaType}/${id}/similar?api_key=${apiKey}&language=${language}`
   );
   return data?.results;
 };
 
 // Discover
-export const fetchMovies = async (page = 1, genreId, sortOption) => {
+export const fetchMovies = async (
+  page = 1,
+  genreId,
+  sortOption,
+  language = "en-US"
+) => {
   const today = new Date().toISOString().split("T")[0];
   let voteCountGte = 100;
   let sort = sortOption;
@@ -149,13 +162,18 @@ export const fetchMovies = async (page = 1, genreId, sortOption) => {
     voteCountGte = 1000;
   }
   const { data } = await axios.get(
-    `${baseUrl}/discover/movie?api_key=${apiKey}&release_date.lte=${today}&with_genres=${genreId}&sort_by=${sort}&vote_count.gte=${voteCountGte}&page=${page}`
+    `${baseUrl}/discover/movie?api_key=${apiKey}&release_date.lte=${today}&with_genres=${genreId}&sort_by=${sort}&vote_count.gte=${voteCountGte}&page=${page}&language=${language}`
   );
 
   return data;
 };
 
-export const fetchTvShows = async (page = 1, genreId, sortOption) => {
+export const fetchTvShows = async (
+  page = 1,
+  genreId,
+  sortOption,
+  language = "en-US"
+) => {
   const today = new Date().toISOString().split("T")[0];
   let voteCountGte = 10;
   let sort = sortOption;
@@ -166,17 +184,16 @@ export const fetchTvShows = async (page = 1, genreId, sortOption) => {
   }
 
   const { data } = await axios.get(
-    `${baseUrl}/discover/tv?api_key=${apiKey}&air_date.lte=${today}&with_genres=${genreId}&sort_by=${sort}&vote_count.gte=${voteCountGte}&page=${page}`
+    `${baseUrl}/discover/tv?api_key=${apiKey}&air_date.lte=${today}&with_genres=${genreId}&sort_by=${sort}&vote_count.gte=${voteCountGte}&page=${page}&language=${language}`
   );
 
   return data;
 };
 
 // Search
-export const searchMulti = async (query, page = 1) => {
+export const searchMulti = async (query, page = 1, language = "en-US") => {
   const { data } = await axios.get(
-    `${baseUrl}/search/multi?api_key=${apiKey}&page=${page}&query=${query}`
+    `${baseUrl}/search/multi?api_key=${apiKey}&page=${page}&query=${query}&language=${language}`
   );
-  // console.log(`${baseUrl}/search/multi?api_key=${apiKey}&page=${page}&query=${query}`)
   return data;
 };

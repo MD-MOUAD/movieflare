@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import { Button, IconButton } from "@material-tailwind/react";
 import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
-
+import { useTranslation } from 'react-i18next';
 const Pagination = ({ totalPages, onPageChange }) => {
+  const {t} = useTranslation();
   const [active, setActive] = useState(1);
   const pageLimit = 4; // Number of page buttons to show at a time
   const totalPagesMax250 = Math.min(Math.ceil(totalPages / 2), 250);
@@ -59,17 +60,17 @@ const Pagination = ({ totalPages, onPageChange }) => {
   const { start, end } = getPageRange();
 
   return (
-    <div className="flex items-center gap-4 py-2 max-sm:scale-75 max-sm:gap-1 mb-6">
+    <div className="flex items-center sm:gap-4 py-2 max-sm:scale-75 mb-6">
       <Button
         variant="text"
-        className={`flex items-center gap-2 ${active === 1 ? 'opacity-50 cursor-not-allowed' : 'text-gray-800 dark:text-gray-200'} transition-opacity duration-300`}
+        className={`flex items-center gap-1 sm:gap-2 ${active === 1 ? 'opacity-50 cursor-not-allowed' : 'text-gray-800 dark:text-gray-200'} transition-opacity duration-300`}
         onClick={prev}
         disabled={active === 1}
       >
         <ArrowLeftIcon strokeWidth={2} className={`h-4 w-4 ${active === 1 ? 'text-gray-400' : 'text-gray-800 dark:text-gray-200'}`} />
-        Previous
+        {t('previous')}
       </Button>
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-1 sm:gap-2">
         {start > 1 && (
           <>
             <IconButton {...getItemProps(1)}>1</IconButton>
@@ -88,11 +89,11 @@ const Pagination = ({ totalPages, onPageChange }) => {
       </div>
       <Button
         variant="text"
-        className={`flex items-center gap-2 ${active === totalPagesMax250 ? 'opacity-50 cursor-not-allowed' : 'text-gray-800 dark:text-gray-200'} transition-opacity duration-300`}
+        className={`flex items-center gap-1 sm:gap-2 ${active === totalPagesMax250 ? 'opacity-50 cursor-not-allowed' : 'text-gray-800 dark:text-gray-200'} transition-opacity duration-300`}
         onClick={next}
         disabled={active === totalPagesMax250}
       >
-        Next
+        {t('next')}
         <ArrowRightIcon strokeWidth={2} className={`h-4 w-4 ${active === totalPagesMax250 ? 'text-gray-400' : 'text-gray-800 dark:text-gray-200'}`} />
       </Button>
     </div>

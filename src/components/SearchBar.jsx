@@ -2,11 +2,15 @@ import { useEffect, useState } from "react";
 import { FaSearch, FaTimes } from "../utils/icons";
 import { baseImgPath, searchMulti } from "../services/api";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { useLanguage } from "../context/LanguageContext";
 
 const SearchBar = () => {
   const [query, setQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [debouncedQuery, setDebouncedQuery] = useState(query);
+  const { t } = useTranslation();
+  const { language } = useLanguage();
 
   const handleClear = () => {
     setDebouncedQuery("");
@@ -35,7 +39,7 @@ const SearchBar = () => {
     if (debouncedQuery) {
       const fetchData = async () => {
         try {
-          const data = await searchMulti(debouncedQuery);
+          const data = await searchMulti(debouncedQuery, 1, language);
           setSearchResults(data?.results);
         } catch (error) {
           console.log("Error fetching data:", error);
@@ -43,7 +47,7 @@ const SearchBar = () => {
       };
       fetchData();
     }
-  }, [debouncedQuery]);
+  }, [debouncedQuery, language]);
 
   return (
     <>
@@ -51,8 +55,9 @@ const SearchBar = () => {
         <input
           id="searchBar"
           type="text"
-          placeholder="Search on website"
+          placeholder={t('searchOnWebsite')}
           value={query}
+          dir={`${language === "ar-MA" ? "rtl" : "ltr"}`}
           onChange={(e) => setQuery(e.target.value)}
           className="px-2 md:px-5 h-full w-4/6 bg-inherit outline-none flex-1 placeholder:text-gray-600 dark:placeholder:text-inputColor max-sm:rounded-lg"
         />
@@ -95,7 +100,7 @@ const SearchBar = () => {
       </div>
       {/* for mobile */}
       <div className="relative text-red-500 sm:hidden cursor-pointer">
-        <FaSearch size={18} onClick={handleMobileSearch} />
+        <FaSearch size={18} onClick={handleMobileSearch} className="mx-2"/>
         <div id="mobile-search-bar-arrow" className="size-6 absolute top-8 left-1/2 -translate-x-1/2 rotate-45 bg-slate-300 dark:bg-gray-50  max-sm:hidden"></div>
       </div>
     </>

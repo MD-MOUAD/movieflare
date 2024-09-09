@@ -3,8 +3,12 @@ import CardComponent from "../CardComponent";
 import CardSkeleton from "../Skeletons/CardSkeleton";
 import { FaStar, FaChevronCircleRight } from "../../utils/icons";
 import { fetchTopRated } from "../../services/api";
+import { useTranslation } from "react-i18next";
+import { useLanguage } from "../../context/LanguageContext";
 
 const TopRatedSection = () => {
+  const { language } = useLanguage();
+  const { t } = useTranslation();
   const [topRatedData, setTopRatedData] = useState([]);
   const [mediaType, setMediaType] = useState("tv");
   const [loading, setLoading] = useState(true);
@@ -15,7 +19,7 @@ const TopRatedSection = () => {
     setLoading(true);
     const fetchData = async () => {
       try {
-        const trending = await fetchTopRated(mediaType);
+        const trending = await fetchTopRated(mediaType, 1, language);
         setTopRatedData(trending);
         setLoading(false);
       } catch (error) {
@@ -23,12 +27,12 @@ const TopRatedSection = () => {
       }
     };
     fetchData();
-  }, [mediaType]);
+  }, [mediaType, language]);
 
   useEffect(() => {
     const fetchNexTwenty = async () => {
       try {
-        const nextData = await fetchTopRated(mediaType, page);
+        const nextData = await fetchTopRated(mediaType, page, language);
         setTopRatedData([...topRatedData, ...nextData]);
       } catch (error) {
         console.log("Error fetching data:", error);
@@ -61,32 +65,32 @@ const TopRatedSection = () => {
 
   return (
     <>
-      <div className="mt-4 flex items-center space-x-3 max-sm:space-x-8 p-4">
-        <h2 className="flex items-center gap-1 font-bold text-xl max-sm:text-lg text-red-500">
-          Top Rated
-          <FaStar size={18} />
+      <div className={`mt-4 flex items-center gap-3 p-4 max-sm:px-1 ${language === "ar-MA" && "flex-row-reverse"}`}>
+        <h2 className={`flex items-center gap-1 font-bold text-base sm:text-xl text-red-500 ${language === "ar-MA" && "flex-row-reverse"}`}>
+          {t("topRated")}
+          <FaStar className="size-4 sm:size-5" />
         </h2>
         <div className="flex font-[500] border-2 border-black/50 dark:border-white/50 rounded-full shadow-md">
           <button
-            className={`px-10 max-sm:px-8 py-1 rounded-full ${
+            className={`px-2 sm:px-5 py-1 rounded-full ${
               mediaType === "tv" ? "bg-red-600 text-slate-100 hover:scale-105" : "opacity-75"
             } transition-all duration-100 shrink-0`}
             onClick={() => setMediaType("tv") && setPage(1)}
           >
-            Tv
+            {t('Tv Series')}
           </button>
           <button
-            className={`px-5 max-sm:px-4 rounded-full ${
+            className={`px-5 py-1 rounded-full ${
               mediaType === "movie" ? "bg-red-600 text-slate-100 hover:scale-105" : "opacity-75"
             } transition-all duration-100 shrink-0`}
             onClick={() => setMediaType("movie") && setPage(1)}
           >
-            Movies
+            {t('Movies')}
           </button>
         </div>
       </div>
       <div
-        className="flex items-center overflow-x-auto gap-5 max-sm:gap-3 pt-3 pb-5 px-1 mx-4 max-sm:py-1 max-sm:mx-0 max-sm:scrollbar-none"
+        className={`flex items-center overflow-x-auto gap-5 max-sm:gap-3 pt-3 pb-5 px-1 mx-4 max-sm:py-1 max-sm:mx-0 max-sm:scrollbar-none ${language === "ar-MA" && "flex-row-reverse"}`}
         ref={containerRef}
       >
         {loading

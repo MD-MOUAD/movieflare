@@ -3,9 +3,12 @@ import { Link } from "react-router-dom";
 import { getYear, mapGenreIdsToNames } from "../utils/helpers";
 import { FaStar } from "../utils/icons";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const CardComponent = ({ item, small }) => {
   const [loaded, setLoaded] = useState(false);
+  const { t } = useTranslation();
+
   return (
     <div className="flex flex-col">
       <Link to={`/${item?.media_type}/${item?.id}`}>
@@ -40,7 +43,7 @@ const CardComponent = ({ item, small }) => {
           <div className="absolute bottom-0 left-0 right-0 w-full min-h-[70%] flex flex-col justify-between bg-black py-3 px-3 opacity-70 translate-y-full group-hover:translate-y-0 transition-transform duration-300 max-sm:hidden">
             <div className="mt-1 flex gap-10 items-center">
               <div className="uppercase text-[10px] text-yellow-200 font-bold">
-                {`${item?.media_type}`}
+                {`${t(item?.media_type)}`}
               </div>
               <div className="text-sm max-md:text-xs text-center text-red-300 font-bold">
                 {getYear(item)}
@@ -64,6 +67,7 @@ const CardComponent = ({ item, small }) => {
             >
               {mapGenreIdsToNames(item?.genre_ids, genresDict[item?.media_type])
                 .slice(0, 3)
+                .map((genreName) => t(genreName))
                 .join(", ")}
             </p>
             <div className="mt-1 flex justify-center items-center gap-2 text-orange-400">

@@ -2,11 +2,13 @@ import { FcGoogle, FaFacebook, MdLogout, FaBookmark } from "../utils/icons";
 import { useAuth } from "../context/useAuth";
 import { Avatar, Menu, MenuButton, MenuItem, MenuList, useToast } from "@chakra-ui/react";
 import { Link, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const ProfileAvatar = () => {
   const { user, signInWithGoogle, signInWithFacebook, logout } = useAuth();
   const navigate = useNavigate();
   const toast = useToast();
+  const { t } = useTranslation();
 
   const loginError = {
     title: "Login error",
@@ -60,14 +62,14 @@ const ProfileAvatar = () => {
           <MenuItem>
             <div className="flex items-center gap-4 dark:text-white">
               <FaBookmark />
-              WatchList
+              {t("watchlist")}
             </div>
           </MenuItem>
         </Link>
         <MenuItem onClick={handleLogout}>
           <div className="flex items-center gap-4">
             <MdLogout />
-            Logout
+            {t("logout")}
           </div>
         </MenuItem>
       </MenuList>
@@ -81,13 +83,13 @@ const ProfileAvatar = () => {
         <MenuItem onClick={handleGoogleLogin}>
           <div className="flex items-center gap-4">
             <FcGoogle />
-            Sign in with Google
+            {t('signInGoogle')}
           </div>
         </MenuItem>
         <MenuItem onClick={handleFacebookLogin}>
           <div className="flex items-center gap-4">
             <FaFacebook color="#1877F2" />
-            Sign in with facebook
+            {t('signInFacebook')}
           </div>
         </MenuItem>
       </MenuList>

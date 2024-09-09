@@ -1,14 +1,11 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import {
-  FaFilm,
-  FaHome,
-  MdLiveTv,
-  moviesGenreIcons,
-} from "../utils/icons";
+import { FaFilm, FaHome, MdLiveTv, moviesGenreIcons } from "../utils/icons";
 import { Link, useLocation } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const Sidebar = ({ isOpen, setIsOpen }) => {
+  const { t } = useTranslation();
   const path = useLocation().pathname;
 
   const [activeLink, setActiveLink] = useState(0);
@@ -24,7 +21,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
       icon: <FaFilm size={22} />,
     },
     {
-      name: "Tv Shows",
+      name: "Tv Series",
       path: "/shows",
       icon: <MdLiveTv size={22} />,
     },
@@ -32,15 +29,13 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
 
   useEffect(() => {
     Links.forEach((link, i) => {
-      if (
-        path === link?.path ) {
+      if (path === link?.path) {
         setActiveLink(i);
       }
     });
 
     moviesGenreIcons.forEach((element, i) => {
-      if (
-        path === element?.path ) {
+      if (path === element?.path) {
         setActiveLink(i + 3);
       }
     });
@@ -50,8 +45,8 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
     if (window.innerWidth < 1024) {
       setIsOpen(false);
     }
-  }
-  
+  };
+
   return (
     <div
       className={`z-50 fixed top-16 max-sm:top-14 left-0  dark:text-white bg-slate-200 dark:bg-neutral-900 transform ${
@@ -61,7 +56,9 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
       } transition-transform duration-500 ease-in-out`}
     >
       <div className="h-[calc(100vh-4rem)] max-sm:h-[calc(100vh-3.5rem)] overflow-y-auto">
-        <ul className={`flex-col px-1 mb-5 ${isOpen ? "pt-5 space-y-4" : "pt-1"}`}>
+        <ul
+          className={`flex-col px-1 mb-5 ${isOpen ? "pt-5 space-y-4" : "pt-1"}`}
+        >
           {Links.map((link, index) => (
             <li key={index}>
               <Link
@@ -77,16 +74,19 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
                   "bg-gray-400 dark:bg-neutral-700"
                 }`}
               >
-                <div>
-                  {link.icon}
-                </div>
-                <h2>{link.name}</h2>
+                <div>{link.icon}</div>
+                <h2>{t(link.name)}</h2>
               </Link>
             </li>
           ))}
         </ul>
-        <div className={`border-t-2 mx-2 mt-2  border-black/10 dark:border-white/10 opacity-60 font-normal ${isOpen ? "px-5 pt-4 pb-2" : "text-sm text-center p-1"}`}>
-        Genres</div>
+        <div
+          className={`border-t-2 mx-2 mt-2  border-black/10 dark:border-white/10 opacity-60 font-normal ${
+            isOpen ? "px-5 pt-4 pb-2" : "text-sm text-center p-1"
+          }`}
+        >
+          {t("Genres")}
+        </div>
         <ul className={`flex-col px-1 ${isOpen ? "pt-2 space-y-4" : "pt-1"}`}>
           {moviesGenreIcons.map((genre, i) => {
             const index = i + 3;
@@ -106,10 +106,16 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
                   onClick={handleMobileCloseMenu}
                 >
                   {React.createElement(genre?.icon, {
-                      className: "text-gray-800 dark:text-gray-400 text-2xl",
-                      size: 30,
-                    })}
-                  <h2 className={`text-gray-800 dark:text-gray-300 ${isOpen ? "text": "text-center text-xs"}`}>{genre?.name}</h2>
+                    className: "text-gray-800 dark:text-gray-400 text-2xl",
+                    size: 30,
+                  })}
+                  <h2
+                    className={`text-gray-800 dark:text-gray-300 ${
+                      isOpen ? "text" : "text-center text-xs"
+                    }`}
+                  >
+                    {t(genre?.name)}
+                  </h2>
                 </Link>
               </li>
             );
