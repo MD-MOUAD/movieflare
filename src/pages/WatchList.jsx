@@ -4,10 +4,14 @@ import { useAuth } from "../context/useAuth";
 import Spinner from "../components/Spinner";
 import WatchlistCard from "../components/watchlistPage_components/WatchlistCard";
 import HomeLink from "../components/HomeLink";
+import { useTranslation } from "react-i18next";
+import { useLanguage } from "../context/LanguageContext";
 
 const WatchList = () => {
   const { getWatchlist } = useFirestore();
   const { user } = useAuth();
+  const { t } = useTranslation();
+  const { language } = useLanguage();
 
   const [watchlist, setWatchlist] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -33,8 +37,12 @@ const WatchList = () => {
   return (
     <div className="container mx-auto py-2">
       <div className="px-10 sm:px-20 sm:mb-4">
-        <h2 className="flex items-center gap-2 text-lg sm:text-xl font-bold text-red-500 py-2 mb-2 sm:py-4">
-          WatchList
+        <h2
+          className={`flex items-center gap-2 text-lg sm:text-xl font-bold text-red-500 py-2 mb-2 sm:py-4 ${
+            language === "ar-MA" && "flex-row-reverse"
+          }`}
+        >
+          {t("watchlist")}
         </h2>
         {watchlist.length > 0 ? (
           <div className="flex flex-col gap-6">
@@ -50,7 +58,12 @@ const WatchList = () => {
         ) : (
           <div className="h-[85vh] flex flex-col justify-between">
             <div className="flex justify-center">
-              <h3 className="mt-[20vh] text-lg">Your watchlist is empty</h3>
+              <h3
+                dir={language === "ar-MA" ? "rtl" : "ltr"}
+                className={`mt-[20vh] text-lg`}
+              >
+                {t("emptyWatchlist")}
+              </h3>
             </div>
             <div className="flex justify-center">
               <HomeLink />

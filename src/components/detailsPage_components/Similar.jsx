@@ -32,8 +32,8 @@ const Similar = ({ itemId, mediaType }) => {
   return (
     <div className="py-6">
       <h2
-        className={`text-lg sm:text-xl font-roboto ml-2 mb-6 ${
-          language === "ar-MA" && "text-right"
+        className={`text-lg sm:text-xl font-roboto mb-6 ${
+          language === "ar-MA" ? "text-right mr-2" : "ml-2"
         }`}
       >
         {t(`Similar ${mediaType === "tv" ? "Series" : "Movies"}`)}

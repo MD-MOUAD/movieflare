@@ -36,7 +36,7 @@ const Shows = () => {
   }, [genre, sortOption, page, language]);
 
   return (
-    <div className="container mx-auto py-2">
+    <div className="py-2">
       <section id="filter" className="mb-5">
         <div className="px-2 sm:px-20">
           <div className={`flex justify-between items-center ${language == "ar-MA" &&"flex-row-reverse"}`}>

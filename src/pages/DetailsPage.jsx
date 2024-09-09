@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import {
   BaseImgPathOriginal,
   baseImgPath,
@@ -15,6 +15,7 @@ import {
   IoIosAdd,
   IoMdTime,
   FaBookmark,
+  FaRegPlayCircle,
 } from "../utils/icons";
 import { ratingPercentage, minutesToHours } from "../utils/helpers";
 import noProfileImg from "../assets/no-profile-img.svg";
@@ -159,7 +160,11 @@ const DetailsPage = () => {
             alt="poster"
             className="w-72 rounded-lg max-md:w-60"
           />
-          <div className={`flex flex-col text-white space-y-2 max-lg:items-center ${language === "ar-MA" && "items-end"}`}>
+          <div
+            className={`flex flex-col text-white gap-2 max-lg:items-center ${
+              language === "ar-MA" && "items-end"
+            }`}
+          >
             <h1 className="font-roboto font-bold text-3xl text-red-500 max-md:text-center">
               {title + " "}
               <span className="text-gray-400 font-normal">
@@ -186,7 +191,11 @@ const DetailsPage = () => {
                 <span className="uppercase text-gray-300">({type})</span>
               )}
             </div>
-            <div className={`flex items-center gap-5 py-5 ${language === "ar-MA" && "flex-row-reverse"}`}>
+            <div
+              className={`flex items-center gap-5 py-5 ${
+                language === "ar-MA" && "flex-row-reverse"
+              }`}
+            >
               <div className="max-sm:scale-90">
                 <CircularProgress
                   progress={ratingPercentage(details?.vote_average)}
@@ -225,7 +234,12 @@ const DetailsPage = () => {
               {details?.tagline}
             </p>
             <h3 className="font-bold text-lg">{t("overview")}</h3>
-            <p dir={language === "ar-MA" ? "rtl" : "ltr"} className="text-lg text-white/75 pb-6">{details?.overview}</p>
+            <p
+              dir={language === "ar-MA" ? "rtl" : "ltr"}
+              className="text-lg text-white/75 pb-6"
+            >
+              {details?.overview !== "" ? details?.overview : t("noOverview")}
+            </p>
             <div className="flex flex-wrap gap-2">
               {details?.genres?.map((genre) => (
                 <div
@@ -236,14 +250,20 @@ const DetailsPage = () => {
                 </div>
               ))}
             </div>
+            <button className="mt-2 bg-red-500 hover:bg-red-700 text-sm text-white font-semibold py-2 px-5 rounded-lg shadow-lg w-fit">
+              <Link to={details?.homepage} target="_blank" className="flex gap-2 items-center">
+                <FaRegPlayCircle className="size-4" />
+                <span>{t("watchOnHomepage")}</span>
+              </Link>
+            </button>
           </div>
         </div>
       </div>
       <div className="mt-4 container mx-auto">
         {/* cast */}
         <h2
-          className={`text-lg sm:text-xl font-roboto ml-2 ${
-            language === "ar-MA" && "text-right"
+          className={`text-lg sm:text-xl font-roboto ${
+            language === "ar-MA" ? "text-right mr-2" : "ml-2"
           }`}
         >
           {t(`${type == "tv" ? "Series" : "Top Billed"} Cast`)}
@@ -277,8 +297,8 @@ const DetailsPage = () => {
         </div>
         {/* Trailers */}
         <h2
-          className={`text-lg sm:text-xl font-roboto ml-2 mb-4 ${
-            language === "ar-MA" && "text-right"
+          className={`text-lg sm:text-xl font-roboto mb-4 ${
+            language === "ar-MA" ? "text-right mr-2" : "ml-2"
           }`}
         >
           {t("latestTrailer")}
@@ -286,20 +306,14 @@ const DetailsPage = () => {
         {officialTrailers.length > 0 ? (
           <VideoComponent id={officialTrailers[0]?.key} />
         ) : (
-          <p
-            className={`mt-10 ml-32 py-5 ${
-              language === "ar-MA" && "text-right mr-32"
-            }`}
-          >
-            {t("noTrailersAvailable")}
-          </p>
+          <p className="mt-10 text-center py-5">{t("noTrailersAvailable")}</p>
         )}
 
         {/* Other Videos */}
         {videos?.length > 0 && (
           <h2
-            className={`mt-8 text-lg sm:text-xl font-roboto ml-2 mb-4 ${
-              language === "ar-MA" && "text-right"
+            className={`mt-8 text-lg sm:text-xl font-roboto mb-4 ${
+              language === "ar-MA" ? "text-right mr-2" : "ml-2"
             }`}
           >
             {t("otherVideos")}

@@ -56,7 +56,7 @@ const router = createBrowserRouter([
         ),
       },
     ],
-    errorElement: <HomeRedirection />,
+    // errorElement: <HomeRedirection />,
   },
 ]);
 
