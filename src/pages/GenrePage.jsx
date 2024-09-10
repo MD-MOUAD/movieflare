@@ -54,11 +54,9 @@ const GenrePage = () => {
   return (
     <div className="py-2">
       <div
-        className={`flex items-center justify-center gap-2 text-base sm:text-xl font-bold text-red-500 py-2 sm:py-4 px-2 sm:px-10 sm:mb-4 ${
-          language === "ar-MA" && "flex-row-reverse"
-        }`}
+        className={`flex items-center justify-center gap-2 text-base sm:text-xl font-bold text-red-500 py-2 sm:py-4 px-2 sm:px-10 sm:mb-4`}
       >
-        <div className={`flex gap-1 items-center ${language === "ar-MA" && "flex-row-reverse"}`}>
+        <div className={`flex gap-1 items-center`}>
           <h2>
             {`${t("discoverMovies")}:`}
             <span className="lowercase text-gray-800 dark:text-gray-400 text-sm sm:text-lg">

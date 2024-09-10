@@ -57,7 +57,6 @@ const SearchBar = () => {
           type="text"
           placeholder={t('searchOnWebsite')}
           value={query}
-          dir={`${language === "ar-MA" ? "rtl" : "ltr"}`}
           onChange={(e) => setQuery(e.target.value)}
           className="px-2 md:px-5 h-full w-4/6 bg-inherit outline-none flex-1 placeholder:text-gray-600 dark:placeholder:text-inputColor max-sm:rounded-lg"
         />

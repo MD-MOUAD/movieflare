@@ -5,14 +5,12 @@ import Spinner from "../components/Spinner";
 import FavoriteCard from "../components/favoritePage_components/FavoriteCard";
 import HomeLink from "../components/HomeLink";
 import { useTranslation } from "react-i18next";
-import { useLanguage } from "../context/LanguageContext";
 import { RiHeart3Fill } from "../utils/icons";
 
 const Favorite = () => {
   const { getFavorite } = useFirestore();
   const { user } = useAuth();
   const { t } = useTranslation();
-  const { language } = useLanguage();
 
   const [favorite, setFavorite] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -38,9 +36,7 @@ const Favorite = () => {
     <div className="container mx-auto py-2">
       <div className="px-10 sm:px-20 sm:mb-4">
         <h2
-          className={`flex items-center gap-2 text-lg sm:text-xl font-bold text-red-500 py-2 mb-2 sm:py-4 ${
-            language === "ar-MA" && "flex-row-reverse"
-          }`}
+          className={`flex items-center gap-2 text-lg sm:text-xl font-bold text-red-500 py-2 mb-2 sm:py-4`}
         >
           {t("favorites")}
           <RiHeart3Fill />
@@ -59,12 +55,7 @@ const Favorite = () => {
         ) : (
           <div className="h-[85vh] flex flex-col justify-between">
             <div className="flex justify-center">
-              <h3
-                dir={language === "ar-MA" ? "rtl" : "ltr"}
-                className={`mt-[20vh] text-lg`}
-              >
-                {t("emptyFavorite")}
-              </h3>
+              <h3 className={`mt-[20vh] text-lg`}>{t("emptyFavorite")}</h3>
             </div>
             <div className="flex justify-center">
               <HomeLink />

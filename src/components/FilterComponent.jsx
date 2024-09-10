@@ -3,12 +3,11 @@ import { genresDict } from "../services/api";
 import Select, { components } from "react-select";
 import selectStyles from "../utils/selectStyles";
 import { useTranslation } from "react-i18next";
-import { useLanguage } from "../context/LanguageContext";
 
 const FilterComponent = ({ mediaType, setGenre, setSort, resetPage }) => {
   const [genres, setGenres] = useState([]);
   const { t } = useTranslation();
-  const { language } = useLanguage();
+
 
   useEffect(() => {
     const genresList = [];
@@ -63,7 +62,7 @@ const FilterComponent = ({ mediaType, setGenre, setSort, resetPage }) => {
 
   return (
     <div className="filter hidden px-2 py-4 rounded-md bg-slate-300 dark:bg-neutral-900">
-      <form className="flex flex-wrap items-center gap-10 max-lg:gap-2" dir={language === "ar-MA" ? "rtl": "ltr"}>
+      <form className="flex flex-wrap items-center gap-10 max-lg:gap-2">
         <Select
           options={GenreOptions}
           placeholder={t('containGenresAny')}

@@ -39,7 +39,7 @@ const Movies = () => {
     <div className="py-2">
       <section id="filter" className="mb-5">
         <div className="px-1 sm:px-20">
-          <div className={`flex justify-between items-center ${language == "ar-MA" &&"flex-row-reverse"}`}>
+          <div className={`flex justify-between items-center`}>
             <div className="flex items-center gap-2 text-lg sm:text-xl font-bold text-red-500 py-4">
               <h2>{t("discoverMovies")}</h2>
               <FaFilm size={22} />

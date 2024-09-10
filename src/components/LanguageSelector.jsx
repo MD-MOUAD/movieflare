@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Menu,
   MenuButton,
@@ -13,21 +13,14 @@ import { languageQuery, savedLanguage } from "../i18n";
 import { useLanguage } from "../context/LanguageContext";
 
 const languages = [
-  { code: "en", label: "English", flag: "🇺🇸" },
-  { code: "fr", label: "Français", flag: "🇫🇷" },
-  { code: "es", label: "Español", flag: "🇪🇸" },
-  { code: "ar", label: "العربية", flag: "🇲🇦" },
+  { code: "en", label: "English", flag: "🇺🇸", dir: "ltr" },
+  { code: "fr", label: "Français", flag: "🇫🇷", dir: "ltr" },
+  { code: "es", label: "Español", flag: "🇪🇸", dir: "ltr" },
+  { code: "ar", label: "العربية", flag: "🇲🇦", dir: "rtl" },
 ];
-// const languages = [
-//   { code: "en", label: "English", flag: "🇺🇸", dir: "ltr" },
-//   { code: "fr", label: "Français", flag: "🇫🇷", dir: "ltr" },
-//   { code: "es", label: "Español", flag: "🇪🇸", dir: "ltr" },
-//   { code: "ar", label: "العربية", flag: "🇲🇦", dir: "rtl" },
-// ];
-
 
 const LanguageSelector = () => {
-  const { setLanguage} = useLanguage()
+  const { setLanguage } = useLanguage();
   const { i18n } = useTranslation();
   const [selectedLanguage, setSelectedLanguage] = useState(() => {
     if (savedLanguage) {
@@ -37,9 +30,9 @@ const LanguageSelector = () => {
   });
 
   // Set the direction attribute on the HTML element
-  // useEffect(() => {
-  //   document.documentElement.setAttribute("dir", selectedLanguage.dir);
-  // }, [selectedLanguage]);
+  useEffect(() => {
+    document.documentElement.setAttribute("dir", selectedLanguage.dir);
+  }, [selectedLanguage]);
 
   const handleSelectLanguage = (language) => {
     setSelectedLanguage(language);
@@ -48,7 +41,7 @@ const LanguageSelector = () => {
     // save language to local storage
     localStorage.setItem("savedLanguage", language.code);
     // Update the direction attribute
-    // document.documentElement.setAttribute("dir", language.dir);
+    document.documentElement.setAttribute("dir", language.dir);
   };
 
   return (
@@ -67,11 +60,12 @@ const LanguageSelector = () => {
         {languages.map((language) => (
           <MenuItem
             px={5}
+            gap={2}
             key={language.code}
             onClick={() => handleSelectLanguage(language)}
           >
             {language.flag}
-            <Text ml={2}>{language.label}</Text>
+            <Text>{language.label}</Text>
           </MenuItem>
         ))}
       </MenuList>

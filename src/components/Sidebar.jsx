@@ -3,9 +3,11 @@ import { useEffect, useState } from "react";
 import { FaFilm, FaHome, MdLiveTv, moviesGenreIcons } from "../utils/icons";
 import { Link, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useLanguage } from "../context/LanguageContext";
 
 const Sidebar = ({ isOpen, setIsOpen }) => {
   const { t } = useTranslation();
+  const { language } = useLanguage();
   const path = useLocation().pathname;
 
   const [activeLink, setActiveLink] = useState(0);
@@ -49,10 +51,16 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
 
   return (
     <div
-      className={`z-50 fixed top-16 max-sm:top-14 left-0  dark:text-white bg-slate-200 dark:bg-neutral-900 transform ${
+      className={`z-50 fixed top-16 max-sm:top-14 dark:text-white bg-slate-200 dark:bg-neutral-900 transform ${
+        language === "ar-MA" ? "right-0" : "left-0"
+      } ${
         isOpen
           ? "w-52 max-lg:w-72 max-sm:w-64 translate-x-0"
-          : "w-20 max-lg:-translate-x-full"
+          : `w-20 ${
+              language === "ar-MA"
+                ? "max-lg:translate-x-full"
+                : "max-lg:-translate-x-full"
+            }`
       } transition-transform duration-500 ease-in-out`}
     >
       <div className="h-[calc(100vh-4rem)] max-sm:h-[calc(100vh-3.5rem)] overflow-y-auto">

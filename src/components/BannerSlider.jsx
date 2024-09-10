@@ -34,7 +34,6 @@ const BannerSlider = ({ movies }) => {
       height={{ base: "14rem", md: "24rem", lg: "26rem", xl: "30rem" }}
     >
       {movies.map((item, index) => {
-        const isArabicText = /[\u0600-\u06FF]/.test(item.overview);
         return (
           <MotionBox
             key={index}
@@ -58,21 +57,17 @@ const BannerSlider = ({ movies }) => {
               <div className="absolute inset-0 bg-cover-gradient sm:rounded-md"></div>
 
               <div
-                className={`relative h-full flex items-center p-4 sm:p-12 rounded-lg sm:backdrop-filter ${
-                  isArabicText && "justify-end"
-                }`}
+                className={`relative h-full flex items-center p-4 sm:p-12 rounded-lg sm:backdrop-filter`}
               >
                 <div
-                  className={`flex gap-3 md:gap-6 items-center text-white w-fit max-w-5xl bg-opacity-75 ${
-                    isArabicText && "flex-row-reverse"
-                  }`}
+                  className={`flex gap-3 md:gap-6 items-center text-white w-fit max-w-5xl bg-opacity-75`}
                 >
                   <img
                     src={`${baseImgPath}/${item?.poster_path}`}
                     alt="Movie Poster"
                     className="w-28 md:w-48 rounded-lg shadow-lg opacity-65 max-sm:hidden"
                   />
-                  <div className={`flex flex-col ${isArabicText ? "items-end" : "items-start"}`}>
+                  <div className={`flex flex-col`}>
                     <h1 className="text-5xl max-lg:text-4xl max-md:text-2xl max-sm:text-3xl font-bold text-white max-sm:backdrop-blur-sm">
                       {item.title || item.name}
                     </h1>
@@ -87,12 +82,11 @@ const BannerSlider = ({ movies }) => {
                       {mapGenreIdsToNames(
                         item?.genre_ids,
                         genresDict[item?.media_type]
-                      )?.map(genreName => t(genreName)).join(", ")}
+                      )
+                        ?.map((genreName) => t(genreName))
+                        .join(", ")}
                     </p>
-                    <p
-                      dir={isArabicText ? "rtl" : "ltr"}
-                      className="mt-4 xl:text-lg text-white/50 font-[500] line-clamp-2 max-md:hidden"
-                    >
+                    <p className="mt-4 xl:text-lg text-white/50 font-[500] line-clamp-2 max-md:hidden">
                       {item?.overview}
                     </p>
                     <div className="mt-6">
@@ -102,7 +96,7 @@ const BannerSlider = ({ movies }) => {
                           className="flex gap-2 items-center"
                         >
                           <FaRegPlayCircle className="size-4" />
-                          <span>{t('watchNow')}</span>
+                          <span>{t("watchNow")}</span>
                         </Link>
                       </button>
                     </div>

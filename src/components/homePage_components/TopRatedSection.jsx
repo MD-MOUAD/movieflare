@@ -65,8 +65,8 @@ const TopRatedSection = () => {
 
   return (
     <>
-      <div className={`mt-4 flex items-center gap-3 p-4 max-sm:px-1 ${language === "ar-MA" && "flex-row-reverse"}`}>
-        <h2 className={`flex items-center gap-1 font-bold text-base sm:text-xl text-red-500 ${language === "ar-MA" && "flex-row-reverse"}`}>
+      <div className={`mt-4 flex items-center gap-3 p-4 max-sm:px-1`}>
+        <h2 className={`flex items-center gap-1 font-bold text-base sm:text-xl text-red-500`}>
           {t("topRated")}
           <FaStar className="size-4 sm:size-5" />
         </h2>
@@ -90,7 +90,7 @@ const TopRatedSection = () => {
         </div>
       </div>
       <div
-        className={`flex items-center overflow-x-auto gap-5 max-sm:gap-3 pt-3 pb-5 px-1 mx-4 max-sm:py-1 max-sm:mx-0 max-sm:scrollbar-none ${language === "ar-MA" && "flex-row-reverse"}`}
+        className={`flex items-center overflow-x-auto gap-5 max-sm:gap-3 pt-3 pb-5 px-1 mx-4 max-sm:py-1 max-sm:mx-0 max-sm:scrollbar-none`}
         ref={containerRef}
       >
         {loading

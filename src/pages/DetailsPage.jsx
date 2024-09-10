@@ -152,20 +152,14 @@ const DetailsPage = () => {
       >
         <div className="absolute inset-0 bg-backdrop-gradient"></div>
         <div
-          className={`relative container mx-auto px-6 py-10 flex flex-col items-center gap-10 ${
-            language === "ar-MA" ? "md:flex-row-reverse" : "md:flex-row "
-          }`}
+          className={`relative container mx-auto px-6 py-10 flex flex-col items-center gap-10 md:flex-row`}
         >
           <img
             src={`${baseImgPath}/${details.poster_path}`}
             alt="poster"
             className="w-72 rounded-lg max-md:w-60"
           />
-          <div
-            className={`flex flex-col text-white gap-2 max-lg:items-center ${
-              language === "ar-MA" && "items-end"
-            }`}
-          >
+          <div className={`flex flex-col text-white gap-2 max-lg:items-center`}>
             <h1 className="font-roboto font-bold text-3xl text-red-500 max-md:text-center">
               {title + " "}
               <span className="text-gray-400 font-normal">
@@ -195,11 +189,7 @@ const DetailsPage = () => {
                 <FavoriteButton itemDetails={details} />
               </div>
             </div>
-            <div
-              className={`flex items-center gap-5 py-5 ${
-                language === "ar-MA" && "flex-row-reverse"
-              }`}
-            >
+            <div className={`flex items-center gap-5 py-5`}>
               <div className="max-sm:scale-90">
                 <CircularProgress
                   progress={ratingPercentage(details?.vote_average)}
@@ -211,10 +201,10 @@ const DetailsPage = () => {
               </p>
               {isInWatchlist ? (
                 <button
-                  className="flex items-center justify-center min-w-52 px-3 py-2 border-2 rounded-md border-slate-200/20 text-green-400 font-bold bg-green-600/30 hover:bg-green-700/30"
+                  className="flex items-center justify-center gap-2 min-w-52 px-3 py-2 border-2 rounded-md border-slate-200/20 text-green-400 font-bold bg-green-600/30 hover:bg-green-700/30"
                   onClick={handleRemoveFromWatchlist}
                 >
-                  <FaCheckCircle size={20} className="mr-2" />
+                  <FaCheckCircle size={20}/>
                   {t("InWatchlist")}
                 </button>
               ) : (
@@ -238,10 +228,7 @@ const DetailsPage = () => {
               {details?.tagline}
             </p>
             <h3 className="font-bold text-lg">{t("overview")}</h3>
-            <p
-              dir={language === "ar-MA" ? "rtl" : "ltr"}
-              className="text-lg text-white/75 pb-6"
-            >
+            <p className="text-lg text-white/75 pb-6">
               {details?.overview !== "" ? details?.overview : t("noOverview")}
             </p>
             <div className="flex flex-wrap gap-2">
@@ -272,16 +259,14 @@ const DetailsPage = () => {
         <h2
           className={`border-red-500 dark:border-red-600 text-lg sm:text-xl font-roboto ${
             language === "ar-MA"
-              ? "text-right mr-2 border-r-4 sm:border-r-8 pr-2"
+              ? "mr-2 border-r-4 sm:border-r-8 pr-2"
               : "ml-2 border-l-4 sm:border-l-8 pl-2"
           }`}
         >
           {t(`${type == "tv" ? "Series" : "Top Billed"} Cast`)}
         </h2>
         <div
-          className={`flex gap-5 pl-2 md:px-5 md:py-2 mt-4 mb-10 overflow-x-auto max-sm:scrollbar-none ${
-            language === "ar-MA" && "flex-row-reverse"
-          }`}
+          className={`flex gap-5 pl-2 md:px-5 md:py-2 mt-4 mb-10 overflow-x-auto max-sm:scrollbar-none`}
         >
           {cast?.length === 0 && (
             <p className="mt-10 text-center">{t("noCastFound")}</p>
@@ -309,7 +294,7 @@ const DetailsPage = () => {
         <h2
           className={`border-red-500 dark:border-red-600 text-lg sm:text-xl font-roboto mb-4 ${
             language === "ar-MA"
-              ? "text-right mr-2 border-r-4 sm:border-r-8 pr-2"
+              ? "mr-2 border-r-4 sm:border-r-8 pr-2"
               : "ml-2 border-l-4 sm:border-l-8 pl-2"
           }`}
         >
@@ -326,7 +311,7 @@ const DetailsPage = () => {
           <h2
             className={`border-red-500 dark:border-red-600 mt-8 text-lg sm:text-xl font-roboto mb-4 ${
               language === "ar-MA"
-                ? "text-right mr-2 border-r-4 sm:border-r-8 pr-2"
+                ? "mr-2 border-r-4 sm:border-r-8 pr-2"
                 : "ml-2 border-l-4 sm:border-l-8 pl-2"
             }`}
           >
@@ -334,9 +319,7 @@ const DetailsPage = () => {
           </h2>
         )}
         <div
-          className={`flex mt-5 overflow-x-auto gap-5 ${
-            language === "ar-MA" && "flex-row-reverse"
-          }`}
+          className={`flex mt-5 overflow-x-auto gap-5`}
         >
           {videos &&
             videos.map((item) => {
