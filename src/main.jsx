@@ -9,6 +9,7 @@ import Movies from "./pages/movies/Movies";
 import Shows from "./pages/shows/Shows";
 import DetailsPage from "./pages/DetailsPage.jsx";
 import WatchList from "./pages/WatchList.jsx";
+import Favorite from "./pages/Favorite.jsx";
 import { AuthProvider } from "./context/authProvider.jsx";
 import { LanguageProvider } from "./context/LanguageContext.jsx";
 import Protected from "./components/routes/Protected.jsx";
@@ -55,8 +56,16 @@ const router = createBrowserRouter([
           </Protected>
         ),
       },
+      {
+        path: "favorite",
+        element: (
+          <Protected>
+            <Favorite />
+          </Protected>
+        ),
+      },
     ],
-    // errorElement: <HomeRedirection />,
+    errorElement: <HomeRedirection />,
   },
 ]);
 

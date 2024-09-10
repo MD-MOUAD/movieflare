@@ -1,6 +1,19 @@
-import { FcGoogle, FaFacebook, MdLogout, FaBookmark } from "../utils/icons";
+import {
+  FcGoogle,
+  FaFacebook,
+  MdLogout,
+  FaBookmark,
+  RiHeart3Fill,
+} from "../utils/icons";
 import { useAuth } from "../context/useAuth";
-import { Avatar, Menu, MenuButton, MenuItem, MenuList, useToast } from "@chakra-ui/react";
+import {
+  Avatar,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+  useToast,
+} from "@chakra-ui/react";
 import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
@@ -11,33 +24,33 @@ const ProfileAvatar = () => {
   const { t } = useTranslation();
 
   const loginError = {
-    title: "Login error",
-    description: "An error occurred while login",
+    title: t("loginError"),
+    description: t("loginErrorOccurred"),
     status: "error",
     duration: 4000,
     isClosable: true,
-  }
+  };
   const LoginSuccess = {
-    title: "Login success",
+    title: t("loginSuccess"),
     status: "success",
     duration: 3000,
     isClosable: true,
-  }
+  };
   const handleGoogleLogin = async () => {
     try {
       await signInWithGoogle();
-      toast(LoginSuccess)
+      toast(LoginSuccess);
     } catch (error) {
-      toast(loginError)
+      toast(loginError);
     }
   };
   const handleFacebookLogin = async () => {
     try {
       await signInWithFacebook();
       console.log("facebook login successfully");
-      toast(LoginSuccess)
+      toast(LoginSuccess);
     } catch (error) {
-      toast(loginError)
+      toast(loginError);
       console.log("error: ", error);
     }
   };
@@ -66,6 +79,14 @@ const ProfileAvatar = () => {
             </div>
           </MenuItem>
         </Link>
+        <Link to={"/favorite"}>
+          <MenuItem>
+            <div className="flex items-center gap-4 dark:text-white">
+              <RiHeart3Fill />
+              {t("favorites")}
+            </div>
+          </MenuItem>
+        </Link>
         <MenuItem onClick={handleLogout}>
           <div className="flex items-center gap-4">
             <MdLogout />
@@ -83,13 +104,13 @@ const ProfileAvatar = () => {
         <MenuItem onClick={handleGoogleLogin}>
           <div className="flex items-center gap-4">
             <FcGoogle />
-            {t('signInGoogle')}
+            {t("signInGoogle")}
           </div>
         </MenuItem>
         <MenuItem onClick={handleFacebookLogin}>
           <div className="flex items-center gap-4">
             <FaFacebook color="#1877F2" />
-            {t('signInFacebook')}
+            {t("signInFacebook")}
           </div>
         </MenuItem>
       </MenuList>

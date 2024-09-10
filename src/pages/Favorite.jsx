@@ -2,25 +2,25 @@ import { useEffect, useState } from "react";
 import { useFirestore } from "../services/firestore";
 import { useAuth } from "../context/useAuth";
 import Spinner from "../components/Spinner";
-import WatchlistCard from "../components/watchlistPage_components/WatchlistCard";
+import FavoriteCard from "../components/favoritePage_components/FavoriteCard";
 import HomeLink from "../components/HomeLink";
 import { useTranslation } from "react-i18next";
 import { useLanguage } from "../context/LanguageContext";
-import { FaBookmark } from "../utils/icons";
+import { RiHeart3Fill } from "../utils/icons";
 
-const WatchList = () => {
-  const { getWatchlist } = useFirestore();
+const Favorite = () => {
+  const { getFavorite } = useFirestore();
   const { user } = useAuth();
   const { t } = useTranslation();
   const { language } = useLanguage();
 
-  const [watchlist, setWatchlist] = useState([]);
+  const [favorite, setFavorite] = useState([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     if (user?.uid) {
-      getWatchlist(user.uid)
+      getFavorite(user.uid)
         .then((data) => {
-          setWatchlist(data);
+          setFavorite(data);
         })
         .catch((err) => {
           console.log("Error:", err);
@@ -29,7 +29,7 @@ const WatchList = () => {
           setLoading(false);
         });
     }
-  }, [user?.uid, getWatchlist]);
+  }, [user?.uid, getFavorite]);
 
   if (loading) {
     return <Spinner />;
@@ -42,17 +42,17 @@ const WatchList = () => {
             language === "ar-MA" && "flex-row-reverse"
           }`}
         >
-          {t("watchlist")}
-          <FaBookmark />
+          {t("favorites")}
+          <RiHeart3Fill />
         </h2>
-        {watchlist.length > 0 ? (
+        {favorite.length > 0 ? (
           <div className="flex flex-col gap-6">
-            {watchlist.map((item) => (
-              <WatchlistCard
+            {favorite.map((item) => (
+              <FavoriteCard
                 key={item.id}
                 type={item.type}
                 item={item}
-                setWatchlist={setWatchlist}
+                setFavorite={setFavorite}
               />
             ))}
           </div>
@@ -63,7 +63,7 @@ const WatchList = () => {
                 dir={language === "ar-MA" ? "rtl" : "ltr"}
                 className={`mt-[20vh] text-lg`}
               >
-                {t("emptyWatchlist")}
+                {t("emptyFavorite")}
               </h3>
             </div>
             <div className="flex justify-center">
@@ -76,4 +76,4 @@ const WatchList = () => {
   );
 };
 
-export default WatchList;
+export default Favorite;

@@ -75,6 +75,9 @@ export { HiOutlineHeart };
 // fa6 icons
 import { FaGun } from "react-icons/fa6";
 export { FaGun };
+// ri icons
+import { RiHeart3Fill, RiHeartAdd2Fill } from "react-icons/ri";
+export { RiHeart3Fill, RiHeartAdd2Fill };
 
 //gi icons
 import {

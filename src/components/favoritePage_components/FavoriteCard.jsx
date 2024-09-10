@@ -15,15 +15,15 @@ import { useAuth } from "../../context/useAuth";
 import { FaTrash, StarIcon } from "../../utils/icons";
 import { useTranslation } from "react-i18next";
 
-const WatchlistCard = ({ type, item, setWatchlist }) => {
-  const { removeFromWatchlist } = useFirestore();
+const FavoriteCard = ({ type, item, setFavorite }) => {
+  const { removeFromFavorite } = useFirestore();
   const { user } = useAuth();
   const { t } = useTranslation();
 
   const handleRemoveClick = (event) => {
     event.preventDefault(); // Prevent the default behavior (link redirection)
-    removeFromWatchlist(user?.uid, item.id).then(() => {
-      setWatchlist((prev) => prev.filter((el) => el.id !== item.id));
+    removeFromFavorite(user?.uid, item.id).then(() => {
+      setFavorite((prev) => prev.filter((el) => el.id !== item.id));
     });
   };
 
@@ -38,9 +38,9 @@ const WatchlistCard = ({ type, item, setWatchlist }) => {
             minW={"150px"}
             objectFit={"cover"}
           />
-          <Tooltip label={t("removeFromWatchlist")}>
+          <Tooltip label={t("removeFromFavorite")}>
             <IconButton
-              aria-label={t("removeFromWatchlist")}
+              aria-label={t("removeFromFavorite")}
               icon={<FaTrash />}
               size={"sm"}
               colorScheme="red"
@@ -75,4 +75,4 @@ const WatchlistCard = ({ type, item, setWatchlist }) => {
   );
 };
 
-export default WatchlistCard;
+export default FavoriteCard;

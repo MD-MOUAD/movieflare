@@ -18,6 +18,12 @@ const languages = [
   { code: "es", label: "Español", flag: "🇪🇸" },
   { code: "ar", label: "العربية", flag: "🇲🇦" },
 ];
+// const languages = [
+//   { code: "en", label: "English", flag: "🇺🇸", dir: "ltr" },
+//   { code: "fr", label: "Français", flag: "🇫🇷", dir: "ltr" },
+//   { code: "es", label: "Español", flag: "🇪🇸", dir: "ltr" },
+//   { code: "ar", label: "العربية", flag: "🇲🇦", dir: "rtl" },
+// ];
 
 
 const LanguageSelector = () => {
@@ -30,12 +36,19 @@ const LanguageSelector = () => {
     return languages[0];
   });
 
+  // Set the direction attribute on the HTML element
+  // useEffect(() => {
+  //   document.documentElement.setAttribute("dir", selectedLanguage.dir);
+  // }, [selectedLanguage]);
+
   const handleSelectLanguage = (language) => {
     setSelectedLanguage(language);
     i18n.changeLanguage(language.code);
     setLanguage(languageQuery[language.code]);
     // save language to local storage
     localStorage.setItem("savedLanguage", language.code);
+    // Update the direction attribute
+    // document.documentElement.setAttribute("dir", language.dir);
   };
 
   return (

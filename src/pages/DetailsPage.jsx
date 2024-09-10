@@ -29,6 +29,7 @@ import HomeRedirection from "../components/HomeRedirection";
 import { useFirestore } from "../services/firestore";
 import { useTranslation } from "react-i18next";
 import { useLanguage } from "../context/LanguageContext";
+import FavoriteButton from "../components/FavoriteButton";
 
 const DetailsPage = () => {
   const { type, id } = useParams();
@@ -116,8 +117,8 @@ const DetailsPage = () => {
       setIsInWatchlist(setToWatchList);
     } else {
       toast({
-        title: "Action Required",
-        description: "Please log in to add to your watchlist.",
+        title: t("actionRequired"),
+        description: t("pleaseLogInToAddToWatchlist"),
         status: "error",
         duration: 4000,
         isClosable: true,
@@ -171,7 +172,7 @@ const DetailsPage = () => {
                 {new Date(releaseDate).getFullYear() || "N/A"}
               </span>
             </h1>
-            <div className="flex items-center gap-5 text-lg">
+            <div className="mt-1 flex items-center gap-5 text-lg">
               <div className="flex items-center gap-2 text-white/75">
                 <FaRegCalendarAlt />
                 <div>
@@ -190,6 +191,9 @@ const DetailsPage = () => {
               ) : (
                 <span className="uppercase text-gray-300">({type})</span>
               )}
+              <div className="flex items-center size-4">
+                <FavoriteButton itemDetails={details} />
+              </div>
             </div>
             <div
               className={`flex items-center gap-5 py-5 ${
@@ -251,7 +255,11 @@ const DetailsPage = () => {
               ))}
             </div>
             <button className="mt-2 bg-red-500  dark:bg-red-400 dark:hover:bg-red-500  hover:bg-red-700 text-sm text-white dark:text-black font-bold py-2 px-5 rounded-lg shadow-lg w-fit">
-              <Link to={details?.homepage} target="_blank" className="flex gap-2 items-center">
+              <Link
+                to={details?.homepage}
+                target="_blank"
+                className="flex gap-2 items-center"
+              >
                 <FaRegPlayCircle className="size-4" />
                 <span>{t("watchOnHomepage")}</span>
               </Link>
@@ -263,7 +271,9 @@ const DetailsPage = () => {
         {/* cast */}
         <h2
           className={`border-red-500 dark:border-red-600 text-lg sm:text-xl font-roboto ${
-            language === "ar-MA" ? "text-right mr-2 border-r-4 sm:border-r-8 pr-2" : "ml-2 border-l-4 sm:border-l-8 pl-2"
+            language === "ar-MA"
+              ? "text-right mr-2 border-r-4 sm:border-r-8 pr-2"
+              : "ml-2 border-l-4 sm:border-l-8 pl-2"
           }`}
         >
           {t(`${type == "tv" ? "Series" : "Top Billed"} Cast`)}
@@ -298,7 +308,9 @@ const DetailsPage = () => {
         {/* Trailers */}
         <h2
           className={`border-red-500 dark:border-red-600 text-lg sm:text-xl font-roboto mb-4 ${
-            language === "ar-MA" ? "text-right mr-2 border-r-4 sm:border-r-8 pr-2" : "ml-2 border-l-4 sm:border-l-8 pl-2"
+            language === "ar-MA"
+              ? "text-right mr-2 border-r-4 sm:border-r-8 pr-2"
+              : "ml-2 border-l-4 sm:border-l-8 pl-2"
           }`}
         >
           {t("latestTrailer")}
@@ -313,7 +325,9 @@ const DetailsPage = () => {
         {videos?.length > 0 && (
           <h2
             className={`border-red-500 dark:border-red-600 mt-8 text-lg sm:text-xl font-roboto mb-4 ${
-              language === "ar-MA" ? "text-right mr-2 border-r-4 sm:border-r-8 pr-2" : "ml-2 border-l-4 sm:border-l-8 pl-2"
+              language === "ar-MA"
+                ? "text-right mr-2 border-r-4 sm:border-r-8 pr-2"
+                : "ml-2 border-l-4 sm:border-l-8 pl-2"
             }`}
           >
             {t("otherVideos")}
