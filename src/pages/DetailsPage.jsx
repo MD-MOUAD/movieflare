@@ -250,7 +250,7 @@ const DetailsPage = () => {
                 </div>
               ))}
             </div>
-            <button className="mt-2 bg-red-500 hover:bg-red-700 text-sm text-white font-semibold py-2 px-5 rounded-lg shadow-lg w-fit">
+            <button className="mt-2 bg-red-500  dark:bg-red-400 dark:hover:bg-red-500  hover:bg-red-700 text-sm text-white dark:text-black font-bold py-2 px-5 rounded-lg shadow-lg w-fit">
               <Link to={details?.homepage} target="_blank" className="flex gap-2 items-center">
                 <FaRegPlayCircle className="size-4" />
                 <span>{t("watchOnHomepage")}</span>
@@ -262,8 +262,8 @@ const DetailsPage = () => {
       <div className="mt-4 container mx-auto">
         {/* cast */}
         <h2
-          className={`text-lg sm:text-xl font-roboto ${
-            language === "ar-MA" ? "text-right mr-2" : "ml-2"
+          className={`border-red-500 dark:border-red-600 text-lg sm:text-xl font-roboto ${
+            language === "ar-MA" ? "text-right mr-2 border-r-4 sm:border-r-8 pr-2" : "ml-2 border-l-4 sm:border-l-8 pl-2"
           }`}
         >
           {t(`${type == "tv" ? "Series" : "Top Billed"} Cast`)}
@@ -297,8 +297,8 @@ const DetailsPage = () => {
         </div>
         {/* Trailers */}
         <h2
-          className={`text-lg sm:text-xl font-roboto mb-4 ${
-            language === "ar-MA" ? "text-right mr-2" : "ml-2"
+          className={`border-red-500 dark:border-red-600 text-lg sm:text-xl font-roboto mb-4 ${
+            language === "ar-MA" ? "text-right mr-2 border-r-4 sm:border-r-8 pr-2" : "ml-2 border-l-4 sm:border-l-8 pl-2"
           }`}
         >
           {t("latestTrailer")}
@@ -312,8 +312,8 @@ const DetailsPage = () => {
         {/* Other Videos */}
         {videos?.length > 0 && (
           <h2
-            className={`mt-8 text-lg sm:text-xl font-roboto mb-4 ${
-              language === "ar-MA" ? "text-right mr-2" : "ml-2"
+            className={`border-red-500 dark:border-red-600 mt-8 text-lg sm:text-xl font-roboto mb-4 ${
+              language === "ar-MA" ? "text-right mr-2 border-r-4 sm:border-r-8 pr-2" : "ml-2 border-l-4 sm:border-l-8 pl-2"
             }`}
           >
             {t("otherVideos")}
