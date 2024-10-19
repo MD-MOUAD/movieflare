@@ -83,7 +83,7 @@ const TrendingSection = () => {
       {loading ? (
         <BannerSkeleton />
       ) : (
-        <BannerSlider movies={trendingData.slice(0, 5)} />
+        <BannerSlider movies={trendingData?.slice(0, 5)} />
       )}
       <div className={`mt-2 flex items-center gap-3 p-4 max-sm:px-1`}>
         <h2 className={`flex items-center gap-1 font-bold text-base sm:text-xl text-red-500 $`}>

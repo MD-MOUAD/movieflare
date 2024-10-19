@@ -66,9 +66,9 @@ const CardComponent = ({ item, small }) => {
               }`}
             >
               {mapGenreIdsToNames(item?.genre_ids, genresDict[item?.media_type])
-                .slice(0, 3)
-                .map((genreName) => t(genreName))
-                .join(", ")}
+                ?.slice(0, 3)
+                ?.map((genreName) => t(genreName))
+                ?.join(", ")}
             </p>
             <div className="mt-1 flex justify-center items-center gap-2 text-orange-400">
               <FaStar />
