@@ -14,7 +14,7 @@ const TrendingSection = () => {
   const { t } = useTranslation();
   const [loading, setLoading] = useState(true);
   const [timeFrame, setTimeFrame] = useState("week");
-  const [mediaType, setMediaType] = useState("all");
+  const [mediaType, setMediaType] = useState("movie");
   const [trendingData, setTrendingData] = useState([]);
   const [page, setPage] = useState(1);
   const containerRef = useRef(null);
@@ -68,9 +68,8 @@ const TrendingSection = () => {
   }, [page]);
 
   const mediaTypeOptions = [
-    { value: "all", label: "All" },
-    { value: "tv", label: "Tv Series" },
     { value: "movie", label: "Movies" },
+    { value: "tv", label: "Tv Series" },
   ];
   const handleTypeChange = (event) => {
     const selectedValue = event.target.value;
