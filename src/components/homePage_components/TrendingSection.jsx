@@ -13,7 +13,7 @@ const TrendingSection = () => {
   const { language } = useLanguage();
   const { t } = useTranslation();
   const [loading, setLoading] = useState(true);
-  const [timeFrame, setTimeFrame] = useState("day");
+  const [timeFrame, setTimeFrame] = useState("week");
   const [mediaType, setMediaType] = useState("all");
   const [trendingData, setTrendingData] = useState([]);
   const [page, setPage] = useState(1);
@@ -108,6 +108,16 @@ const TrendingSection = () => {
           </Select>
         </div>
         <div className="flex font-[500] border-2 border-black/50 dark:border-white/50 rounded-full shadow-md">
+        <button
+            className={`px-5 max-sm:px-2 py-1 rounded-full ${
+              timeFrame === "week"
+                ? "bg-red-600 text-slate-100 hover:scale-105"
+                : "opacity-75"
+              } transition-all duration-100 shrink-0`}
+              onClick={() => setTimeFrame("week") && setPage(1)}
+          >
+            {t('thisWeek')}
+          </button>
           <button
             className={`px-7 max-sm:px-5 rounded-full ${
               timeFrame === "day"
@@ -117,16 +127,6 @@ const TrendingSection = () => {
             onClick={() => setTimeFrame("day") && setPage(1)}
           >
             {t('today')}
-          </button>
-          <button
-            className={`px-5 max-sm:px-2 py-1 rounded-full ${
-              timeFrame === "week"
-                ? "bg-red-600 text-slate-100 hover:scale-105"
-                : "opacity-75"
-              } transition-all duration-100 shrink-0`}
-              onClick={() => setTimeFrame("week") && setPage(1)}
-          >
-            {t('thisWeek')}
           </button>
         </div>
       </div>
