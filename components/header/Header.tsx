@@ -3,13 +3,39 @@
 import { NavLinks } from '@/constants'
 import Image from 'next/image'
 import NavbarLink from './NavbarLink'
+import Link from 'next/link'
+import { useEffect, useState } from 'react'
+import clsx from 'clsx'
+import ModeToggle from './ModeToggle'
 
 const Header = () => {
+  const [isVisible, setIsVisible] = useState(true)
+  const [lastScrollY, setLastScrollY] = useState(0)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY
+      setIsVisible(currentScrollY < lastScrollY || currentScrollY < 10)
+      setLastScrollY(currentScrollY)
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [lastScrollY])
+
   return (
-    <header className="border-gradient fixed left-1/2 top-0 z-50 mt-2 w-11/12 max-w-[1232px] -translate-x-1/2 overflow-hidden rounded-[8px] bg-[rgba(255,255,255,0.2)] backdrop-blur-sm dark:bg-[rgba(26,25,25,0.3)] sm:mt-8 sm:rounded-[20px]">
+    <header
+      className={clsx(
+        'border-gradient fixed left-1/2 top-2 z-50 w-11/12 max-w-[1232px] -translate-x-1/2 overflow-hidden rounded-[8px] bg-[rgba(255,255,255,0.2)] backdrop-blur-sm transition-transform duration-500 dark:bg-[rgba(26,25,25,0.3)] sm:top-8 sm:rounded-[20px]',
+        {
+          'translate-y-0': isVisible,
+          '-translate-y-[200%]': !isVisible,
+        }
+      )}
+    >
       <div className="flex h-10 w-full flex-row-reverse items-center justify-between gap-4 px-7 sm:h-20 sm:flex-row lg:justify-start lg:px-0">
         {/* Logo */}
-        <div className="sm:ml-3">
+        <Link href="/" className="sm:ml-3">
           <Image
             src="/images/logo-light.svg"
             height={92}
@@ -24,7 +50,7 @@ const Header = () => {
             alt="logo"
             className="hidden dark:block max-sm:size-12"
           />
-        </div>
+        </Link>
         {/* Navigation links */}
         <div className="hidden flex-1 gap-6 lg:flex xl:ml-8">
           {NavLinks.map(({ label, href }) => (
@@ -33,6 +59,7 @@ const Header = () => {
         </div>
         {/* User interactions */}
         <div className="mr-8 flex h-12 items-center gap-2 sm:gap-4 lg:gap-8">
+          {/* Mobile menu */}
           <div className="mobile-menu sm:hidden">
             <Image
               src="icons/mobile-menu-dark.svg"
@@ -49,6 +76,7 @@ const Header = () => {
               className="block size-4 dark:hidden sm:size-8"
             />
           </div>
+          {/* Search */}
           <div className="search">
             <Image
               src="icons/search-dark.svg"
@@ -65,6 +93,7 @@ const Header = () => {
               className="block size-4 dark:hidden sm:size-8"
             />
           </div>
+          {/* Notifications */}
           <div className="notification hidden sm:block">
             <Image
               src="icons/notification-dark.svg"
@@ -81,6 +110,7 @@ const Header = () => {
               className="block size-4 dark:hidden sm:size-8"
             />
           </div>
+          {/* Profile */}
           <div className="profile hidden sm:block">
             <Image
               src="icons/profile-dark.svg"
@@ -97,22 +127,8 @@ const Header = () => {
               className="block size-4 dark:hidden sm:size-8"
             />
           </div>
-          <div className="mode hidden sm:block">
-            <Image
-              src="icons/sun.svg"
-              height={32}
-              width={32}
-              alt="sun"
-              className="hidden size-4 dark:block sm:size-8"
-            />
-            <Image
-              src="icons/moon.svg"
-              height={32}
-              width={32}
-              alt="moon"
-              className="block size-4 dark:hidden sm:size-8"
-            />
-          </div>
+          {/* Mode toggle */}
+          <ModeToggle />
         </div>
       </div>
     </header>
