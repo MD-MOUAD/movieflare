@@ -11,19 +11,23 @@ export const NavLinks = [
     href: '/',
   },
   {
-    label: 'Discover',
-    href: '/discover',
+    label: 'Pricing',
+    href: '/pricing',
   },
   {
-    label: 'Movie Release',
-    href: '/movie-release',
+    label: 'Movies',
+    href: '/movies',
   },
   {
-    label: 'Forum',
-    href: '/forum',
+    label: 'Series',
+    href: '/series',
   },
   {
-    label: 'About',
-    href: '/about',
+    label: 'Collection',
+    href: '/collection',
+  },
+  {
+    label: 'FAQ',
+    href: '/faq',
   },
 ]

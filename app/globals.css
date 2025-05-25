@@ -3,19 +3,73 @@
 @tailwind utilities;
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-lato), sans-serif;
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
+  /* Mobile Headlines */
+  .h1-mobile {
+    @apply text-[48px] font-bold;
+  }
+  .h2-mobile {
+    @apply text-[24px] font-bold;
+  }
+  .h3-mobile {
+    @apply text-[20px] font-bold;
+  }
+  .h3b-mobile {
+    @apply text-[20px] font-medium;
+  } /* Alt version */
+
+  /* Mobile Paragraphs */
+  .p1-mobile {
+    @apply text-[14px] font-medium;
+  }
+  .p2-mobile {
+    @apply text-[14px] font-normal;
+  }
+  .p3-mobile {
+    @apply text-[14px] font-light;
+  }
+
+  /* Web Headlines */
+  .h1-web {
+    @apply text-[96px] font-bold;
+  }
+  .h2-web {
+    @apply text-[72px] font-bold;
+  }
+  .h3-web {
+    @apply text-[48px] font-bold;
+  }
+  .h4-web {
+    @apply text-[24px] font-bold;
+  }
+  .h4b-web {
+    @apply text-[24px] font-medium;
+  } /* Alt version */
+
+  /* Web Paragraphs */
+  .p1-web {
+    @apply text-[16px] font-medium;
+  }
+  .p2-web {
+    @apply text-[16px] font-normal;
+  }
+  .p3-web {
+    @apply text-[16px] font-light;
+  }
 }
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 3.9%;
+    --font-lato: 'Lato', sans-serif;
+
+    --background: 195 100% 96%; /* #ebfaff */
+    --foreground: 223 80% 6%; /* #030a1b*/
     --card: 0 0% 100%;
     --card-foreground: 0 0% 3.9%;
     --popover: 0 0% 100%;
@@ -42,8 +96,8 @@ body {
   }
 
   .dark {
-    --background: 0 0% 3.9%;
-    --foreground: 0 0% 98%;
+    --background: 223 80% 6%; /* #030a1b*/
+    --foreground: 195 100% 96%; /* #ebfaff*/
     --card: 0 0% 3.9%;
     --card-foreground: 0 0% 98%;
     --popover: 0 0% 3.9%;
@@ -87,4 +141,30 @@ body {
 .no-scrollbar {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
+}
+
+.border-gradient::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(34, 142, 229, 1) 0%,
+    rgba(34, 142, 229, 0.18) 28%,
+    rgba(34, 142, 229, 0.14) 74%,
+    rgba(34, 142, 229, 1) 100%
+  );
+  z-index: -1;
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  padding: 1px;
+  border-radius: 20px;
+}
+
+@media (max-width: 640px) {
+  .border-gradient::before {
+    border-radius: 8px;
+  }
 }
