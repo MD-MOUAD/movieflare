@@ -153,6 +153,10 @@ const config: Config = {
         'stroke-gradient':
           'linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 56%, rgba(255,255,255,0.66) 100%)',
         'card-gradient': 'linear-gradient(90deg, #00CFFF 0%, #010101 100%)',
+        'dark-gradient':
+          'linear-gradient(90deg, rgba(3,10,27,1) 0%,  rgba(3,10,27,0.95) 8%, rgba(3,10,27,0.06) 100%)',
+        'light-gradient':
+          'linear-gradient(90deg, rgba(235, 250, 255, 1) 0%, rgba(231,246,252,1) 5%,  rgba(231, 246, 252, 0.06) 52%)',
       },
     },
   },
