@@ -4,34 +4,35 @@ import { NavLinks } from '@/constants'
 import Image from 'next/image'
 import NavbarLink from './NavbarLink'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
-import clsx from 'clsx'
+import { useEffect, useRef, useState } from 'react'
 import ModeToggle from './ModeToggle'
+import { motion } from 'framer-motion'
 
 const Header = () => {
   const [isVisible, setIsVisible] = useState(true)
-  const [lastScrollY, setLastScrollY] = useState(0)
+  const lastScrollY = useRef(0)
 
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY
-      setIsVisible(currentScrollY < lastScrollY || currentScrollY < 10)
-      setLastScrollY(currentScrollY)
+      setIsVisible(currentScrollY < lastScrollY.current || currentScrollY < 10)
+      lastScrollY.current = currentScrollY
     }
 
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [lastScrollY])
+  }, [])
 
   return (
-    <header
-      className={clsx(
-        'border-gradient fixed left-1/2 top-2 z-50 w-11/12 max-w-[1232px] -translate-x-1/2 overflow-hidden rounded-[8px] bg-[rgba(255,255,255,0.2)] backdrop-blur-sm transition-transform duration-500 dark:bg-[rgba(26,25,25,0.3)] sm:top-8 sm:rounded-[20px]',
-        {
-          'translate-y-0': isVisible,
-          '-translate-y-[200%]': !isVisible,
-        }
-      )}
+    <motion.header
+      initial={{ x: '-50%', y: -80, opacity: 0 }}
+      animate={{
+        x: '-50%',
+        y: isVisible ? 0 : -80,
+        opacity: isVisible ? 1 : 0,
+      }}
+      transition={{ duration: 0.5 }}
+      className="border-gradient fixed left-1/2 top-2 z-50 w-11/12 max-w-[1232px] overflow-hidden rounded-[8px] bg-[rgba(255,255,255,0.2)] backdrop-blur-sm dark:bg-[rgba(26,25,25,0.3)] sm:top-8 sm:rounded-[20px]"
     >
       <div className="flex h-10 w-full flex-row-reverse items-center justify-between gap-4 px-7 sm:h-20 sm:flex-row lg:justify-start lg:px-0">
         {/* Logo */}
@@ -131,7 +132,7 @@ const Header = () => {
           <ModeToggle />
         </div>
       </div>
-    </header>
+    </motion.header>
   )
 }
 
