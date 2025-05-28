@@ -15,7 +15,12 @@ export interface Movie {
   vote_average: number
 }
 export interface MovieDetails extends Movie {
-  production_companies: [name: string, logo_path: string]
+  production_companies: {
+    id: number
+    logo_path: string
+    name: string
+    origin_country: string
+  }[]
   genres: [id: number, name: string]
   tagline: string
 }
