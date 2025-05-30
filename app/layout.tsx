@@ -64,6 +64,9 @@ export const metadata: Metadata = {
   title: 'Movie flare',
   description:
     'Watch the latest movies, series, and shows from around the world – powered by TMDb.',
+  icons: {
+    icon: '/favicon.png',
+  },
 }
 
 export default function RootLayout({

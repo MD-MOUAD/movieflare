@@ -34,7 +34,7 @@ const Header = () => {
       transition={{ duration: 0.5 }}
       className="border-gradient fixed left-1/2 top-2 z-50 w-11/12 max-w-[1232px] overflow-hidden rounded-[8px] bg-[rgba(255,255,255,0.2)] backdrop-blur-sm dark:bg-[rgba(26,25,25,0.3)] sm:top-8 sm:rounded-[20px]"
     >
-      <div className="flex h-10 w-full flex-row-reverse items-center justify-between gap-4 px-7 sm:h-20 sm:flex-row lg:justify-start lg:px-0">
+      <div className="flex h-12 w-full flex-row-reverse items-center justify-between gap-4 px-7 sm:h-20 sm:flex-row lg:justify-start lg:px-0">
         {/* Logo */}
         <Link href="/" className="sm:ml-3">
           <Image

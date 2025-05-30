@@ -64,3 +64,43 @@ export const getMovieDetails = async (
   const data: MovieDetails = await res.json()
   return data
 }
+
+export type MovieImages = {
+  backdrops: { file_path: string }[]
+  posters: { file_path: string }[]
+  logos: { file_path: string }[]
+}
+
+export type MovieWithImages = MovieDetails & {
+  images: MovieImages
+}
+
+export const getMovieImages = async (movieId: number): Promise<MovieImages> => {
+  //! language must be en not en-US!!
+  const res = await fetch(
+    `${apiBaseUrl}/movie/${movieId}/images?api_key=${apiKey}&language=en`,
+    { next: { revalidate: 3600 } }
+  )
+
+  if (!res.ok) {
+    throw new Error(
+      `Failed to fetch images for movie (id: ${movieId}): ${res.status} ${res.statusText}`
+    )
+  }
+
+  const data: MovieImages = await res.json()
+  return data
+}
+
+export const getMovieWithImages = async (
+  movieId: number
+): Promise<MovieWithImages> => {
+  const [details, images] = await Promise.all([
+    getMovieDetails(movieId),
+    getMovieImages(movieId),
+  ])
+  return {
+    ...details,
+    images,
+  }
+}

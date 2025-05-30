@@ -149,6 +149,9 @@ const config: Config = {
         md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 4px)',
       },
+      boxShadow: {
+        'card-white': '0 2px 30px rgba(255, 255, 255, 0.2)',
+      },
       backgroundImage: {
         'stroke-gradient':
           'linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 56%, rgba(255,255,255,0.66) 100%)',

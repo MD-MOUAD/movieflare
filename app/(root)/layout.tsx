@@ -8,7 +8,7 @@ export default function RootLayout({
   return (
     <div className="overflow-hidden">
       <Header />
-      <main className="">{children}</main>
+      <main>{children}</main>
     </div>
   )
 }
