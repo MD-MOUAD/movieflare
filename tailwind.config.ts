@@ -150,7 +150,8 @@ const config: Config = {
         sm: 'calc(var(--radius) - 4px)',
       },
       boxShadow: {
-        'card-white': '0 2px 30px rgba(255, 255, 255, 0.2)',
+        'card-white': '4px 5px 8px rgba(255, 255, 255, 0.1)',
+        'card-black': '6px 5px 8px rgba(0, 0, 0, 0.3)',
       },
       backgroundImage: {
         'stroke-gradient':

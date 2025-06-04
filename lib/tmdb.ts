@@ -13,6 +13,8 @@ export interface Movie {
   poster_path: string
   backdrop_path: string
   vote_average: number
+  media_type: string
+  genre_ids: number[]
 }
 export interface MovieDetails extends Movie {
   production_companies: {

@@ -18,7 +18,7 @@ const ModeToggle = () => {
         height={32}
         width={32}
         alt="moon"
-        className="block size-4 transition-transform duration-500 hover:rotate-[360deg] dark:hidden sm:size-8"
+        className="block size-4 transition-transform duration-500 hover:scale-[1.1] dark:hidden sm:size-8"
         onClick={() => setTheme('dark')}
       />
     </div>
